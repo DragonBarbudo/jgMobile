@@ -26,7 +26,8 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
 
   $scope.rSpace = function(thename){
     var sinSpacio = thename.replace(/ /g,"_");
-    return sinSpacio;
+    var lowCase = sinSpacio.toLowerCase();
+    return lowCase;
   }
 
 })
