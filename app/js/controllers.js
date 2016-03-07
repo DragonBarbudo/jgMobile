@@ -336,7 +336,7 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
 
   $scope.fbLogin = function(){
     console.log('fb');
-    hello.init({ facebook : '613671772113193' }, { redirect_uri:'https://www.facebook.com/connect/login_success.html' });
+    hello.init({ facebook : '613671772113193' }, { redirect_uri:'http://jgmobile.sitio.ninja/redirect.html' });
     hello('facebook').login();
 }//fbLogin
 
