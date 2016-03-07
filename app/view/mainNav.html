@@ -7,10 +7,10 @@
       <ons-list-item ng-click="menu.setMainPage('app/view/portada.html', {closeMenu:true})" modifier="tappable"><span class="icon-action">
           <ons-icon icon="ion-android-bar"></ons-icon></span> Haz tu pedido</ons-list-item>
       <ons-list-item ng-click="menu.setMainPage('app/view/cuenta.html', {closeMenu:true})"><span class="icon-action">
-          <ons-icon icon="ion-person"></ons-icon></span> Tu cuenta</ons-list-item>
+          <ons-icon icon="ion-person"></ons-icon></span><span ng-hide="loggedin">Ingresar</span><span ng-show="loggedin">{{userApp.name}}</span></ons-list-item>
       <ons-list-item ng-click="menu.setMainPage('app/view/acerca.html', {closeMenu:true})"><span class="icon-action">
           <ons-icon icon="ion-ios-help-outline"></ons-icon></span> Acerca de JagerGin</ons-list-item>
-      <ons-list-item ng-click="menu.setMainPage('app/view/portada.html', {closeMenu:true})"><span class="icon-action">
+      <ons-list-item ng-click="logout()" ng-controller="CuentaCtrl" ng-show="loggedin"><span class="icon-action">
           <ons-icon icon="ion-log-out"></ons-icon></span> Cerrar sesión</ons-list-item>
     </ons-list>
   </ons-page>

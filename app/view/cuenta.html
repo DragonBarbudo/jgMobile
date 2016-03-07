@@ -67,9 +67,9 @@
   <div ng-show="loggedin">
     <ons-row class="profile">
       <ons-col>
-        <div class="profileImage"><img src="app/img/profile.png" alt=""/></div>
-        <div class="profileName">Nombre del usuario</div>
-        <div class="profileMail">correo@electronico.com</div>
+        <div class="profileImage"><img ng-src="{{userApp.picture}}" alt=""/></div>
+        <div class="profileName">{{userApp.name}}</div>
+        <div class="profileMail">{{userApp.email}}</div>
         <div class="profileCel">(55)8532-9420</div>
       </ons-col>
     </ons-row>

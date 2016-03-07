@@ -11,10 +11,11 @@ ons-template(id="menu.html")
         |  Haz tu pedido
       ons-list-item(ng-click="menu.setMainPage('app/view/cuenta.html', {closeMenu:true})")
         span.icon-action: ons-icon(icon="ion-person")
-        |  Tu cuenta
+        span(ng-hide="loggedin") Ingresar
+        span(ng-show="loggedin") {{userApp.name}}
       ons-list-item(ng-click="menu.setMainPage('app/view/acerca.html', {closeMenu:true})")
         span.icon-action: ons-icon(icon="ion-ios-help-outline")
         |  Acerca de JagerGin
-      ons-list-item(ng-click="menu.setMainPage('app/view/portada.html', {closeMenu:true})")
+      ons-list-item(ng-click="logout()", ng-controller="CuentaCtrl", ng-show="loggedin")
         span.icon-action: ons-icon(icon="ion-log-out")
         |  Cerrar sesión

@@ -54,9 +54,9 @@ ons-page(ng-controller="CuentaCtrl").account
   div(ng-show="loggedin")
     ons-row.profile
       ons-col
-        .profileImage: img(src="app/img/profile.png", alt="")
-        .profileName Nombre del usuario
-        .profileMail correo@electronico.com
+        .profileImage: img(ng-src="{{userApp.picture}}", alt="")
+        .profileName {{userApp.name}}
+        .profileMail {{userApp.email}}
         .profileCel (55)8532-9420
     
     .historial

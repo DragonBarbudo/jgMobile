@@ -326,7 +326,7 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
 
 moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, $filter) {
 
-  $scope.loggedin   = false;
+
   $scope.choose     = true;
   $scope.signUpForm = false;
   $scope.signInForm = false;
@@ -335,9 +335,15 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
 
 
   $scope.fbLogin = function(){
-    console.log('fb');
-    hello.init({ facebook : '613671772113193' }, { redirect_uri:'http://jgmobile.sitio.ninja/redirect.html' });
     hello('facebook').login();
-}//fbLogin
+  }//fbLogin
+
+
+  $scope.logout = function(){
+    hello('facebook').logout();
+    $scope.choose     = true;
+    $scope.signUpForm = false;
+    $scope.signInForm = false;
+  }
 
 });
