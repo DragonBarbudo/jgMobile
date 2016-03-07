@@ -5343,3 +5343,74 @@ body {
 .searchBar input {
   width: 100%;
 }
+.account .page__background {
+  background: #202325;
+}
+.account .historial {
+  background: #f5f5f5;
+}
+.account .signIn .logo {
+  text-align: center;
+  padding: 20px 0;
+}
+.account .signIn .logo img {
+  width: 100%;
+}
+.account .signIn p {
+  color: #f5f5f5;
+  text-align: center;
+  font-size: 0.9em;
+}
+.account .signIn .buttons {
+  text-align: center;
+}
+.account .signIn .buttons ons-button {
+  text-align: center;
+  margin: 10px 0;
+}
+.account .signIn .buttons ons-button.signupBtn {
+  background: #DD062C;
+}
+.account .signIn .buttons ons-button.signInBtn {
+  background: #2EB9FF;
+}
+.account .signUpArea,
+.account .signInArea {
+  padding: 20px 0;
+  text-align: center;
+}
+.account .signUpArea .fa,
+.account .signInArea .fa {
+  color: #f5f5f5;
+  padding: 10px 0;
+}
+.account .signUpArea .facebookIn,
+.account .signInArea .facebookIn {
+  background: #435E9F;
+}
+.account .signUpArea form input,
+.account .signInArea form input {
+  margin: 5px 0;
+  color: #f5f5f5;
+}
+.account .signUpArea form .signInBtn,
+.account .signInArea form .signInBtn {
+  margin: 20px 0;
+  background: #2EB9FF;
+}
+.account .signUpArea form a.cancelar,
+.account .signInArea form a.cancelar {
+  display: block;
+  color: #A3A3A3;
+  padding: 5px 0;
+  font-size: 0.8em;
+  text-decoration: underline;
+}
+.account .signUpArea form .terms,
+.account .signInArea form .terms {
+  font-size: 0.8em;
+}
+.account .signUpArea form .terms a,
+.account .signInArea form .terms a {
+  color: #2EB9FF;
+}

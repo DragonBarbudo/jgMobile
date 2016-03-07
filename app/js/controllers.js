@@ -325,5 +325,11 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
 
 
 moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, $filter) {
+  
+  $scope.loggedin   = false;
+  $scope.choose     = true;
+  $scope.signUpForm = false;
+  $scope.signInForm = false;
 
+  $scope.signin = {};
 });

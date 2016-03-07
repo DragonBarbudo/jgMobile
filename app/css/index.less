@@ -12,6 +12,7 @@
 @main: #2EB9FF;
 @dark: #2B3439;
 @sec: #DD062C;
+@fbcolor: #435E9F;
 /* ################################ FONTS */
 .font{   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; }
 .font2{ font-family: 'Roboto Condensed', sans-serif; }
@@ -490,4 +491,69 @@ body {
 .searchBar{
   padding: 20px;
   input{ width: 100%; }
+}
+
+
+
+.account{
+  .page__background{
+    background: @b;
+  }
+  .historial{
+    background: @w;
+  }
+
+
+  .signIn{
+    .logo{
+      text-align: center;
+      padding: 20px 0;
+      img{width: 100%;}
+    }
+    p{color:@w; text-align: center; font-size: 0.9em;}
+    .buttons{
+      text-align: center;
+      ons-button{
+        text-align: center;
+        margin: 10px 0;
+        &.signupBtn{
+          background: @sec;
+        }
+        &.signInBtn{
+          background: @main;
+        }
+      }
+    }
+  }
+  .signUpArea, .signInArea{
+    padding: 20px 0;
+    text-align: center;
+    .fa{color:@w; padding: 10px 0;}
+    .facebookIn{ background: @fbcolor; }
+    form{
+      input{
+        margin: 5px 0;
+        color:@w;
+      }
+      .signInBtn{
+        margin: 20px 0;
+        background:@main;
+      }
+      a.cancelar{
+        display: block;
+        color:@g;
+        padding: 5px 0;
+        font-size: 0.8em;
+        text-decoration: underline;
+      }
+      .terms{
+        font-size: 0.8em;
+        a{color:@main;}
+      }
+    }
+
+
+  }
+
+
 }

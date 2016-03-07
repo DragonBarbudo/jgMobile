@@ -1,5 +1,5 @@
 
-<ons-page>
+<ons-page ng-controller="CuentaCtrl" class="account">
   <ons-toolbar>
     <div class="left">
       <ons-toolbar-button ng-click="menu.toggleMenu()">
@@ -16,154 +16,204 @@
       </ons-toolbar-button>
     </div>
   </ons-toolbar>
-  <ons-row class="profile">
-    <ons-col>
-      <div class="profileImage"><img src="app/img/profile.png" alt=""/></div>
-      <div class="profileName">Nombre del usuario</div>
-      <div class="profileMail">correo@electronico.com</div>
-      <div class="profileCel">(55)8532-9420</div>
-    </ons-col>
-  </ons-row>
-  <div class="historial">
-    <ons-row>
-      <ons-col class="instrucciones">Desliza a la derecha para ver tu historial de compras</ons-col>
-    </ons-row>
-    <ons-row>
+  <div ng-hide="loggedin" class="signIn">
+    <ons-row ng-show="choose">
+      <ons-col></ons-col>
+      <ons-col>
+        <div class="logo"><img src="app/img/jagergin.svg" alt=""/></div>
+        <p>¡Que la fiesta nunca termine!</p>
+        <div class="buttons">
+          <ons-button ng-click="signUpForm=true; choose=false;" class="signupBtn">Regístrate</ons-button>
+          <ons-button ng-click="signInForm=true; choose=false;" class="signInBtn">¿Ya tienes cuenta?</ons-button>
+        </div>
+      </ons-col>
       <ons-col></ons-col>
     </ons-row>
-    <ons-row>
+    <ons-row ng-show="signUpForm" class="signUpArea">
+      <ons-col></ons-col>
       <ons-col>
-        <ons-carousel style="height:290px; width:100%;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll">
-          <ons-carousel-item>
-            <div class="pedido">
-              <ons-row>
-                <ons-col>
-                  <div class="num">39194</div>
-                </ons-col>
-                <ons-col>
-                  <div class="fecha">15-02-2016</div>
-                </ons-col>
-              </ons-row>
-              <ons-row>
-                <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                </div>
-              </ons-row>
-              <ons-row>
-                <ons-col>
-                  <div class="total">$405.00</div>
-                </ons-col>
-                <ons-col>
-                  <div class="estado">Por entregar</div>
-                </ons-col>
-              </ons-row>
-            </div>
-          </ons-carousel-item>
-          <ons-carousel-item>
-            <div class="pedido">
-              <ons-row>
-                <ons-col>
-                  <div class="num">39194</div>
-                </ons-col>
-                <ons-col>
-                  <div class="fecha">15-02-2016</div>
-                </ons-col>
-              </ons-row>
-              <ons-row>
-                <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                </div>
-              </ons-row>
-              <ons-row>
-                <ons-col>
-                  <div class="total">$405.00</div>
-                </ons-col>
-                <ons-col>
-                  <div class="estado">Por entregar</div>
-                </ons-col>
-              </ons-row>
-            </div>
-          </ons-carousel-item>
-          <ons-carousel-item>
-            <div class="pedido">
-              <ons-row>
-                <ons-col>
-                  <div class="num">39194</div>
-                </ons-col>
-                <ons-col>
-                  <div class="fecha">15-02-2016</div>
-                </ons-col>
-              </ons-row>
-              <ons-row>
-                <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                </div>
-              </ons-row>
-              <ons-row>
-                <ons-col>
-                  <div class="total">$405.00</div>
-                </ons-col>
-                <ons-col>
-                  <div class="estado">Por entregar</div>
-                </ons-col>
-              </ons-row>
-            </div>
-          </ons-carousel-item>
-          <ons-carousel-item>
-            <div class="pedido">
-              <ons-row>
-                <ons-col>
-                  <div class="num">39194</div>
-                </ons-col>
-                <ons-col>
-                  <div class="fecha">15-02-2016</div>
-                </ons-col>
-              </ons-row>
-              <ons-row>
-                <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                  - Botella x2 <br>
-                  - Vasos x5<br>
-                  - Cubiertos x1<br>
-                  - Cervilletas x1<br>
-                </div>
-              </ons-row>
-              <ons-row>
-                <ons-col>
-                  <div class="total">$405.00</div>
-                </ons-col>
-                <ons-col>
-                  <div class="estado">Por entregar</div>
-                </ons-col>
-              </ons-row>
-            </div>
-          </ons-carousel-item>
-        </ons-carousel>
+        <div class="fa fa-facebook"></div>
+        <ons-button class="facebookIn">Ingresar con Facebook </ons-button>
+        <p>- o - </p>
+        <form>
+          <input type="email" ng-model="signin.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/>
+          <input type="text" ng-model="signin.name" placeholder="Nombre" class="text-input text-input--underbar"/>
+          <input type="tel" ng-model="signin.tel" placeholder="Teléfono móvil" class="text-input text-input--underbar"/>
+          <input type="password" ng-model="signin.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
+          <input type="password" ng-model="signin.password2" placeholder="Confirmar contraseña" class="text-input text-input--underbar"/>
+          <div class="errorInForm"></div>
+          <ons-button class="signInBtn">Crear cuenta</ons-button>
+          <p class="terms">Al crear una cuenta aceptas los <a ng-click="">Términos de servicio.</a></p><a ng-click="signInForm=true; signUpForm=false;" class="cancelar">¿Ya tienes cuenta?</a>
+        </form>
+      </ons-col>
+      <ons-col></ons-col>
+    </ons-row>
+    <ons-row ng-show="signInForm" class="signInArea">
+      <ons-col></ons-col>
+      <ons-col>
+        <div class="fa fa-facebook"></div>
+        <ons-button class="facebookIn">Ingresar con Facebook </ons-button>
+        <p>- o - </p>
+        <form>
+          <input type="email" ng-model="signin.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/>
+          <input type="password" ng-model="signin.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
+          <div class="errorInForm"></div>
+          <ons-button class="signInBtn">Ingresar</ons-button><a ng-click="signInForm=false; signUpForm=true;" class="cancelar">Crear una cuenta</a>
+        </form>
+      </ons-col>
+      <ons-col></ons-col>
+    </ons-row>
+  </div>
+  <div ng-show="loggedin">
+    <ons-row class="profile">
+      <ons-col>
+        <div class="profileImage"><img src="app/img/profile.png" alt=""/></div>
+        <div class="profileName">Nombre del usuario</div>
+        <div class="profileMail">correo@electronico.com</div>
+        <div class="profileCel">(55)8532-9420</div>
       </ons-col>
     </ons-row>
+    <div class="historial">
+      <ons-row>
+        <ons-col class="instrucciones">Desliza a la derecha para ver tu historial de compras</ons-col>
+      </ons-row>
+      <ons-row>
+        <ons-col></ons-col>
+      </ons-row>
+      <ons-row>
+        <ons-col>
+          <ons-carousel style="height:290px; width:100%;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll">
+            <ons-carousel-item>
+              <div class="pedido">
+                <ons-row>
+                  <ons-col>
+                    <div class="num">39194</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="fecha">15-02-2016</div>
+                  </ons-col>
+                </ons-row>
+                <ons-row>
+                  <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                  </div>
+                </ons-row>
+                <ons-row>
+                  <ons-col>
+                    <div class="total">$405.00</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="estado">Por entregar</div>
+                  </ons-col>
+                </ons-row>
+              </div>
+            </ons-carousel-item>
+            <ons-carousel-item>
+              <div class="pedido">
+                <ons-row>
+                  <ons-col>
+                    <div class="num">39194</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="fecha">15-02-2016</div>
+                  </ons-col>
+                </ons-row>
+                <ons-row>
+                  <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                  </div>
+                </ons-row>
+                <ons-row>
+                  <ons-col>
+                    <div class="total">$405.00</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="estado">Por entregar</div>
+                  </ons-col>
+                </ons-row>
+              </div>
+            </ons-carousel-item>
+            <ons-carousel-item>
+              <div class="pedido">
+                <ons-row>
+                  <ons-col>
+                    <div class="num">39194</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="fecha">15-02-2016</div>
+                  </ons-col>
+                </ons-row>
+                <ons-row>
+                  <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                  </div>
+                </ons-row>
+                <ons-row>
+                  <ons-col>
+                    <div class="total">$405.00</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="estado">Por entregar</div>
+                  </ons-col>
+                </ons-row>
+              </div>
+            </ons-carousel-item>
+            <ons-carousel-item>
+              <div class="pedido">
+                <ons-row>
+                  <ons-col>
+                    <div class="num">39194</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="fecha">15-02-2016</div>
+                  </ons-col>
+                </ons-row>
+                <ons-row>
+                  <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                    - Botella x2 <br>
+                    - Vasos x5<br>
+                    - Cubiertos x1<br>
+                    - Cervilletas x1<br>
+                  </div>
+                </ons-row>
+                <ons-row>
+                  <ons-col>
+                    <div class="total">$405.00</div>
+                  </ons-col>
+                  <ons-col>
+                    <div class="estado">Por entregar</div>
+                  </ons-col>
+                </ons-row>
+              </div>
+            </ons-carousel-item>
+          </ons-carousel>
+        </ons-col>
+      </ons-row>
+    </div>
   </div>
 </ons-page>
