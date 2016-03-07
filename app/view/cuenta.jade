@@ -31,7 +31,7 @@ ons-page(ng-controller="CuentaCtrl").account
           input(type="password", ng-model="signin.password", placeholder="Contraseña").text-input.text-input--underbar
           input(type="password", ng-model="signin.password2", placeholder="Confirmar contraseña").text-input.text-input--underbar
           .errorInForm
-          ons-button.signInBtn Crear cuenta
+          ons-button.signInBtn(ng-click="loggedin=true") Crear cuenta
           p.terms Al crear una cuenta aceptas los 
             a(ng-click="") Términos de servicio.
           a.cancelar(ng-click="signInForm=true; signUpForm=false;") ¿Ya tienes cuenta?
@@ -47,7 +47,7 @@ ons-page(ng-controller="CuentaCtrl").account
           input(type="email", ng-model="signin.email", placeholder="Correo electrónico").text-input.text-input--underbar
           input(type="password", ng-model="signin.password", placeholder="Contraseña").text-input.text-input--underbar
           .errorInForm
-          ons-button.signInBtn Ingresar
+          ons-button.signInBtn(ng-click="loggedin=true") Ingresar
           a.cancelar(ng-click="signInForm=false; signUpForm=true;") Crear una cuenta
       ons-col
         

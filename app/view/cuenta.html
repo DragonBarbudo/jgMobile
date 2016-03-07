@@ -42,7 +42,7 @@
           <input type="password" ng-model="signin.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
           <input type="password" ng-model="signin.password2" placeholder="Confirmar contraseña" class="text-input text-input--underbar"/>
           <div class="errorInForm"></div>
-          <ons-button class="signInBtn">Crear cuenta</ons-button>
+          <ons-button ng-click="loggedin=true" class="signInBtn">Crear cuenta</ons-button>
           <p class="terms">Al crear una cuenta aceptas los <a ng-click="">Términos de servicio.</a></p><a ng-click="signInForm=true; signUpForm=false;" class="cancelar">¿Ya tienes cuenta?</a>
         </form>
       </ons-col>
@@ -58,7 +58,7 @@
           <input type="email" ng-model="signin.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/>
           <input type="password" ng-model="signin.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
           <div class="errorInForm"></div>
-          <ons-button class="signInBtn">Ingresar</ons-button><a ng-click="signInForm=false; signUpForm=true;" class="cancelar">Crear una cuenta</a>
+          <ons-button ng-click="loggedin=true" class="signInBtn">Ingresar</ons-button><a ng-click="signInForm=false; signUpForm=true;" class="cancelar">Crear una cuenta</a>
         </form>
       </ons-col>
       <ons-col></ons-col>
