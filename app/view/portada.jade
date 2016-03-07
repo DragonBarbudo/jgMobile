@@ -1,0 +1,17 @@
+include mixins
+
+ons-navigator(var="Navigator") 
+  ons-page(ng-controller="PortadaCtrl").portada
+    ons-toolbar
+      .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
+      .center: img(src="app/img/jagergin_typo.svg").centralLogo
+      .right: +toolbar-right
+
+    +mainSlider
+    
+    .categoriesGrid
+      ons-row.categories
+        ons-col(ng-repeat="cat in categoriesList | filter : { description : 0 } | orderBy: 'order'", ng-click="categoryOpen(cat.id, cat.name, cat.parent);", width="48%"): .tb: .cell
+          .icon: svg-snap(path="app/img/icon_{{ rSpace(cat.name) }}.svg")
+          .text {{cat.name}}
+          

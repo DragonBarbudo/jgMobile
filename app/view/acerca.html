@@ -1,0 +1,32 @@
+
+<ons-page class="about">
+  <ons-toolbar>
+    <div class="left">
+      <ons-toolbar-button ng-click="menu.toggleMenu()">
+        <ons-icon icon="ion-navicon"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+    <div class="center">Acerca de JagerGin</div>
+    <div class="right">
+      <ons-toolbar-button ng-click="Navigator.pushPage('app/view/busqueda.html')">
+        <ons-icon icon="ion-android-search"></ons-icon>
+      </ons-toolbar-button>
+      <ons-toolbar-button ng-click="menu.setMainPage('app/view/carrito.html')">
+        <ons-icon icon="ion-ios-cart-outline" ng-class="{'active-cart': cartCount &gt; 0}" data="{{cartCount}}"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+  </ons-toolbar>
+  <ons-row>
+    <ons-col>
+      <div class="mainLogo"><img src="app/img/jagergin.svg" alt=""/></div>
+    </ons-col>
+  </ons-row>
+  <ons-row>
+    <ons-col>&nbsp;</ons-col>
+    <ons-col width="80%">
+      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla totam deleniti voluptatum quidem iure aut suscipit et necessitatibus perspiciatis ea unde dolor, nobis, similique id ducimus, magnam! Aut quos, ducimus.</p>
+      <div class="social"><a href="#" class="fa fa-facebook"></a><a href="#" class="fa fa-twitter"></a></div>
+    </ons-col>
+    <ons-col>&nbsp;</ons-col>
+  </ons-row>
+</ons-page>

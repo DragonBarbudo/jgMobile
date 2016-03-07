@@ -1,0 +1,30 @@
+
+<ons-page ng-controller="PortadaCtrl" class="portada">
+  <ons-toolbar>
+    <div class="left">
+      <ons-back-button>Atras</ons-back-button>
+    </div>
+    <div class="center"><img src="app/img/jagergin_typo.svg" class="centralLogo"/></div>
+    <div class="right">
+      <ons-toolbar-button ng-click="Navigator.pushPage('app/view/busqueda.html')">
+        <ons-icon icon="ion-android-search"></ons-icon>
+      </ons-toolbar-button>
+      <ons-toolbar-button ng-click="menu.setMainPage('app/view/carrito.html')">
+        <ons-icon icon="ion-ios-cart-outline" ng-class="{'active-cart': cartCount &gt; 0}" data="{{cartCount}}"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+  </ons-toolbar>
+  <slick infinit="true" lazy-load="ondemand" autoplay="true" arrows="false" class="portadaSlider">
+    <div><img src="app/img/promo1.jpg" alt=""/></div>
+    <div><img src="app/img/promo2.jpg" alt=""/></div>
+  </slick>
+  <div class="categoriesGrid">
+    <ons-row class="categories">
+      <ons-col ng-repeat="cat in categoriesList | filter : { description : '!0' }" ng-click="categoryOpen(cat.id, cat.name)" width="48%">
+        <div class="tb">
+          <div class="cell">{{cat.name}}</div>
+        </div>
+      </ons-col>
+    </ons-row>
+  </div>
+</ons-page>

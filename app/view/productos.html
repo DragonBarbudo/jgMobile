@@ -1,0 +1,90 @@
+
+<ons-page ng-controller="ProductosCtrl">
+  <ons-toolbar>
+    <div class="left">
+      <ons-back-button>Atras</ons-back-button>
+    </div>
+    <div class="center">{{categoryName}}</div>
+    <div class="right">
+      <ons-toolbar-button ng-click="Navigator.pushPage('app/view/busqueda.html')">
+        <ons-icon icon="ion-android-search"></ons-icon>
+      </ons-toolbar-button>
+      <ons-toolbar-button ng-click="menu.setMainPage('app/view/carrito.html')">
+        <ons-icon icon="ion-ios-cart-outline" ng-class="{'active-cart': cartCount &gt; 0}" data="{{cartCount}}"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+  </ons-toolbar>
+  <ons-row style="background-image: url(http://lorempixel.com/400/200)" class="selectionMode">
+    <ons-col>&nbsp;</ons-col>
+    <ons-col>
+      <div class="button-bar">
+        <div class="button-bar__item">
+          <input type="radio" name="vista" ng-checked="!grid" ng-click="grid=false"/>
+          <button class="button-bar__button">
+            <ons-icon icon="fa-list-ul"></ons-icon>
+          </button>
+        </div>
+        <div class="button-bar__item">
+          <input type="radio" name="vista" ng-checked="grid" ng-click="grid=true"/>
+          <button class="button-bar__button">
+            <ons-icon icon="fa-th-large"></ons-icon>
+          </button>
+        </div>
+      </div>
+    </ons-col>
+  </ons-row>
+  <ons-row ng-show="!grid" class="productsList">
+    <ons-col>
+      <ons-list>
+        <ons-list-item ng-repeat="prod in products" class="product">
+          <ons-row>
+            <ons-col width="70px">
+              <div class="thumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
+            </ons-col>
+            <ons-col>
+              <div class="name">{{prod.name}}</div>
+              <div class="description">{{prod.description}}</div>
+              <div class="price">{{prod.new_price | currency}}</div>
+            </ons-col>
+            <ons-col width="70px" ng-hide="InCart(prod.refId)" class="cartBtn">
+              <ons-button ng-click="addToCart(prod)">
+                <ons-icon icon="ion-ios-cart-outline"></ons-icon>
+              </ons-button>
+            </ons-col>
+            <ons-col width="70px" ng-show="InCart(prod.refId)" class="cartBtn">
+              <ons-button class="isInCart">
+                <ons-icon icon="ion-ios-checkmark-empty"></ons-icon>
+              </ons-button>
+            </ons-col>
+          </ons-row>
+        </ons-list-item>
+      </ons-list>
+    </ons-col>
+  </ons-row>
+  <ons-row ng-show="grid" class="productsGrid">
+    <ons-col ng-repeat="prod in products" width="46%" class="product">
+      <ons-row>
+        <div class="bigthumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
+        <div class="name">{{prod.name}}</div>
+        <ons-row>
+          <ons-col>
+            <div class="description">{{prod.description}}</div>
+          </ons-col>
+          <ons-col>
+            <div class="price">{{prod.new_price | currency}}</div>
+          </ons-col>
+        </ons-row>
+        <div ng-hide="InCart(prod.refId)" class="cartBtn">
+          <ons-button ng-click="addToCart(prod)">
+            <ons-icon icon="ion-ios-cart-outline"></ons-icon>
+          </ons-button>
+        </div>
+        <div ng-show="InCart(prod.refId)" class="cartBtn">
+          <ons-button class="isInCart">
+            <ons-icon icon="ion-ios-checkmark-empty"></ons-icon>
+          </ons-button>
+        </div>
+      </ons-row>
+    </ons-col>
+  </ons-row>
+</ons-page>

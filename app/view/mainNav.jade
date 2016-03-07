@@ -1,0 +1,20 @@
+ons-sliding-menu(var="menu" main-page="app/view/portada.html", menu-page="menu.html", side="left", max-slide-distance="75%", type="reveal", swipe-target-width="40%")
+
+
+
+ons-template(id="menu.html")
+  ons-page
+    ons-list.mainNav
+      ons-list-item: img(src="app/img/jagergin_imago.svg").jagerginmenu
+      ons-list-item(ng-click="menu.setMainPage('app/view/portada.html', {closeMenu:true})", modifier="tappable")
+        span.icon-action: ons-icon(icon="ion-android-bar")
+        |  Haz tu pedido
+      ons-list-item(ng-click="menu.setMainPage('app/view/cuenta.html', {closeMenu:true})")
+        span.icon-action: ons-icon(icon="ion-person")
+        |  Tu cuenta
+      ons-list-item(ng-click="menu.setMainPage('app/view/acerca.html', {closeMenu:true})")
+        span.icon-action: ons-icon(icon="ion-ios-help-outline")
+        |  Acerca de JagerGin
+      ons-list-item(ng-click="menu.setMainPage('app/view/portada.html', {closeMenu:true})")
+        span.icon-action: ons-icon(icon="ion-log-out")
+        |  Cerrar sesión

@@ -1,0 +1,18 @@
+include mixins
+
+ons-page.about
+  ons-toolbar
+    .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
+    .center Acerca de JagerGin
+    .right: +toolbar-right
+  
+  ons-row
+    ons-col: .mainLogo: img(src="app/img/jagergin.svg", alt="")
+  ons-row
+    ons-col &nbsp;
+    ons-col(width="80%")
+      p  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla totam deleniti voluptatum quidem iure aut suscipit et necessitatibus perspiciatis ea unde dolor, nobis, similique id ducimus, magnam! Aut quos, ducimus.
+      .social
+        a(href="#").fa.fa-facebook
+        a(href="#").fa.fa-twitter
+    ons-col &nbsp;

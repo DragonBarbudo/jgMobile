@@ -1,0 +1,25 @@
+include mixins
+
+ons-page(ng-controller="BusquedaCtrl")
+  ons-toolbar
+    .left: ons-back-button Atras
+    .center Buscar
+    .right: +cartBtn
+  
+  ons-row
+    ons-col.searchBar
+      input(type="text", placeholder="Buscar producto", ng-model="search").search-input
+
+  ons-row.productsList
+    ons-col
+      ons-list
+        ons-list-item(ng-repeat="prod in products | filter: search").product
+          ons-row
+            ons-col(width="70px"): .thumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
+            ons-col
+              .name {{prod.name}}
+              .description {{prod.description}} | {{ prod.categoryName }}
+              .price {{prod.new_price | currency}}
+            ons-col(width="70px", ng-hide="InCart(prod.refId)").cartBtn: ons-button(ng-click="addToCart(prod)"): ons-icon(icon="ion-ios-cart-outline")
+            ons-col(width="70px", ng-show="InCart(prod.refId)").cartBtn: ons-button.isInCart: ons-icon(icon="ion-ios-checkmark-empty")
+          

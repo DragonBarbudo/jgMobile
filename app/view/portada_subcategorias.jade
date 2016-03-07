@@ -1,0 +1,15 @@
+ons-page(ng-controller="PortadaCtrl").portada
+  ons-toolbar
+    .left: ons-back-button Regresar
+    .center: img(src="app/img/jagergin_typo.svg").centralLogo
+    .right
+      ons-toolbar-button(): ons-icon(icon="ion-android-search")
+      ons-toolbar-button(): ons-icon(icon="ion-ios-cart-outline")
+
+  slick(infinit="true", lazy-load="ondemand", autoplay="true", arrows="false").portadaSlider
+    div: img(src="app/img/promo1.jpg", alt="")
+    div: img(src="app/img/promo2.jpg", alt="")
+  
+  .categoriesGrid
+    ons-row.categories
+      ons-col(ng-repeat="cat in categoriesList", ng-click="categoryOpen(cat.id, cat.description)", ng-show="cat.description==subcats", width="50%"): .tb: .cell {{cat.name}}

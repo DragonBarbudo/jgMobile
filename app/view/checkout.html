@@ -1,0 +1,40 @@
+
+<ons-page ng-controller="CheckoutCtrl" class="Cart">
+  <ons-toolbar>
+    <div class="left">
+      <ons-back-button>Atras</ons-back-button>
+    </div>
+    <div class="center">Checkout</div>
+    <div class="right">&nbsp;</div>
+  </ons-toolbar>
+  <ons-bottom-toolbar class="navigation-bar">
+    <div class="left navigation-bar__left"></div>
+    <div class="center navigation-bar__title amount navigation-bar__center totalAmount">{{ order.total_amount | currency }}</div>
+    <div class="right navigation-bar__right">
+      <ons-toolbar-button class="payBtn">
+        <ons-icon icon="ion-bag"></ons-icon> Pagar
+      </ons-toolbar-button>
+    </div>
+  </ons-bottom-toolbar>
+  <ons-row>
+    <ons-col class="instrucciones">Asigna el lugar donde será tu entrega. Recuerda que debe estar dentro de la zona JagerGin.</ons-col>
+  </ons-row>
+  <ons-row>
+    <ons-col>
+      <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" events="map.events">
+        <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible" geodesic="p.geodesic" fill="p.fill" fit="false"></ui-gmap-polygon>
+        <!--ui-gmap-marker(idKey="1", coords="marker.coords", options="marker.options")-->
+      </ui-gmap-google-map>
+    </ons-col>
+  </ons-row>
+  <ons-row> 
+    <ons-col>
+      <form>
+        <input type="text" placeholder="Dirección" ng-model="address"/>
+        <input type="text" placeholder="Código Postal" ng-model="order.customer_zipcode"/>
+        <input type="text" placeholder="Referencias del domicilio" ng-model="order.customer_references"/>
+        <input type="text" placeholder="Notas sobre la dirección" ng-model="order.customer_note"/>
+      </form>
+    </ons-col>
+  </ons-row>
+</ons-page>

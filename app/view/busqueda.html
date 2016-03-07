@@ -1,0 +1,47 @@
+
+<ons-page ng-controller="BusquedaCtrl">
+  <ons-toolbar>
+    <div class="left">
+      <ons-back-button>Atras</ons-back-button>
+    </div>
+    <div class="center">Buscar</div>
+    <div class="right">
+      <ons-toolbar-button ng-click="menu.setMainPage('app/view/carrito.html')">
+        <ons-icon icon="ion-ios-cart-outline" ng-class="{'active-cart': cartCount &gt; 0}" data="{{cartCount}}"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+  </ons-toolbar>
+  <ons-row>
+    <ons-col class="searchBar">
+      <input type="text" placeholder="Buscar producto" ng-model="search" class="search-input"/>
+    </ons-col>
+  </ons-row>
+  <ons-row class="productsList">
+    <ons-col>
+      <ons-list>
+        <ons-list-item ng-repeat="prod in products | filter: search" class="product">
+          <ons-row>
+            <ons-col width="70px">
+              <div class="thumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
+            </ons-col>
+            <ons-col>
+              <div class="name">{{prod.name}}</div>
+              <div class="description">{{prod.description}} | {{ prod.categoryName }}</div>
+              <div class="price">{{prod.new_price | currency}}</div>
+            </ons-col>
+            <ons-col width="70px" ng-hide="InCart(prod.refId)" class="cartBtn">
+              <ons-button ng-click="addToCart(prod)">
+                <ons-icon icon="ion-ios-cart-outline"></ons-icon>
+              </ons-button>
+            </ons-col>
+            <ons-col width="70px" ng-show="InCart(prod.refId)" class="cartBtn">
+              <ons-button class="isInCart">
+                <ons-icon icon="ion-ios-checkmark-empty"></ons-icon>
+              </ons-button>
+            </ons-col>
+          </ons-row>
+        </ons-list-item>
+      </ons-list>
+    </ons-col>
+  </ons-row>
+</ons-page>

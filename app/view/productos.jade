@@ -1,0 +1,42 @@
+include mixins
+
+ons-page(ng-controller="ProductosCtrl")
+  ons-toolbar
+    .left: ons-back-button Atras
+    .center {{categoryName}}
+    .right: +toolbar-right
+
+  ons-row.selectionMode(style="background-image: url(http://lorempixel.com/400/200)")
+    ons-col &nbsp;
+    ons-col
+      .button-bar
+        .button-bar__item
+          input(type="radio", name="vista", ng-checked="!grid", ng-click="grid=false")
+          button.button-bar__button: ons-icon(icon="fa-list-ul")
+        .button-bar__item
+          input(type="radio", name="vista", ng-checked="grid", ng-click="grid=true")
+          button.button-bar__button: ons-icon(icon="fa-th-large")
+
+  ons-row.productsList(ng-show="!grid")
+    ons-col
+      ons-list
+        ons-list-item(ng-repeat="prod in products").product
+          ons-row
+            ons-col(width="70px"): .thumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
+            ons-col
+              .name {{prod.name}}
+              .description {{prod.description}}
+              .price {{prod.new_price | currency}}
+            ons-col(width="70px", ng-hide="InCart(prod.refId)").cartBtn: ons-button(ng-click="addToCart(prod)"): ons-icon(icon="ion-ios-cart-outline")
+            ons-col(width="70px", ng-show="InCart(prod.refId)").cartBtn: ons-button.isInCart: ons-icon(icon="ion-ios-checkmark-empty")
+
+  ons-row.productsGrid(ng-show="grid")
+    ons-col(ng-repeat="prod in products", width="46%").product
+          ons-row
+            .bigthumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
+            .name {{prod.name}}
+            ons-row
+              ons-col: .description {{prod.description}}
+              ons-col: .price {{prod.new_price | currency}}
+            .cartBtn(ng-hide="InCart(prod.refId)"): ons-button(ng-click="addToCart(prod)"): ons-icon(icon="ion-ios-cart-outline")
+            .cartBtn(ng-show="InCart(prod.refId)"): ons-button.isInCart: ons-icon(icon="ion-ios-checkmark-empty")

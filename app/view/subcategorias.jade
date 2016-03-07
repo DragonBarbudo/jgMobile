@@ -1,0 +1,13 @@
+include mixins
+
+ons-page(ng-controller="PortadaCtrl").portada
+  ons-toolbar
+    .left: ons-back-button Atras
+    .center: img(src="app/img/jagergin_typo.svg").centralLogo
+    .right: +toolbar-right
+
+  +mainSlider
+  
+  .categoriesGrid
+    ons-row.categories
+      ons-col(ng-repeat="cat in categoriesList | filter : { description : '!0' }", ng-click="categoryOpen(cat.id, cat.name)", width="48%"): .tb: .cell {{cat.name}}

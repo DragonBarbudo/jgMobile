@@ -1,0 +1,28 @@
+include mixins
+
+ons-page(ng-controller="CheckoutCtrl").Cart
+  ons-toolbar
+    .left: ons-back-button Atras
+    .center Checkout
+    .right &nbsp;
+  ons-bottom-toolbar.navigation-bar
+    .left.navigation-bar__left
+    .center.navigation-bar__title.amount.navigation-bar__center.totalAmount {{ order.total_amount | currency }}
+    .right.navigation-bar__right
+      ons-toolbar-button.payBtn
+        ons-icon(icon="ion-bag")
+        |  Pagar
+        
+  ons-row: ons-col.instrucciones Asigna el lugar donde será tu entrega. Recuerda que debe estar dentro de la zona JagerGin.
+  ons-row
+    ons-col
+      ui-gmap-google-map(control="map.control", center='map.center', zoom='map.zoom', events="map.events")
+        ui-gmap-polygon(static="true", ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", visible="p.visible", geodesic="p.geodesic", fill="p.fill", fit="false")
+        //ui-gmap-marker(idKey="1", coords="marker.coords", options="marker.options")
+  ons-row  
+    ons-col
+      form
+        input(type="text", placeholder="Dirección" ng-model="address")
+        input(type="text", placeholder="Código Postal" ng-model="order.customer_zipcode")
+        input(type="text", placeholder="Referencias del domicilio" ng-model="order.customer_references")
+        input(type="text", placeholder="Notas sobre la dirección" ng-model="order.customer_note")
