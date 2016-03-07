@@ -325,11 +325,19 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
 
 
 moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, $filter) {
-  
+
   $scope.loggedin   = false;
   $scope.choose     = true;
   $scope.signUpForm = false;
   $scope.signInForm = false;
 
   $scope.signin = {};
+
+
+  $scope.fbLogin = function(){
+    console.log('fb');
+    hello.init({ facebook : '613671772113193' }, { redirect_uri:'https://www.facebook.com/connect/login_success.html' });
+    hello('facebook').login();
+}//fbLogin
+
 });
