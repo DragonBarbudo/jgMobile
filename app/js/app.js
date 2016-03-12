@@ -40,10 +40,10 @@ moduleapp.run(function($rootScope){
   $rootScope.userApp.name;
   $rootScope.userApp.picture;
 
-  hello.init({ facebook : '613671772113193' }, { redirect_uri:'http://jgmobile.sitio.ninja/redirect.html' });
+  hello.init({ facebook : '613671772113193' }, { redirect_uri:'http://mobile.prototipo.xyz/redirect.html' });
   //hello.init({ facebook : '613690458777991' }, { redirect_uri:'redirect.html' });
 
-  //hello('facebook').login({ scope: 'email' });
+  hello('facebook').login({ scope: 'email' });
 
   hello.on('auth.login', function(auth) {
 
