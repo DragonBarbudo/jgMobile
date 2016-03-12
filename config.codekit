@@ -176,6 +176,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/app\/img\/mainBG.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 86301,
+		"inputAbbreviatedPath": "\/app\/img\/mainBG.jpg",
+		"outputAbbreviatedPath": "\/app\/img\/mainBG.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/app\/img\/profile.png": {
 		"fileType": 32768,
 		"ignore": 0,

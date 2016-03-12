@@ -15,8 +15,6 @@ var moduleapp = angular.module('JagerginMobileApp',
 
 
 
-
-
 moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
   //for cors
   $httpProvider.defaults.useXDomain = true;
@@ -45,9 +43,7 @@ moduleapp.run(function($rootScope){
   hello.init({ facebook : '613671772113193' }, { redirect_uri:'http://jgmobile.sitio.ninja/redirect.html' });
   //hello.init({ facebook : '613690458777991' }, { redirect_uri:'redirect.html' });
 
-  hello('facebook').login({
-    scope: 'email'
-  });
+  //hello('facebook').login({ scope: 'email' });
 
   hello.on('auth.login', function(auth) {
 

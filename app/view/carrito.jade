@@ -21,7 +21,7 @@ ons-navigator(var="CartNavigator")
         ons-col
           ons-list
             ons-list-item(ng-repeat="prod in cartItems").product
-              ons-carousel(style="width:100%; height: 70px;", swipeable, overscrollable, auto-scroll)
+              ons-carousel(style="width:100%; height: 70px;", swipeable, overscrollable, auto-scroll, var="carousel{{prod.id}}")
                 ons-carousel-item
                   ons-row
                     ons-col(width="70px"): .thumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
@@ -30,7 +30,7 @@ ons-navigator(var="CartNavigator")
                       .description {{prod.description}}
                       .price {{prod.new_price | currency }}
                     ons-col.qty
-                      <ons-icon icon="ion-android-remove" ng-click="decreaseQuantity_tap(cartItems[$index])" ></ons-icon>
+                      <ons-icon icon="ion-android-remove" ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-class="{'eliminate' : cartItems[$index].quantity == 1}" ></ons-icon>
                       <ons-icon icon="ion-android-add" ng-click="increaseQuantity_tap(cartItems[$index])"></ons-icon>
                       .priceTotal 
                         span {{cartItems[$index].quantity}}x | 

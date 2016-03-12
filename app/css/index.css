@@ -4748,12 +4748,12 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 .navigation-bar {
-  background: #1b1d1f;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1b1d1f), color-stop(1, #202325));
-  background: -ms-linear-gradient(bottom, #1b1d1f, #202325);
-  background: -moz-linear-gradient(center bottom, #1b1d1f 0%, #202325 100%);
-  background: -o-linear-gradient(#202325, #1b1d1f);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#202325', endColorstr='#1b1d1f', GradientType=0);
+  background: #101213;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #101213), color-stop(1, #40464a));
+  background: -ms-linear-gradient(bottom, #101213, #40464a);
+  background: -moz-linear-gradient(center bottom, #101213 0%, #40464a 100%);
+  background: -o-linear-gradient(#40464a, #101213);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#40464a', endColorstr='#101213', GradientType=0);
   border-bottom: 1px solid #2EB9FF;
 }
 .navigation-bar ons-icon {
@@ -4835,20 +4835,17 @@ body {
   margin-top: 10px;
 }
 .portada .page__background {
-  background: #202325;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #202325), color-stop(1, #2d3134));
-  background: -ms-linear-gradient(bottom, #202325, #2d3134);
-  background: -moz-linear-gradient(center bottom, #202325 0%, #2d3134 100%);
-  background: -o-linear-gradient(#2d3134, #202325);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2d3134', endColorstr='#202325', GradientType=0);
+  background-image: url(../img/mainBG.jpg);
+  background-size: cover;
 }
 .portada .portadaSlider img {
   width: 100%;
 }
 .portada .categoriesGrid ons-col {
-  margin: .2% 1%;
+  margin: 2% 1%;
+  background: transparent;
   color: #f5f5f5;
-  padding: 20px 10px;
+  padding: 10px 10px;
   text-align: center;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -4861,30 +4858,32 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 .portada .categoriesGrid ons-col .icon {
-  width: 80px;
-  height: 80px;
-  background: #202325;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 10% 10% 0 0;
+  -moz-border-radius: 10% 10% 0 0;
+  border-radius: 10% 10% 0 0;
   -moz-background-clip: padding-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   margin: 0 auto;
   position: relative;
-  background: #1b1d1f;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1b1d1f), color-stop(1, #202325));
-  background: -ms-linear-gradient(bottom, #1b1d1f, #202325);
-  background: -moz-linear-gradient(center bottom, #1b1d1f 0%, #202325 100%);
-  background: -o-linear-gradient(#202325, #1b1d1f);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#202325', endColorstr='#1b1d1f', GradientType=0);
-  border: 4px solid #1b1d1f;
+  background: rgba(204, 204, 204, 0.35);
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(204, 204, 204, 0.35)), color-stop(1, rgba(245, 245, 245, 0.55)));
+  background: -ms-linear-gradient(bottom, rgba(204, 204, 204, 0.35), rgba(245, 245, 245, 0.55));
+  background: -moz-linear-gradient(center bottom, rgba(204, 204, 204, 0.35) 0%, rgba(245, 245, 245, 0.55) 100%);
+  background: -o-linear-gradient(rgba(245, 245, 245, 0.55), rgba(204, 204, 204, 0.35));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(245, 245, 245, 0.55)', endColorstr='rgba(204, 204, 204, 0.35)', GradientType=0);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   overflow: hidden;
 }
 .portada .categoriesGrid ons-col .icon svg {
-  height: 50px;
-  max-width: 50px;
+  height: 60px;
+  max-width: 60px;
   margin-top: 15px;
+}
+.portada .categoriesGrid ons-col .icon svg #border {
+  fill: #2B3439;
 }
 .portada .categoriesGrid ons-col .icon:before {
   content: "";
@@ -4893,12 +4892,12 @@ body {
   top: 0;
   right: 50%;
   bottom: 0;
-  background: rgba(16, 18, 19, 0.15);
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(16, 18, 19, 0.15)), color-stop(1, rgba(64, 70, 74, 0.25)));
-  background: -ms-linear-gradient(bottom, rgba(16, 18, 19, 0.15), rgba(64, 70, 74, 0.25));
-  background: -moz-linear-gradient(center bottom, rgba(16, 18, 19, 0.15) 0%, rgba(64, 70, 74, 0.25) 100%);
-  background: -o-linear-gradient(rgba(64, 70, 74, 0.25), rgba(16, 18, 19, 0.15));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(64, 70, 74, 0.25)', endColorstr='rgba(16, 18, 19, 0.15)', GradientType=0);
+  background: rgba(245, 245, 245, 0.05);
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(245, 245, 245, 0.05)), color-stop(1, rgba(255, 255, 255, 0.25)));
+  background: -ms-linear-gradient(bottom, rgba(245, 245, 245, 0.05), rgba(255, 255, 255, 0.25));
+  background: -moz-linear-gradient(center bottom, rgba(245, 245, 245, 0.05) 0%, rgba(255, 255, 255, 0.25) 100%);
+  background: -o-linear-gradient(rgba(255, 255, 255, 0.25), rgba(245, 245, 245, 0.05));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(255, 255, 255, 0.25)', endColorstr='rgba(245, 245, 245, 0.05)', GradientType=0);
 }
 .portada .categoriesGrid ons-col .tb {
   display: table;
@@ -4910,15 +4909,83 @@ body {
 }
 .portada .categoriesGrid ons-col .text {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 8px;
+  left: 50%;
   font-size: 0.7em;
-  color: #A3A3A3;
+  color: #f5f5f5;
   text-align: center;
-  width: 100%;
+  width: 140px;
+  margin-left: -70px;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 300;
   text-transform: uppercase;
+  background: #202325;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #202325), color-stop(1, #2d3134));
+  background: -ms-linear-gradient(bottom, #202325, #2d3134);
+  background: -moz-linear-gradient(center bottom, #202325 0%, #2d3134 100%);
+  background: -o-linear-gradient(#2d3134, #202325);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2d3134', endColorstr='#202325', GradientType=0);
+  padding: 3px 0;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.portada .categoriesGrid ons-col .text:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 20px 0 0 19px;
+  border-color: transparent transparent transparent #1b1d1f;
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+}
+.portada .categoriesGrid ons-col .text:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 20px 19px;
+  border-color: transparent transparent #1b1d1f transparent;
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+}
+.portada .categoriesGrid ons-col.subcats:first-child svg #fill {
+  fill: #954010;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats svg #fill {
+  fill: #CE2127;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats + .subcats svg #fill {
+  fill: #5D81B5;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats + .subcats + .subcats svg #fill {
+  fill: #79A15F;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats + .subcats + .subcats + .subcats svg #fill {
+  fill: #CC7F05;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats + .subcats + .subcats + .subcats + .subcats svg #fill {
+  fill: #ECB100;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats + .subcats + .subcats + .subcats + .subcats + .subcats svg #fill {
+  fill: #3D2A79;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats + .subcats + .subcats + .subcats + .subcats + .subcats + .subcats svg #fill {
+  fill: #F2F2F2;
+}
+.portada .categoriesGrid ons-col.subcats:first-child + .subcats + .subcats + .subcats + .subcats + .subcats + .subcats + .subcats + .subcats svg #fill {
+  fill: #AAEC6F;
+}
+.portada .subheaderimg {
+  width: 100%;
+  min-height: 120px;
+  background-image: url(http://lorempixel.com/960/300);
 }
 .productsList .product,
 .productsGrid .product {
@@ -4996,15 +5063,13 @@ body {
   text-align: right;
 }
 .productsGrid .product .cartBtn {
-  position: absolute;
-  top: 80px;
-  right: -5px;
+  width: 100%;
   margin-top: 10px;
   text-align: right;
 }
 .productsGrid .product .cartBtn ons-button {
   text-align: center;
-  width: 70px;
+  width: 100%;
 }
 .selectionMode {
   padding: 40px 10px;
@@ -5046,6 +5111,9 @@ body {
 }
 .Cart .productsList .qty ons-icon:active {
   background: #269ad5;
+}
+.Cart .productsList .qty ons-icon.eliminate {
+  background: #DD062C;
 }
 .Cart .priceTotal {
   line-height: 2.4;

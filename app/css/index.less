@@ -33,7 +33,7 @@ body {
 }
 
 .navigation-bar{
-  .gradient(@b/1.2, @b);
+  .gradient(@b/2, @b*2);
   border-bottom:1px solid @main;
   ons-icon{
     color:@w;
@@ -103,7 +103,9 @@ body {
 
 .portada{
   .page__background{
-    .gradient(@b, @b*1.4);
+    //.gradient(@w, @w*1.4);
+    background-image: url(../img/mainBG.jpg);
+    background-size: cover;
   }
   .portadaSlider{
     img{
@@ -112,37 +114,34 @@ body {
   }
   .categoriesGrid{
     ons-col{
-      margin: .2% 1%;
-      //background: @b;
-      //.gradient(@dark/1.2, @dark);
+      margin: 2% 1%;
+      background: transparent;
       color:@w;
-      padding: 20px 10px;
+      padding: 10px 10px;
       text-align: center;
       .border-radius(4px);
-      //background: url(http://lorempixel.com/image_output/nightlife-h-g-267-290-3.jpg);
       background-size: cover;
       position: relative;
       .font2;
       .icon{
-        width: 80px; height: 80px;
-        background: @b;
-        .border-radius(50%);
+        width: 100px; height: 100px;
+        .border-radius(10% 10% 0 0);
         margin: 0 auto;
         position: relative;
-        .gradient(@b/1.2, @b);
-        border: 4px solid @b/1.2;
+        .gradient(fade(@w/1.2, 35%), fade(@w, 55%));
+        border: 1px solid fade(@w*1.2, 25%);
         overflow: hidden;
         svg{
-          height: 50px;
-          max-width: 50px;
+          height: 60px;
+          max-width: 60px;
           margin-top: 15px;
-          //#fill{ fill:@w; }
+          #border{ fill:@dark; }
         }
         &:before{
           content:"";
           position: absolute;
           left: 0; top: 0; right: 50%; bottom: 0;
-          .gradient(fade(@b/2, 15%), fade(@b*2, 25%));
+          .gradient(fade(@w, 5%), fade(@w*2, 25%));
         }
       }
       .tb{
@@ -155,17 +154,79 @@ body {
       }
       .text{
         position: absolute;
-        bottom: 0;
-        left: 0;
+        bottom: 8px;
+        left: 50%;
         font-size: 0.7em;
-        color:@g;
+        color:@w;
         text-align: center;
-        width: 100%;
+        width: 140px;
+        margin-left: -70px;
         .font2;
         font-weight: 300;
         text-transform: uppercase;
+        .gradient(@b, @b*1.4);
+        padding: 3px 0;
+        .border-radius(0 0 4px 4px);
+        &:before{
+          content:"";
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 20px 0 0 19px;
+          border-color: transparent transparent transparent @b/1.2;
+          position: absolute;
+          right: 0;
+          bottom: 20px;
+        }
+        &:after{
+          content:"";
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 0 20px 19px;
+          border-color: transparent transparent @b/1.2 transparent;
+          position: absolute;
+          left: 0;
+          bottom: 20px;
+        }
+      }
+      &.subcats{
+        &:first-child{
+          svg{ #fill{fill:#954010; } }
+          &+.subcats{
+            svg{ #fill{fill:#CE2127; } }
+            &+.subcats{
+              svg{ #fill{fill:#5D81B5; } }
+              &+.subcats{
+                svg{ #fill{fill:#79A15F; } }
+                &+.subcats{
+                  svg{ #fill{fill:#CC7F05; } }
+                  &+.subcats{
+                    svg{ #fill{fill:#ECB100; } }
+                    &+.subcats{
+                      svg{ #fill{fill:#3D2A79; } }
+                      &+.subcats{
+                        svg{ #fill{fill:#F2F2F2; } }
+                        &+.subcats{
+                          svg{ #fill{fill:#AAEC6F; } }
+
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
+
+  }
+  .subheaderimg{
+    width: 100%;
+    min-height: 120px;
+    background-image: url(http://lorempixel.com/960/300);
   }
 }
 
@@ -193,7 +254,6 @@ body {
       font-size: 0.8em;
       font-weight: bold;
       color:@main;
-
     }
   }
   .cartBtn{
@@ -226,12 +286,10 @@ body {
     .name{ margin-bottom: 10px;}
     .price{text-align: right;}
     .cartBtn{
-      position: absolute;
-      top: 80px;
-      right: -5px;
+      width: 100%;
       margin-top: 10px;
       text-align: right;
-      ons-button{text-align: center; width: 70px;}
+      ons-button{text-align: center; width: 100%;}
     }
   }
 }
@@ -273,6 +331,9 @@ body {
         line-height: 1;
         &:active{
           background: @main/1.2;
+        }
+        &.eliminate{
+          background: @sec;
         }
       }
     }

@@ -102,6 +102,8 @@ moduleapp.controller('CarritoCtrl', function ($scope, ShoppingCartSvc, SettingSv
     $scope.order.total_amount;
     $scope.cartCount;
 
+    $scope.carous = [];
+
     getTotalAmount();
 
 
@@ -123,14 +125,16 @@ moduleapp.controller('CarritoCtrl', function ($scope, ShoppingCartSvc, SettingSv
       item.subTotal = item.quantity * item.new_price;
     	updateCart();
     }
-    $scope.decreaseQuantity_tap = function(item){
+    $scope.decreaseQuantity_tap = function(item, qty, itemindx){
     	ShoppingCartSvc.decreaseQuantity(item);
       item.subTotal = item.quantity * item.new_price;
     	updateCart();
+      if(qty == 1){
+        $scope[itemindx].next();
+      }
     }
 
     $scope.removeFromCart = function(item){
-      console.log('Remove '+item)
       ShoppingCartSvc.removeItem(item);
       updateCart();
     }

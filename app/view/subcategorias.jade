@@ -6,8 +6,12 @@ ons-page(ng-controller="PortadaCtrl").portada
     .center: img(src="app/img/jagergin_typo.svg").centralLogo
     .right: +toolbar-right
 
-  +mainSlider
+  ons-row
+    ons-col.subheaderimg
   
   .categoriesGrid
     ons-row.categories
-      ons-col(ng-repeat="cat in categoriesList | filter : { description : '!0' }", ng-click="categoryOpen(cat.id, cat.name)", width="48%"): .tb: .cell {{cat.name}}
+      ons-col(ng-repeat="cat in categoriesList | filter : { description : '!0' } | orderBy:'name' ", ng-click="categoryOpen(cat.id, cat.name)", width="48%").subcats: .tb: .cell 
+        .icon: svg-snap(path="app/img/icon_vinos_y_licores.svg")
+        .text {{cat.name}}
+        

@@ -14,15 +14,19 @@
       </ons-toolbar-button>
     </div>
   </ons-toolbar>
-  <slick infinit="true" lazy-load="ondemand" autoplay="true" arrows="false" class="portadaSlider">
-    <div><img src="app/img/promo1.jpg" alt=""/></div>
-    <div><img src="app/img/promo2.jpg" alt=""/></div>
-  </slick>
+  <ons-row>
+    <ons-col class="subheaderimg"></ons-col>
+  </ons-row>
   <div class="categoriesGrid">
     <ons-row class="categories">
-      <ons-col ng-repeat="cat in categoriesList | filter : { description : '!0' }" ng-click="categoryOpen(cat.id, cat.name)" width="48%">
+      <ons-col ng-repeat="cat in categoriesList | filter : { description : '!0' } | orderBy:'name' " ng-click="categoryOpen(cat.id, cat.name)" width="48%" class="subcats">
         <div class="tb">
-          <div class="cell">{{cat.name}}</div>
+          <div class="cell"> 
+            <div class="icon">
+              <svg-snap path="app/img/icon_vinos_y_licores.svg"></svg-snap>
+            </div>
+            <div class="text">{{cat.name}}</div>
+          </div>
         </div>
       </ons-col>
     </ons-row>

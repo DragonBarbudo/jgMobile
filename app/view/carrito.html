@@ -31,7 +31,7 @@
         <ons-col>
           <ons-list>
             <ons-list-item ng-repeat="prod in cartItems" class="product">
-              <ons-carousel style="width:100%; height: 70px;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll">
+              <ons-carousel style="width:100%; height: 70px;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll" var="carousel{{prod.id}}">
                 <ons-carousel-item>
                   <ons-row>
                     <ons-col width="70px">
@@ -43,7 +43,7 @@
                       <div class="price">{{prod.new_price | currency }}</div>
                     </ons-col>
                     <ons-col class="qty">
-                      <ons-icon icon="ion-android-remove" ng-click="decreaseQuantity_tap(cartItems[$index])" ></ons-icon>
+                      <ons-icon icon="ion-android-remove" ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-class="{'eliminate' : cartItems[$index].quantity == 1}" ></ons-icon>
                       <ons-icon icon="ion-android-add" ng-click="increaseQuantity_tap(cartItems[$index])"></ons-icon>
                       <div class="priceTotal"> <span>{{cartItems[$index].quantity}}x | </span>{{ cartItems[$index].subTotal | currency}}</div>
                     </ons-col>

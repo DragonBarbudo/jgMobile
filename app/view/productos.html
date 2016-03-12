@@ -36,7 +36,7 @@
   <ons-row ng-show="!grid" class="productsList">
     <ons-col>
       <ons-list>
-        <ons-list-item ng-repeat="prod in products" class="product">
+        <ons-list-item ng-repeat="prod in products | orderBy:'name'" class="product">
           <ons-row>
             <ons-col width="70px">
               <div class="thumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
@@ -62,7 +62,7 @@
     </ons-col>
   </ons-row>
   <ons-row ng-show="grid" class="productsGrid">
-    <ons-col ng-repeat="prod in products" width="46%" class="product">
+    <ons-col ng-repeat="prod in products | orderBy:'name'" width="46%" class="product">
       <ons-row>
         <div class="bigthumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
         <div class="name">{{prod.name}}</div>

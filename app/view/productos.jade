@@ -20,7 +20,7 @@ ons-page(ng-controller="ProductosCtrl")
   ons-row.productsList(ng-show="!grid")
     ons-col
       ons-list
-        ons-list-item(ng-repeat="prod in products").product
+        ons-list-item(ng-repeat="prod in products | orderBy:'name'").product
           ons-row
             ons-col(width="70px"): .thumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
             ons-col
@@ -31,7 +31,7 @@ ons-page(ng-controller="ProductosCtrl")
             ons-col(width="70px", ng-show="InCart(prod.refId)").cartBtn: ons-button.isInCart: ons-icon(icon="ion-ios-checkmark-empty")
 
   ons-row.productsGrid(ng-show="grid")
-    ons-col(ng-repeat="prod in products", width="46%").product
+    ons-col(ng-repeat="prod in products | orderBy:'name'", width="46%").product
           ons-row
             .bigthumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
             .name {{prod.name}}
