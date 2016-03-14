@@ -43,7 +43,7 @@
                       <div class="price">{{prod.new_price | currency }}</div>
                     </ons-col>
                     <ons-col class="qty">
-                      <ons-icon icon="ion-android-remove" ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-class="{'eliminate' : cartItems[$index].quantity == 1}" ></ons-icon>
+                      <ons-icon icon="ion-android-remove" ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-class="{'eliminate' : cartItems[$index].quantity == 1}"></ons-icon>
                       <ons-icon icon="ion-android-add" ng-click="increaseQuantity_tap(cartItems[$index])"></ons-icon>
                       <div class="priceTotal"> <span>{{cartItems[$index].quantity}}x | </span>{{ cartItems[$index].subTotal | currency}}</div>
                     </ons-col>

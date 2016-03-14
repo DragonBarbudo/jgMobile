@@ -14,7 +14,7 @@
       </ons-toolbar-button>
     </div>
   </ons-toolbar>
-  <ons-row style="background-image: url(http://lorempixel.com/400/200)" class="selectionMode">
+  <ons-row style="background-image: url( app/img/header_{{ rSpace(categoryName) }}.jpg )" class="selectionMode"> 
     <ons-col>&nbsp;</ons-col>
     <ons-col>
       <div class="button-bar">
@@ -70,20 +70,26 @@
           <ons-col>
             <div class="description">{{prod.description}}</div>
           </ons-col>
+          <ons-col class="tar"><span class="qtyTxt">{{prod.quantity}}x  </span><span class="price">{{prod.new_price | currency}}</span></ons-col>
+        </ons-row>
+        <ons-row>
+          <ons-col ng-hide="InCart(prod.refId)">
+            <ons-icon icon="ion-android-remove" ng-show="prod.quantity&gt;1" ng-click="prod.quantity = (prod.quantity*1)-1" ng-class="{'eliminate' : cartItems[$index].quantity == 1}" class="qtyButtons"></ons-icon>
+            <ons-icon icon="ion-android-add" ng-click="prod.quantity = (prod.quantity*1)+1" class="qtyButtons"></ons-icon>
+          </ons-col>
           <ons-col>
-            <div class="price">{{prod.new_price | currency}}</div>
+            <div ng-hide="InCart(prod.refId)" class="cartBtn">
+              <ons-button ng-click="addToCart(prod)">
+                <ons-icon icon="ion-ios-cart-outline"></ons-icon>
+              </ons-button>
+            </div>
+            <div ng-show="InCart(prod.refId)" class="cartBtn">
+              <ons-button class="isInCart">
+                <ons-icon icon="ion-ios-checkmark-empty"></ons-icon>
+              </ons-button>
+            </div>
           </ons-col>
         </ons-row>
-        <div ng-hide="InCart(prod.refId)" class="cartBtn">
-          <ons-button ng-click="addToCart(prod)">
-            <ons-icon icon="ion-ios-cart-outline"></ons-icon>
-          </ons-button>
-        </div>
-        <div ng-show="InCart(prod.refId)" class="cartBtn">
-          <ons-button class="isInCart">
-            <ons-icon icon="ion-ios-checkmark-empty"></ons-icon>
-          </ons-button>
-        </div>
       </ons-row>
     </ons-col>
   </ons-row>

@@ -11,7 +11,7 @@ ons-template(id="menu.html")
         |  Haz tu pedido
       ons-list-item(ng-click="menu.setMainPage('app/view/cuenta.html', {closeMenu:true})")
         span.icon-action: ons-icon(icon="ion-person")
-        span(ng-hide="loggedin") Ingresar
+        span(ng-hide="loggedin") Tu cuenta
         span(ng-show="loggedin") {{userApp.name}}
       ons-list-item(ng-click="menu.setMainPage('app/view/acerca.html', {closeMenu:true})")
         span.icon-action: ons-icon(icon="ion-ios-help-outline")

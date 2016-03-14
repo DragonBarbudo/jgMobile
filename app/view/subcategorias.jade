@@ -1,17 +1,18 @@
 include mixins
 
-ons-page(ng-controller="PortadaCtrl").portada
+ons-page(ng-controller="PortadaCtrl").portada.sub
   ons-toolbar
     .left: ons-back-button Atras
     .center: img(src="app/img/jagergin_typo.svg").centralLogo
     .right: +toolbar-right
 
   ons-row
-    ons-col.subheaderimg
+    ons-col.subheaderimg.subcat
   
   .categoriesGrid
     ons-row.categories
-      ons-col(ng-repeat="cat in categoriesList | filter : { description : '!0' } | orderBy:'name' ", ng-click="categoryOpen(cat.id, cat.name)", width="48%").subcats: .tb: .cell 
-        .icon: svg-snap(path="app/img/icon_vinos_y_licores.svg")
-        .text {{cat.name}}
+      ons-col(ng-repeat="cat in categoriesList | filter : { description : '!0' } | orderBy:'name' ", ng-click="categoryOpen(cat.id, cat.name)", width="100%").subcats: .tb: .cell 
+        .text
+          svg-snap(path="app/img/icon_{{ rSpace(cat.name) }}.svg", class="icon_{{ rSpace(cat.name) }}")
+          span {{cat.name}}
         

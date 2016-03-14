@@ -9,6 +9,8 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
     $scope.categoriesList = result.data;
   });
 
+
+
   $scope.categoryOpen = function(theid, thename, subs){
     if(subs==1){
       Navigator.pushPage('app/view/subcategorias.html', {subcat:theid});
@@ -26,6 +28,8 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
 
   $scope.rSpace = function(thename){
     var sinSpacio = thename.replace(/ /g,"_");
+    sinSpacio = sinSpacio.replace('ó', "o");
+    sinSpacio = sinSpacio.replace('á', "a");
     var lowCase = sinSpacio.toLowerCase();
     return lowCase;
   }
@@ -87,6 +91,15 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
   $scope.InCart = function(ref){
     var found = $filter('filter')($scope.itemsInCart, {refId:ref}, true);
     if(found.length){ return true; } else { return false; }
+  }
+
+
+  $scope.rSpace = function(thename){
+    var sinSpacio = thename.replace(/ /g,"_");
+    sinSpacio = sinSpacio.replace('ó', "o");
+    sinSpacio = sinSpacio.replace('á', "a");
+    var lowCase = sinSpacio.toLowerCase();
+    return lowCase;
   }
 
 });
@@ -339,12 +352,16 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
 
 
   $scope.fbLogin = function(){
-    hello('facebook').login();
+    hello('facebook').login({ scope: 'email' });
   }//fbLogin
 
+  $scope.googleLogin = function(){
+    hello('google').login({ scope: 'email' });
+  }
 
   $scope.logout = function(){
     hello('facebook').logout();
+    hello('google').logout();
     $scope.choose     = true;
     $scope.signUpForm = false;
     $scope.signInForm = false;

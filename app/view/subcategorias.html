@@ -1,5 +1,5 @@
 
-<ons-page ng-controller="PortadaCtrl" class="portada">
+<ons-page ng-controller="PortadaCtrl" class="portada sub">
   <ons-toolbar>
     <div class="left">
       <ons-back-button>Atras</ons-back-button>
@@ -15,17 +15,16 @@
     </div>
   </ons-toolbar>
   <ons-row>
-    <ons-col class="subheaderimg"></ons-col>
+    <ons-col class="subheaderimg subcat"></ons-col>
   </ons-row>
   <div class="categoriesGrid">
     <ons-row class="categories">
-      <ons-col ng-repeat="cat in categoriesList | filter : { description : '!0' } | orderBy:'name' " ng-click="categoryOpen(cat.id, cat.name)" width="48%" class="subcats">
+      <ons-col ng-repeat="cat in categoriesList | filter : { description : '!0' } | orderBy:'name' " ng-click="categoryOpen(cat.id, cat.name)" width="100%" class="subcats">
         <div class="tb">
           <div class="cell"> 
-            <div class="icon">
-              <svg-snap path="app/img/icon_vinos_y_licores.svg"></svg-snap>
+            <div class="text">
+              <svg-snap path="app/img/icon_{{ rSpace(cat.name) }}.svg" class="icon_{{ rSpace(cat.name) }}"></svg-snap><span>{{cat.name}}</span>
             </div>
-            <div class="text">{{cat.name}}</div>
           </div>
         </div>
       </ons-col>

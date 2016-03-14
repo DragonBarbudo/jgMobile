@@ -22,7 +22,9 @@ ons-page(ng-controller="CuentaCtrl").account
       ons-col
       ons-col
         div.fa.fa-facebook
-        ons-button.facebookIn(ng-click="fbLogin()") Ingresar con Facebook 
+        ons-button.facebookIn(ng-click="fbLogin()") Ingresar con Facebook
+        div.fa.fa-google-plus
+        ons-button.googleIn(ng-click="googleLogin()") Ingresar con Google+ 
         p - o - 
         form
           input(type="email", ng-model="signin.email", placeholder="Correo electrónico").text-input.text-input--underbar
@@ -42,6 +44,8 @@ ons-page(ng-controller="CuentaCtrl").account
       ons-col
         div.fa.fa-facebook
         ons-button.facebookIn(ng-click="fbLogin()") Ingresar con Facebook 
+        div.fa.fa-google-plus
+        ons-button.googleIn(ng-click="googleLogin()") Ingresar con Google+ 
         p - o - 
         form
           input(type="email", ng-model="signin.email", placeholder="Correo electrónico").text-input.text-input--underbar

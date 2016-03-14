@@ -30,8 +30,8 @@ ons-navigator(var="CartNavigator")
                       .description {{prod.description}}
                       .price {{prod.new_price | currency }}
                     ons-col.qty
-                      <ons-icon icon="ion-android-remove" ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-class="{'eliminate' : cartItems[$index].quantity == 1}" ></ons-icon>
-                      <ons-icon icon="ion-android-add" ng-click="increaseQuantity_tap(cartItems[$index])"></ons-icon>
+                      ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")
+                      ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")
                       .priceTotal 
                         span {{cartItems[$index].quantity}}x | 
                         | {{ cartItems[$index].subTotal | currency}}

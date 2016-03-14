@@ -13,6 +13,7 @@
 @dark: #2B3439;
 @sec: #DD062C;
 @fbcolor: #435E9F;
+@googlecolor: #E04535;
 /* ################################ FONTS */
 .font{   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; }
 .font2{ font-family: 'Roboto Condensed', sans-serif; }
@@ -41,6 +42,7 @@ body {
     .font2;
   }
 }
+.tac{text-align: center;}
 
 
 .toolbar-button, .toolbar-button--outline, .toolbar-button--quiet, .button, .page{ .font2; }
@@ -104,8 +106,23 @@ body {
 .portada{
   .page__background{
     //.gradient(@w, @w*1.4);
-    background-image: url(../img/mainBG.jpg);
+    background-image: url(../img/bg2.jpg);
     background-size: cover;
+    background-position: right;
+    &:before{
+      content:"";
+      width: 100%; height: 100%;
+      position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+      .gradient( fade(@w/2, 100%), fade(@w/2, 10%) );
+    }
+
+  }
+
+  &.sub{
+    .page__background{
+      background: @w;
+      &:before{display: none;}
+    }
   }
   .portadaSlider{
     img{
@@ -114,7 +131,7 @@ body {
   }
   .categoriesGrid{
     ons-col{
-      margin: 2% 1%;
+      margin: 1% 1% 8% 1%;
       background: transparent;
       color:@w;
       padding: 10px 10px;
@@ -124,25 +141,32 @@ body {
       position: relative;
       .font2;
       .icon{
-        width: 100px; height: 100px;
-        .border-radius(10% 10% 0 0);
+        width: 120px; height: 120px;
+        .border-radius(50%);
         margin: 0 auto;
         position: relative;
-        .gradient(fade(@w/1.2, 35%), fade(@w, 55%));
-        border: 1px solid fade(@w*1.2, 25%);
+        //.gradient(fade(@w/1.2, 35%), fade(@w, 55%));
+        .gradient(@b/1.2, @b);
         overflow: hidden;
         svg{
           height: 60px;
           max-width: 60px;
-          margin-top: 15px;
+          margin-top: 30px;
+          position: relative;
+          z-index: 1;
           #border{ fill:@dark; }
         }
+
         &:before{
           content:"";
           position: absolute;
-          left: 0; top: 0; right: 50%; bottom: 0;
-          .gradient(fade(@w, 5%), fade(@w*2, 25%));
+          left: 10%; top: 10%;
+          .gradient(@w, @w*2);
+          width: 80%; height: 80%;
+          .border-radius(50%);
+          z-index: 0;
         }
+
       }
       .tb{
         display: table;
@@ -154,7 +178,7 @@ body {
       }
       .text{
         position: absolute;
-        bottom: 8px;
+        bottom: -12px;
         left: 50%;
         font-size: 0.7em;
         color:@w;
@@ -164,9 +188,10 @@ body {
         .font2;
         font-weight: 300;
         text-transform: uppercase;
-        .gradient(@b, @b*1.4);
+        .gradient(@b/1.2, @b);
         padding: 3px 0;
-        .border-radius(0 0 4px 4px);
+        .border-radius(4px);
+        /*
         &:before{
           content:"";
           width: 0;
@@ -189,8 +214,39 @@ body {
           left: 0;
           bottom: 20px;
         }
+        */
       }
       &.subcats{
+        padding: 0;
+        margin: 0;
+        padding:  0 40px;
+        .border-radius(0);
+        line-height: 1;
+        margin: 1% 0%;
+
+        .text{
+          width: 100%;
+          margin: 0;
+          position: relative;
+          left: 0;
+          font-size: 0.9em;
+          padding: 20px 10px;
+          color:@b;
+          .box-sizing(border-box);
+          .border-radius(0);
+          text-align: left;
+          background: @w*2;
+          .border-radius(3px);
+          .box-shadow(0 0 10px @w/1.2);
+          .font2;
+          svg{
+            max-width: 30px; max-height: 34px;
+            position: absolute;
+            right: 10px; top: 12px;
+            *{ fill: @dark; }
+          }
+          .icon_tequilas, .icon_brandy{ svg{ max-width: 20px; right: 15px; top: 18px; } }
+        }
         &:first-child{
           svg{ #fill{fill:#954010; } }
           &+.subcats{
@@ -227,11 +283,17 @@ body {
     width: 100%;
     min-height: 120px;
     background-image: url(http://lorempixel.com/960/300);
+    background-size: cover;
+    background-position: center;
+    &.subcat{
+      background-image: url(../img/header_vinos_y_licores.jpg);
+    }
   }
 }
 
 .productsList, .productsGrid{
   .product{
+    background: @w*2;
     line-height: 1;
     padding: 6px 10px;
     margin: 1% 2%;
@@ -255,6 +317,29 @@ body {
       font-weight: bold;
       color:@main;
     }
+    .qtyButtons{
+      background: @main;
+      color:@w;
+      font-size: 0.9em;
+      padding: 4px 6px;
+      .border-radius(3px);
+      margin: 22px 2px 0 2px;
+      line-height: 1;
+      &:active{
+        background: @main/1.2;
+      }
+      &.eliminate{
+        background: @sec;
+      }
+    }
+
+    .qtyTxt{
+      color:@g;
+      display: inline-block;
+      font-size: 0.9em;
+      margin-right: 5px;
+    }
+
   }
   .cartBtn{
     text-align: center;
@@ -263,6 +348,7 @@ body {
       width: 50px;
       height: 50px;
       line-height: 2.4em;
+      .gradient(@b/1.2, @b);
       &.isInCart{
         background: @w/1.2;
       }
@@ -299,6 +385,7 @@ body {
   text-align: right;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   border-bottom: 2px solid @main;
   margin-bottom: 5px;
   .button-bar{
@@ -591,6 +678,7 @@ body {
     text-align: center;
     .fa{color:@w; padding: 10px 0;}
     .facebookIn{ background: @fbcolor; }
+    .googleIn{ background: @googlecolor;}
     form{
       input{
         margin: 5px 0;
@@ -617,4 +705,22 @@ body {
   }
 
 
+}
+
+
+
+
+
+
+#loading-bar-spinner{
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  .gradient( fade(@b, 80%), fade(@b, 10%) );
+  .transition;
+  .spinner-icon{
+    position: absolute;
+    left: 50%; top: 50%;
+    margin: -7px 0 0 -7px;
+  }
 }
