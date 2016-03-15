@@ -2,9 +2,13 @@ include mixins
 ons-navigator(var="CartNavigator") 
   ons-page(ng-controller="CarritoCtrl").Cart
     ons-toolbar
-      .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
+      .left
+        ons-toolbar-button(ng-click="menu.setMainPage('app/view/portada.html')")
+          ons-icon(icon="ion-android-bar")
+          span.haztuMenu Haz tu pedido
+        //ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
       .center Tu carrito
-      .right
+      //.right
           ons-toolbar-button(ng-click="menu.setMainPage('app/view/portada.html')"): ons-icon(icon="ion-android-bar")
 
     ons-bottom-toolbar.navigation-bar

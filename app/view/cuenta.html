@@ -71,6 +71,9 @@
   <div ng-show="loggedin">
     <ons-row class="profile">
       <ons-col>
+        <div class="profileEditBtn">
+          <ons-icon icon="ion-edit"></ons-icon>
+        </div>
         <div class="profileImage"><img ng-src="{{userApp.picture}}" alt=""/></div>
         <div class="profileName">{{userApp.name}}</div>
         <div class="profileMail">{{userApp.email}}</div>

@@ -26,7 +26,13 @@ ons-page(ng-controller="ProductosCtrl")
             ons-col
               .name {{prod.name}}
               .description {{prod.description}}
-              .price {{prod.new_price | currency}}
+              .price
+                span.qtyTxt {{prod.quantity}}x  
+                span {{prod.new_price * prod.quantity | currency}}
+            ons-col(ng-hide="InCart(prod.refId)", width="20px").tac
+              ons-icon(icon="ion-android-add", ng-click="prod.quantity = (prod.quantity*1)+1").qtyButtons.listQty  
+              ons-icon(icon="ion-android-remove", ng-show="prod.quantity>1" ng-click="prod.quantity = (prod.quantity*1)-1", ng-class="{'eliminate' : cartItems[$index].quantity == 1}").qtyButtons.listQty
+              
             ons-col(width="70px", ng-hide="InCart(prod.refId)").cartBtn: ons-button(ng-click="addToCart(prod)"): ons-icon(icon="ion-ios-cart-outline")
             ons-col(width="70px", ng-show="InCart(prod.refId)").cartBtn: ons-button.isInCart: ons-icon(icon="ion-ios-checkmark-empty")
 
@@ -39,9 +45,9 @@ ons-page(ng-controller="ProductosCtrl")
               ons-col: .description {{prod.description}}
               ons-col.tar
                 span.qtyTxt {{prod.quantity}}x  
-                span.price {{prod.new_price | currency}}
+                span.price {{prod.new_price * prod.quantity | currency}}
             ons-row
-              ons-col(ng-hide="InCart(prod.refId)")
+              ons-col(ng-hide="InCart(prod.refId)").tac
                 ons-icon(icon="ion-android-remove", ng-show="prod.quantity>1" ng-click="prod.quantity = (prod.quantity*1)-1", ng-class="{'eliminate' : cartItems[$index].quantity == 1}").qtyButtons
                 ons-icon(icon="ion-android-add", ng-click="prod.quantity = (prod.quantity*1)+1").qtyButtons
               ons-col

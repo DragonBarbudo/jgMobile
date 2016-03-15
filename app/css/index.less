@@ -291,6 +291,9 @@ body {
   }
 }
 
+
+.haztuMenu{color:@w; margin-left: 5px; font-size: 0.8em;}
+
 .productsList, .productsGrid{
   .product{
     background: @w*2;
@@ -330,6 +333,10 @@ body {
       }
       &.eliminate{
         background: @sec;
+
+      }
+      &.listQty{
+        margin: 0px;
       }
     }
 
@@ -421,6 +428,7 @@ body {
         }
         &.eliminate{
           background: @sec;
+          &:before{ content:"\f253" !important;}
         }
       }
     }
@@ -533,6 +541,12 @@ body {
       position: absolute;
       left: 0; top: 0; bottom: 0; right: 0;
       .gradient(fade(@dark,90%), fade(@dark,50%));
+    }
+    .profileEditBtn{
+      position: absolute;
+      right: 20px;top: 20px;
+      color:@w;
+      
     }
     .profileImage{
       display: block;

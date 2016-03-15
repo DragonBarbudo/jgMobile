@@ -80,6 +80,8 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
     ShoppingCartSvc.addItem(theItem);
   }
 
+
+
   $scope.$watch(function () {
        return ShoppingCartSvc.count();
      },

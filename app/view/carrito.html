@@ -3,16 +3,16 @@
   <ons-page ng-controller="CarritoCtrl" class="Cart">
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button ng-click="menu.toggleMenu()">
-          <ons-icon icon="ion-navicon"></ons-icon>
+        <ons-toolbar-button ng-click="menu.setMainPage('app/view/portada.html')">
+          <ons-icon icon="ion-android-bar"></ons-icon><span class="haztuMenu">Haz tu pedido</span>
         </ons-toolbar-button>
+        <!--ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")-->
       </div>
       <div class="center">Tu carrito</div>
-      <div class="right">
-        <ons-toolbar-button ng-click="menu.setMainPage('app/view/portada.html')">
-          <ons-icon icon="ion-android-bar"></ons-icon>
-        </ons-toolbar-button>
-      </div>
+      <!--.right
+      ons-toolbar-button(ng-click="menu.setMainPage('app/view/portada.html')"): ons-icon(icon="ion-android-bar")
+      
+      -->
     </ons-toolbar>
     <ons-bottom-toolbar class="navigation-bar">
       <div class="left navigation-bar__left"></div>

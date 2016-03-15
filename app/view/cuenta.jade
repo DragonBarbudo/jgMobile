@@ -58,6 +58,7 @@ ons-page(ng-controller="CuentaCtrl").account
   div(ng-show="loggedin")
     ons-row.profile
       ons-col
+        .profileEditBtn: ons-icon(icon="ion-edit")
         .profileImage: img(ng-src="{{userApp.picture}}", alt="")
         .profileName {{userApp.name}}
         .profileMail {{userApp.email}}

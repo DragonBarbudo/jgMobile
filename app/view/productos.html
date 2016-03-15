@@ -44,7 +44,11 @@
             <ons-col>
               <div class="name">{{prod.name}}</div>
               <div class="description">{{prod.description}}</div>
-              <div class="price">{{prod.new_price | currency}}</div>
+              <div class="price"><span class="qtyTxt">{{prod.quantity}}x  </span><span>{{prod.new_price * prod.quantity | currency}}</span></div>
+            </ons-col>
+            <ons-col ng-hide="InCart(prod.refId)" width="20px" class="tac">
+              <ons-icon icon="ion-android-add" ng-click="prod.quantity = (prod.quantity*1)+1" class="qtyButtons listQty"> </ons-icon>
+              <ons-icon icon="ion-android-remove" ng-show="prod.quantity&gt;1" ng-click="prod.quantity = (prod.quantity*1)-1" ng-class="{'eliminate' : cartItems[$index].quantity == 1}" class="qtyButtons listQty"></ons-icon>
             </ons-col>
             <ons-col width="70px" ng-hide="InCart(prod.refId)" class="cartBtn">
               <ons-button ng-click="addToCart(prod)">
@@ -70,10 +74,10 @@
           <ons-col>
             <div class="description">{{prod.description}}</div>
           </ons-col>
-          <ons-col class="tar"><span class="qtyTxt">{{prod.quantity}}x  </span><span class="price">{{prod.new_price | currency}}</span></ons-col>
+          <ons-col class="tar"><span class="qtyTxt">{{prod.quantity}}x  </span><span class="price">{{prod.new_price * prod.quantity | currency}}</span></ons-col>
         </ons-row>
         <ons-row>
-          <ons-col ng-hide="InCart(prod.refId)">
+          <ons-col ng-hide="InCart(prod.refId)" class="tac">
             <ons-icon icon="ion-android-remove" ng-show="prod.quantity&gt;1" ng-click="prod.quantity = (prod.quantity*1)-1" ng-class="{'eliminate' : cartItems[$index].quantity == 1}" class="qtyButtons"></ons-icon>
             <ons-icon icon="ion-android-add" ng-click="prod.quantity = (prod.quantity*1)+1" class="qtyButtons"></ons-icon>
           </ons-col>

@@ -5085,6 +5085,11 @@ body {
 .portada .subheaderimg.subcat {
   background-image: url(../img/header_vinos_y_licores.jpg);
 }
+.haztuMenu {
+  color: #f5f5f5;
+  margin-left: 5px;
+  font-size: 0.8em;
+}
 .productsList .product,
 .productsGrid .product {
   background: #ffffff;
@@ -5149,6 +5154,10 @@ body {
 .productsList .product .qtyButtons.eliminate,
 .productsGrid .product .qtyButtons.eliminate {
   background: #DD062C;
+}
+.productsList .product .qtyButtons.listQty,
+.productsGrid .product .qtyButtons.listQty {
+  margin: 0px;
 }
 .productsList .product .qtyTxt,
 .productsGrid .product .qtyTxt {
@@ -5250,6 +5259,9 @@ body {
 }
 .Cart .productsList .qty ons-icon.eliminate {
   background: #DD062C;
+}
+.Cart .productsList .qty ons-icon.eliminate:before {
+  content: "\f253" !important;
 }
 .Cart .priceTotal {
   line-height: 2.4;
@@ -5364,6 +5376,12 @@ body {
   background: -moz-linear-gradient(center bottom, rgba(43, 52, 57, 0.9) 0%, rgba(43, 52, 57, 0.5) 100%);
   background: -o-linear-gradient(rgba(43, 52, 57, 0.5), rgba(43, 52, 57, 0.9));
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(43, 52, 57, 0.5)', endColorstr='rgba(43, 52, 57, 0.9)', GradientType=0);
+}
+.profile .profileEditBtn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #f5f5f5;
 }
 .profile .profileImage {
   display: block;
