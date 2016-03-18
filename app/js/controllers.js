@@ -1,4 +1,7 @@
-moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc){
+moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi){
+
+  $rootScope.zona;
+
 
   $scope.cartCount;
 
@@ -34,8 +37,27 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
     return lowCase;
   }
 
+  uiGmapGoogleMapApi.then(function(maps) {
+    $scope.coords = { lat:19.4089596, long: -99.1147098 };
+
+      $scope.map = {
+          center: {
+            latitude: $scope.coords.lat,
+            longitude: $scope.coords.long
+          },
+        zoom: 11,
+        options: {
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+        }
+      }
+      $scope.polygons = zonaJagergin;
+
+    });
+
 })
-.directive('svgSnap', function(){
+
+moduleapp.directive('svgSnap', function(){
   return{
     restrict: 'E',
     replace: true,
@@ -277,7 +299,7 @@ moduleapp.controller('CheckoutCtrl', function ($scope, ShoppingCartSvc, SettingS
   var zonaDraw = [
       {
           id: 1,
-          path: zonaJag,
+          path: zonaJagergin.SanPedroDeLosPinos,
           stroke: {
               color: '#F8012D',
               weight: 1

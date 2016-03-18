@@ -17,6 +17,9 @@ var moduleapp = angular.module('JagerginMobileApp',
 
 
 moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+
+
+
   //for cors
   $httpProvider.defaults.useXDomain = true;
   delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -38,7 +41,7 @@ moduleapp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 
 moduleapp.run(function($rootScope){
 
-
+  $rootScope.zona = false;
 
   $rootScope.loggedin = false;
   $rootScope.userApp = {};

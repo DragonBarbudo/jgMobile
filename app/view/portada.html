@@ -44,5 +44,21 @@
         </ons-col>
       </ons-row>
     </div>
+    <div ng-hide="zona" class="zonaJagergin">
+      <ons-row>
+        <ons-col class="inst">
+          <h2>Zona de cobertura JagerGin</h2>
+          <p>Podemos entregar tu pedido si tu fiesta esta dentro de la zona marcada.</p>
+        </ons-col>
+      </ons-row>
+      <ons-row>
+        <ons-col>
+          <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" events="map.events">
+            <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" fill="p.fill"></ui-gmap-polygon>
+          </ui-gmap-google-map>
+        </ons-col>
+      </ons-row>
+      <ons-button ng-click="zona=true">Aceptar</ons-button>
+    </div>
   </ons-page>
 </ons-navigator>
