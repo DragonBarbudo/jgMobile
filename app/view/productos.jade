@@ -17,6 +17,7 @@ ons-page(ng-controller="ProductosCtrl")
           input(type="radio", name="vista", ng-checked="grid", ng-click="grid=true")
           button.button-bar__button: ons-icon(icon="fa-th-large")
 
+
   ons-row.productsList(ng-show="!grid")
     ons-col
       ons-list
@@ -24,7 +25,7 @@ ons-page(ng-controller="ProductosCtrl")
           ons-row
             ons-col(width="70px"): .thumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
             ons-col
-              .name {{prod.name}}
+              .name {{ prod.name =  prod.name.replace(categoryName, '') }}
               .description {{prod.description}}
               .price
                 span.qtyTxt {{prod.quantity}}x  

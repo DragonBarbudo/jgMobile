@@ -9,7 +9,8 @@
       <ons-toolbar-button ng-click="Navigator.pushPage('app/view/busqueda.html')">
         <ons-icon icon="ion-android-search"></ons-icon>
       </ons-toolbar-button>
-      <ons-toolbar-button ng-click="menu.setMainPage('app/view/carrito.html')">
+      <!--ons-toolbar-button(ng-click="menu.setMainPage('app/view/carrito.html')"): ons-icon(icon="ion-ios-cart-outline", ng-class="{'active-cart': cartCount > 0}", data="{{cartCount}}")-->
+      <ons-toolbar-button ng-click="Navigator.pushPage('app/view/carrito.html')">
         <ons-icon icon="ion-ios-cart-outline" ng-class="{'active-cart': cartCount &gt; 0}" data="{{cartCount}}"></ons-icon>
       </ons-toolbar-button>
     </div>

@@ -3,6 +3,7 @@
 @import 'lib/elements';
 @import 'lib/slick';
 @import 'lib/loading-bar.css';
+@import 'lib/visualStates';
 
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
 
@@ -36,6 +37,7 @@ body {
 .navigation-bar{
   .gradient(@b/2, @b*2);
   border-bottom:1px solid @main;
+  .borderColorAnim;
   ons-icon{
     color:@w;
     font-size: 1.5em !important;
@@ -87,7 +89,8 @@ body {
     margin: 10px 35%;
   }
   .list__item{
-    border-bottom: 1px solid @dark;
+    border-bottom: 1px solid @sec;
+    .borderColorAnim;
     .gradient(@b/1.2, @b);
     color:@w;
     font-size: 0.8em;
@@ -101,20 +104,22 @@ body {
 
 .centralLogo{
   margin-top: 10px;
+  width: 120px;
 }
 
 .portada{
   .page__background{
     //.gradient(@w, @w*1.4);
-    background-image: url(../img/bg2.jpg);
-    background-size: cover;
-    background-position: right;
-    &:before{
+    //background-image: url(../img/bg2.jpg);
+    //background-size: cover;
+    //background-position: right;
+    .gradient(@sec/4, @main/6);
+    /*&:before{
       content:"";
       width: 100%; height: 100%;
       position: absolute; left: 0; top: 0; right: 0; bottom: 0;
       .gradient( fade(@w/2, 100%), fade(@w/2, 10%) );
-    }
+    }*/
 
   }
 
@@ -129,6 +134,25 @@ body {
       width: 100%;
     }
   }
+
+  .primaryPhrase{
+    color:@main*1.2;
+    text-align: center;
+    margin: 10px;
+    padding: 20px 0;
+    font-size: 1em;
+    border-bottom: 1px solid @main;
+    border-top: 1px solid @main;
+    text-transform: uppercase;
+    .borderColorAnim;
+  }
+  .bottomArrow{
+    .floating;
+    color:@sec;
+    text-align: center;
+    padding: 10px 0;
+  }
+
   .categoriesGrid{
     ons-col{
       margin: 1% 1% 8% 1%;
@@ -141,17 +165,19 @@ body {
       position: relative;
       .font2;
       .icon{
-        width: 120px; height: 120px;
+        width: 100px; height: 100px;
         .border-radius(50%);
-        margin: 0 auto;
+        margin: 5px auto;
         position: relative;
         //.gradient(fade(@w/1.2, 35%), fade(@w, 55%));
-        .gradient(@b/1.2, @b);
+        .gradient( fade(@sec/1.2, 50%), fade(@main, 50%) );
         overflow: hidden;
+        border: 2px solid fade(@main, 50%);
+        .borderColorAnim;
         svg{
           height: 60px;
           max-width: 60px;
-          margin-top: 30px;
+          margin-top: 20px;
           position: relative;
           z-index: 1;
           #border{ fill:@dark; }
@@ -160,9 +186,9 @@ body {
         &:before{
           content:"";
           position: absolute;
-          left: 10%; top: 10%;
-          .gradient(@w, @w*2);
-          width: 80%; height: 80%;
+          left: 4%; top: 4%;
+          .gradient(fade(@w, 70%), @w*2);
+          width: 92%; height: 92%;
           .border-radius(50%);
           z-index: 0;
         }
@@ -188,33 +214,10 @@ body {
         .font2;
         font-weight: 300;
         text-transform: uppercase;
-        .gradient(@b/1.2, @b);
+        //.gradient(@sec/1.2, @sec/2);
         padding: 3px 0;
-        .border-radius(4px);
-        /*
-        &:before{
-          content:"";
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 20px 0 0 19px;
-          border-color: transparent transparent transparent @b/1.2;
-          position: absolute;
-          right: 0;
-          bottom: 20px;
-        }
-        &:after{
-          content:"";
-          width: 0;
-          height: 0;
-          border-style: solid;
-          border-width: 0 0 20px 19px;
-          border-color: transparent transparent @b/1.2 transparent;
-          position: absolute;
-          left: 0;
-          bottom: 20px;
-        }
-        */
+        border-bottom: 1px solid @sec;
+        .borderColorAnim;
       }
       &.subcats{
         padding: 0;
@@ -247,6 +250,11 @@ body {
           }
           .icon_tequilas, .icon_brandy{ svg{ max-width: 20px; right: 15px; top: 18px; } }
         }
+
+        &:nth-child(odd){
+          .text{border-bottom: 1px solid @main;}
+        }
+
         &:first-child{
           svg{ #fill{fill:#954010; } }
           &+.subcats{
@@ -300,9 +308,13 @@ body {
     line-height: 1;
     padding: 6px 10px;
     margin: 1% 2%;
-    .border-radius(3px);
+    .border-radius(3px 3px 0 0);
     .box-shadow(0 0 10px @w/1.2);
     .font2;
+    border-bottom: 1px solid @sec;
+    &:nth-child(odd){
+      border-bottom: 1px solid @main;
+    }
     .thumb{
       width: 50px; height: 50px;
       overflow: hidden;
@@ -355,9 +367,19 @@ body {
       width: 50px;
       height: 50px;
       line-height: 2.4em;
-      .gradient(@b/1.2, @b);
+      .gradient(@sec/1.2, @main);
+      &:before{
+        content:""; position: absolute;
+        left: 1%; top: 4%; width: 98%; height: 92%;
+        .border-radius(3px);
+        .gradient(@b/1.2, @b);
+      }
       &.isInCart{
-        background: @w/1.2;
+        ons-icon{color:@sec;}
+        .gradient(@w/1.2, @w);
+        &:before{
+          .gradient(@w);
+        }
       }
     }
   }
@@ -546,7 +568,7 @@ body {
       position: absolute;
       right: 20px;top: 20px;
       color:@w;
-      
+
     }
     .profileImage{
       display: block;
@@ -652,7 +674,8 @@ body {
 
 .searchBar{
   padding: 20px;
-  input{ width: 100%; }
+  background: @dark;
+  input{ width: 100%; .borderColorAnim; }
 }
 
 

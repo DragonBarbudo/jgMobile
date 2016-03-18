@@ -9,6 +9,12 @@ ons-navigator(var="Navigator")
 
     +mainSlider
     
+    
+    ons-row
+      ons-col.primaryPhrase Haz tu pedido
+    ons-row
+      ons-col.bottomArrow: ons-icon(icon="ion-chevron-down")
+      
     .categoriesGrid
       ons-row.categories
         ons-col(ng-repeat="cat in categoriesList | filter : { description : 0 } | orderBy: 'order'", ng-click="categoryOpen(cat.id, cat.name, cat.parent);", width="48%"): .tb: .cell

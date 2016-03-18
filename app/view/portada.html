@@ -12,15 +12,24 @@
         <ons-toolbar-button ng-click="Navigator.pushPage('app/view/busqueda.html')">
           <ons-icon icon="ion-android-search"></ons-icon>
         </ons-toolbar-button>
-        <ons-toolbar-button ng-click="menu.setMainPage('app/view/carrito.html')">
+        <!--ons-toolbar-button(ng-click="menu.setMainPage('app/view/carrito.html')"): ons-icon(icon="ion-ios-cart-outline", ng-class="{'active-cart': cartCount > 0}", data="{{cartCount}}")-->
+        <ons-toolbar-button ng-click="Navigator.pushPage('app/view/carrito.html')">
           <ons-icon icon="ion-ios-cart-outline" ng-class="{'active-cart': cartCount &gt; 0}" data="{{cartCount}}"></ons-icon>
         </ons-toolbar-button>
       </div>
     </ons-toolbar>
     <slick infinit="true" lazy-load="ondemand" autoplay="true" arrows="false" class="portadaSlider">
-      <div><img src="app/img/promo1.jpg" alt=""/></div>
-      <div><img src="app/img/promo2.jpg" alt=""/></div>
+      <div><img ng-src="app/img/promo1.png" alt=""/></div>
+      <div><img ng-src="app/img/promo2.png" alt=""/></div>
     </slick>
+    <ons-row>
+      <ons-col class="primaryPhrase">Haz tu pedido</ons-col>
+    </ons-row>
+    <ons-row>
+      <ons-col class="bottomArrow">
+        <ons-icon icon="ion-chevron-down"></ons-icon>
+      </ons-col>
+    </ons-row>
     <div class="categoriesGrid">
       <ons-row class="categories">
         <ons-col ng-repeat="cat in categoriesList | filter : { description : 0 } | orderBy: 'order'" ng-click="categoryOpen(cat.id, cat.name, cat.parent);" width="48%">

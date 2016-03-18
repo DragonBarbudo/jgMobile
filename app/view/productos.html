@@ -9,7 +9,8 @@
       <ons-toolbar-button ng-click="Navigator.pushPage('app/view/busqueda.html')">
         <ons-icon icon="ion-android-search"></ons-icon>
       </ons-toolbar-button>
-      <ons-toolbar-button ng-click="menu.setMainPage('app/view/carrito.html')">
+      <!--ons-toolbar-button(ng-click="menu.setMainPage('app/view/carrito.html')"): ons-icon(icon="ion-ios-cart-outline", ng-class="{'active-cart': cartCount > 0}", data="{{cartCount}}")-->
+      <ons-toolbar-button ng-click="Navigator.pushPage('app/view/carrito.html')">
         <ons-icon icon="ion-ios-cart-outline" ng-class="{'active-cart': cartCount &gt; 0}" data="{{cartCount}}"></ons-icon>
       </ons-toolbar-button>
     </div>
@@ -42,7 +43,7 @@
               <div class="thumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
             </ons-col>
             <ons-col>
-              <div class="name">{{prod.name}}</div>
+              <div class="name">{{ prod.name =  prod.name.replace(categoryName, '') }}</div>
               <div class="description">{{prod.description}}</div>
               <div class="price"><span class="qtyTxt">{{prod.quantity}}x  </span><span>{{prod.new_price * prod.quantity | currency}}</span></div>
             </ons-col>

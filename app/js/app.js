@@ -68,8 +68,16 @@ moduleapp.run(function($rootScope){
     });
 
   });
+});
 
 
-
-
+moduleapp.directive('img', function () {
+    var fallbackSrc = {
+    link: function postLink(scope, iElement, iAttrs) {
+      iElement.bind('error', function() {
+        angular.element(this).attr("src", 'app/img/notfound.png');
+      });
+    }
+   }
+   return fallbackSrc;
 });

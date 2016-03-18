@@ -5,7 +5,7 @@ ons-sliding-menu(var="menu" main-page="app/view/portada.html", menu-page="menu.h
 ons-template(id="menu.html")
   ons-page
     ons-list.mainNav
-      ons-list-item: img(src="app/img/jagergin_imago.svg").jagerginmenu
+      ons-list-item: img(ng-src="app/img/jagergin_imago.svg").jagerginmenu
       ons-list-item(ng-click="menu.setMainPage('app/view/portada.html', {closeMenu:true})", modifier="tappable")
         span.icon-action: ons-icon(icon="ion-android-bar")
         |  Haz tu pedido
