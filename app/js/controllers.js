@@ -52,6 +52,8 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
         }
       }
       $scope.polygons = zonaJagergin;
+      $scope.circles = zonaJagergin2;
+
 
     });
 

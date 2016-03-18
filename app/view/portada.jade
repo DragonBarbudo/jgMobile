@@ -28,6 +28,8 @@ ons-navigator(var="Navigator")
       ons-row: ons-col
           ui-gmap-google-map(control="map.control", center='map.center', zoom='map.zoom', events="map.events")
             ui-gmap-polygon(static="true", ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", fill="p.fill")
+            ui-gmap-circle(ng-repeat="c in circles track by c.id", center="c.center", stroke="c.stroke", fill="c.fill", radius="c.radius")
+            
       ons-button(ng-click="zona=true") Aceptar
       
           

@@ -45,15 +45,28 @@ zonaJagergin.Sacramento = { id: 3, stroke: strokeOpt, fill: fillOpt,
 zonaJagergin.AlfonsoXIII = { id: 4, stroke: strokeOpt, fill: fillOpt,
   path:[
     new google.maps.LatLng(19.379413,-99.196050),
-  new google.maps.LatLng(19.378037,-99.191673),
-  new google.maps.LatLng(19.373503,-99.192188),
-  new google.maps.LatLng(19.372470,-99.191973),
-  new google.maps.LatLng(19.372005,-99.194677),
-  new google.maps.LatLng(19.373482,-99.194452),
-  new google.maps.LatLng(19.373624,-99.195170),
-  new google.maps.LatLng(19.374434,-99.201329),
-  new google.maps.LatLng(19.376458,-99.201179),
-  new google.maps.LatLng(19.378401,-99.198475),
-  new google.maps.LatLng(19.378745,-99.197016)
+    new google.maps.LatLng(19.378037,-99.191673),
+    new google.maps.LatLng(19.373503,-99.192188),
+    new google.maps.LatLng(19.372470,-99.191973),
+    new google.maps.LatLng(19.372005,-99.194677),
+    new google.maps.LatLng(19.373482,-99.194452),
+    new google.maps.LatLng(19.373624,-99.195170),
+    new google.maps.LatLng(19.374434,-99.201329),
+    new google.maps.LatLng(19.376458,-99.201179),
+    new google.maps.LatLng(19.378401,-99.198475),
+    new google.maps.LatLng(19.378745,-99.197016)
   ]
 }
+
+
+
+var zonaJagergin2 = [];
+
+//8 de Agosto
+zonaJagergin2[1] = { id:1, stroke: strokeOpt, fill: fillOpt,
+  radius: 230, center: {latitude: 19.394473,longitude: -99.186609}
+};
+//Napoles
+zonaJagergin2[2] = { id:2, stroke: strokeOpt, fill: fillOpt,
+  radius: 405, center: {latitude: 19.393663,longitude: -99.176803}
+};
