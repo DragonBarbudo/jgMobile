@@ -1,72 +1,86 @@
 var strokeOpt = { color: '#F8012D', weight: 1 };
-var fillOpt = { color: '#00B9FF', opacity: 0.5 };
 
 var zonaJagergin = {};
 
-zonaJagergin.SanPedroDeLosPinos = { id: 1, stroke: strokeOpt, fill: fillOpt,
+zonaJagergin.AlvaroObregon = { id: 1, stroke: strokeOpt, fill: { color: '#00B9FF', opacity: 0.5 },
   path:[
-    new google.maps.LatLng(19.397407,-99.179163),
-    new google.maps.LatLng(19.397590,-99.178047),
-    new google.maps.LatLng(19.396497,-99.180021),
-    new google.maps.LatLng(19.393501,-99.181008),
-    new google.maps.LatLng(19.388320,-99.181352),
-    new google.maps.LatLng(19.385567,-99.182467),
-    new google.maps.LatLng(19.385142,-99.190793),
-    new google.maps.LatLng(19.392307,-99.188690),
-    new google.maps.LatLng(19.392388,-99.185740),
-    new google.maps.LatLng(19.395950,-99.185278),
-    new google.maps.LatLng(19.396861,-99.182253)
+
+new google.maps.LatLng(19.372839,-99.210142),
+new google.maps.LatLng(19.368394,-99.222473),
+new google.maps.LatLng(19.369093,-99.224563),
+new google.maps.LatLng(19.366488,-99.232475),
+new google.maps.LatLng(19.364618,-99.234564),
+new google.maps.LatLng(19.364290,-99.233622),
+new google.maps.LatLng(19.362750,-99.233622),
+new google.maps.LatLng(19.361697,-99.232550),
+new google.maps.LatLng(19.360400,-99.235791),
+new google.maps.LatLng(19.358010,-99.234096),
+new google.maps.LatLng(19.359950,-99.230643),
+new google.maps.LatLng(19.359776,-99.229322),
+new google.maps.LatLng(19.362104,-99.224268),
+new google.maps.LatLng(19.358957,-99.223881),
+new google.maps.LatLng(19.356118,-99.228183),
+new google.maps.LatLng(19.350783,-99.228678),
+new google.maps.LatLng(19.349206,-99.234896),
+new google.maps.LatLng(19.346617,-99.242358),
+new google.maps.LatLng(19.352361,-99.246487),
+new google.maps.LatLng(19.347677,-99.254231),
+new google.maps.LatLng(19.346368,-99.254283),
+new google.maps.LatLng(19.342237,-99.258603),
+new google.maps.LatLng(19.339497,-99.264071),
+new google.maps.LatLng(19.333740,-99.267588),
+new google.maps.LatLng(19.330018,-99.263515),
+new google.maps.LatLng(19.330100,-99.257424),
+new google.maps.LatLng(19.334576,-99.253412),
+new google.maps.LatLng(19.337459,-99.247071),
+new google.maps.LatLng(19.338862,-99.240947),
+new google.maps.LatLng(19.337512,-99.240745),
+new google.maps.LatLng(19.336917,-99.231500),
+new google.maps.LatLng(19.328739,-99.231076),
+new google.maps.LatLng(19.331782,-99.221927),
+new google.maps.LatLng(19.334628,-99.215966),
+new google.maps.LatLng(19.335936,-99.208888),
+new google.maps.LatLng(19.335023,-99.208327),
+new google.maps.LatLng(19.327487,-99.212181),
+new google.maps.LatLng(19.320923,-99.220300),
+new google.maps.LatLng(19.317997,-99.221398),
+new google.maps.LatLng(19.311632,-99.219655),
+new google.maps.LatLng(19.307535,-99.215508),
+new google.maps.LatLng(19.305890,-99.205445),
+new google.maps.LatLng(19.321554,-99.193732),
+new google.maps.LatLng(19.329390,-99.193478),
+new google.maps.LatLng(19.333667,-99.196659),
+new google.maps.LatLng(19.334988,-99.189987),
+new google.maps.LatLng(19.336673,-99.190154),
+new google.maps.LatLng(19.337224,-99.184227),
+new google.maps.LatLng(19.339046,-99.182349),
+new google.maps.LatLng(19.349254,-99.180280),
+new google.maps.LatLng(19.352255,-99.177309),
+new google.maps.LatLng(19.359461,-99.171676),
+new google.maps.LatLng(19.365046,-99.177576),
+new google.maps.LatLng(19.361711,-99.185740),
+new google.maps.LatLng(19.363381,-99.190965),
+new google.maps.LatLng(19.370891,-99.191566),
+new google.maps.LatLng(19.383907,-99.191437)
   ]
-}
-
-zonaJagergin.Caracola = { id: 2, stroke: strokeOpt, fill: fillOpt,
-  path:[
-    new google.maps.LatLng(19.387024,-99.191329),
-    new google.maps.LatLng(19.387206,-99.194119),
-    new google.maps.LatLng(19.385101,-99.195857),
-    new google.maps.LatLng(19.384393,-99.197896),
-    new google.maps.LatLng(19.383219,-99.197295),
-    new google.maps.LatLng(19.385041,-99.191694)
-  ]
-}
-
-zonaJagergin.Sacramento = { id: 3, stroke: strokeOpt, fill: fillOpt,
-  path:[
-    new google.maps.LatLng(19.385041,-99.191737),
-    new google.maps.LatLng(19.383178,-99.192424),
-    new google.maps.LatLng(19.379656,-99.195857),
-    new google.maps.LatLng(19.378077,-99.198732),
-    new google.maps.LatLng(19.381519,-99.199977),
-    new google.maps.LatLng(19.382531,-99.199505),
-    new google.maps.LatLng(19.384676,-99.193668)
-  ]
-}
-
-zonaJagergin.AlfonsoXIII = { id: 4, stroke: strokeOpt, fill: fillOpt,
-  path:[
-    new google.maps.LatLng(19.379413,-99.196050),
-    new google.maps.LatLng(19.378037,-99.191673),
-    new google.maps.LatLng(19.373503,-99.192188),
-    new google.maps.LatLng(19.372470,-99.191973),
-    new google.maps.LatLng(19.372005,-99.194677),
-    new google.maps.LatLng(19.373482,-99.194452),
-    new google.maps.LatLng(19.373624,-99.195170),
-    new google.maps.LatLng(19.374434,-99.201329),
-    new google.maps.LatLng(19.376458,-99.201179),
-    new google.maps.LatLng(19.378401,-99.198475),
-    new google.maps.LatLng(19.378745,-99.197016)
-  ]
-}
-
-
-
-var zonaJagergin2 = [];
-
-//8 de Agosto
-zonaJagergin2[1] = { id:1, stroke: strokeOpt, fill: fillOpt,
-  radius: 230, center: {latitude: 19.394473,longitude: -99.186609}
 };
-//Napoles
-zonaJagergin2[2] = { id:2, stroke: strokeOpt, fill: fillOpt,
-  radius: 405, center: {latitude: 19.393663,longitude: -99.176803}
+
+
+zonaJagergin.BenitoJuarez = { id: 2, stroke: strokeOpt, fill: { color: '#B900FF', opacity: 0.5 },
+  path:[
+    new google.maps.LatLng(19.392125,-99.188797),
+new google.maps.LatLng(19.385091,-99.190632),
+new google.maps.LatLng(19.372698,-99.192021),
+new google.maps.LatLng(19.369129,-99.191777),
+new google.maps.LatLng(19.366861,-99.190728),
+new google.maps.LatLng(19.363539,-99.191054),
+new google.maps.LatLng(19.361755,-99.185867),
+new google.maps.LatLng(19.362276,-99.182618),
+new google.maps.LatLng(19.386035,-99.174949),
+new google.maps.LatLng(19.399533,-99.170709),
+new google.maps.LatLng(19.395687,-99.188926),
+new google.maps.LatLng(19.393623,-99.188325),
+new google.maps.LatLng(19.392347,-99.188733)
+
+  ]
 };
