@@ -26,10 +26,18 @@ ons-navigator(var="Navigator")
         h2 Zona de cobertura JagerGin
         p Podemos entregar tu pedido si tu fiesta esta dentro de la zona marcada.
       ons-row: ons-col
-          ui-gmap-google-map(control="map.control", center='map.center', zoom='map.zoom', events="map.events")
-            ui-gmap-polygon(static="true", ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", fill="p.fill")
-            ui-gmap-circle(ng-repeat="c in circles track by c.id", center="c.center", stroke="c.stroke", fill="c.fill", radius="c.radius")
-            
-      ons-button(ng-click="zona=true") Aceptar
+          .notesAboutIntroMap
+            img(ng-src="app/img/icon_marker.png")
+            span Tu ubicación actual
+          .notesAboutZonaJagergin
+            .zona
+            span Zona JagerGin
+          ui-gmap-google-map(control="map.control", options="map.options", center='map.center', zoom='map.zoom', events="map.events")
+            ui-gmap-polygon(ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", fill="p.fill")
+            ui-gmap-marker(ng-repeat="m in marker track by m.id", coords="m.coords", options="m.options", idkey="m.id")
+
+            //ui-gmap-polyline(ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", editable="true", draggable="true" , geodesic="true")
+
+      ons-button(ng-click="okZone()") Aceptar
       
           

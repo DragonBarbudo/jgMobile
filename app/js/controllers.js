@@ -1,6 +1,7 @@
-moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi){
 
-  $rootScope.zona;
+var point, area, insideZone;
+moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, geolocation){
+
 
 
   $scope.cartCount;
@@ -29,6 +30,7 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
         $scope.cartCount = ShoppingCartSvc.count();
     }, true);
 
+
   $scope.rSpace = function(thename){
     var sinSpacio = thename.replace(/ /g,"_");
     sinSpacio = sinSpacio.replace('ó', "o");
@@ -37,25 +39,46 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
     return lowCase;
   }
 
-  uiGmapGoogleMapApi.then(function(maps) {
-    $scope.coords = { lat:19.4089596, long: -99.1147098 };
+  $scope.okZone = function(){
+    $rootScope.zona = true;
+  }
 
-      $scope.map = {
-          center: {
+
+  geolocation.getLocation().then(function(data){
+    var geocoder = new google.maps.Geocoder();
+    uiGmapGoogleMapApi.then(function(maps) {
+      $scope.coords = { lat:data.coords.latitude, long: data.coords.longitude };
+        $scope.map = {
+            center: {
+              latitude: $scope.coords.lat,
+              longitude: $scope.coords.long
+            },
+          zoom: 11,
+          options: {
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false,
+            streetViewControl: false
+          }
+        }
+        $scope.polygons = zonaJagergin;
+
+        $scope.marker = [ {id:0, options: { icon:'app/img/icon_marker.png' },
+          coords: {
             latitude: $scope.coords.lat,
             longitude: $scope.coords.long
-          },
-        zoom: 11,
-        options: {
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          mapTypeControl: false,
-        }
-      }
-      $scope.polygons = zonaJagergin;
-      $scope.circles = zonaJagergin2;
+          }
+        }];
 
 
-    });
+        point = new google.maps.LatLng($scope.coords.lat, $scope.coords.long);
+        area = new google.maps.Polygon(zonaJagergin.todo.path);
+        insideZone = google.maps.geometry.poly.containsLocation( point , area );
+        console.log( insideZone );
+
+
+    }); //ends uiGmapGoogleMapApi
+
+  }); //ends geolocation
 
 })
 
@@ -63,13 +86,6 @@ moduleapp.directive('svgSnap', function(){
   return{
     restrict: 'E',
     replace: true,
-    /*template: function(elem, attr){
-      console.log(elem);
-      jQuery(elem).hide();
-      //var snap = Snap(e);
-      //var svg = Snap.load(attr.path, function(loadedFragment){ snap.append(loadedFragment); })
-      return '<div class="svg-snap"></div>';
-    }*/
     link: function(scope, element, attrs){
       scope.getContentUrl = function(){
         return attrs.path;

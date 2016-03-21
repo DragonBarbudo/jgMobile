@@ -795,6 +795,23 @@ body {
     left: 0; right: 0; top: 0; bottom: 0;
     width: 100%; height: 100%;
     z-index: 0;
-    .angular-google-map-container{ height: 90%;}
+    .angular-google-map-container{ height: 90%; }
   }
+}
+
+.notesAboutIntroMap, .notesAboutZonaJagergin{
+  padding: 4px 10px;
+  position: absolute; right: 0; top: 80px;
+  .gradient(@w, @w*2);
+  .border-radius(4px 0 0 4px);
+  color:@b; font-size: 0.7em;
+  z-index: 99999999;
+  .box-shadow(0 0 10px @g);
+  img{ height: 20px; vertical-align: middle; margin-right: 5px; }
+  span{ display: inline-block; }
+}
+
+.notesAboutZonaJagergin{
+  top: 114px;
+  .zona{ display: inline-block; width: 16px; height: 12px; background: fade(@sec, 70%); border:1px solid @main; margin-right: 5px; vertical-align: bottom; .border-radius(3px);}
 }

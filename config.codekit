@@ -372,6 +372,28 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/app\/img\/icon_location.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 7637,
+		"inputAbbreviatedPath": "\/app\/img\/icon_location.png",
+		"outputAbbreviatedPath": "\/app\/img\/icon_location.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/app\/img\/icon_marker.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 5100,
+		"inputAbbreviatedPath": "\/app\/img\/icon_marker.png",
+		"outputAbbreviatedPath": "\/app\/img\/icon_marker.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/app\/img\/jagerPin.png": {
 		"fileType": 32768,
 		"ignore": 0,

@@ -5955,3 +5955,56 @@ body {
 .zonaJagergin .angular-google-map .angular-google-map-container {
   height: 90%;
 }
+.notesAboutIntroMap,
+.notesAboutZonaJagergin {
+  padding: 4px 10px;
+  position: absolute;
+  right: 0;
+  top: 80px;
+  background: #f5f5f5;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f5f5f5), color-stop(1, #ffffff));
+  background: -ms-linear-gradient(bottom, #f5f5f5, #ffffff);
+  background: -moz-linear-gradient(center bottom, #f5f5f5 0%, #ffffff 100%);
+  background: -o-linear-gradient(#ffffff, #f5f5f5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f5f5f5', GradientType=0);
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  color: #202325;
+  font-size: 0.7em;
+  z-index: 99999999;
+  -webkit-box-shadow: 0 0 10px #A3A3A3;
+  -moz-box-shadow: 0 0 10px #A3A3A3;
+  box-shadow: 0 0 10px #A3A3A3;
+}
+.notesAboutIntroMap img,
+.notesAboutZonaJagergin img {
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.notesAboutIntroMap span,
+.notesAboutZonaJagergin span {
+  display: inline-block;
+}
+.notesAboutZonaJagergin {
+  top: 114px;
+}
+.notesAboutZonaJagergin .zona {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  background: rgba(221, 6, 44, 0.7);
+  border: 1px solid #2EB9FF;
+  margin-right: 5px;
+  vertical-align: bottom;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
