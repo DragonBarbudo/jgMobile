@@ -691,6 +691,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/app\/js\/lib\/maps-point-in-polygon.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/lib\/maps-point-in-polygon.js",
+		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/maps-point-in-polygon-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/app\/js\/lib\/ngGeolocation.js": {
 		"fileType": 64,
 		"ignore": 1,

@@ -9,7 +9,7 @@ zonaJagergin.todo = { id: 1, stroke: strokeOpt, fill: { color: '#F8012D', opacit
 { latitude:19.399735, longitude: -99.178593 },
 { latitude:19.399654, longitude: -99.190910 },
 { latitude:19.393946, longitude: -99.188169 },
-{ latitude:19.385081, longitude: -99.190836 },/*
+{ latitude:19.385081, longitude: -99.190836 },
 { latitude:19.382490, longitude: -99.199677 },
 { latitude:19.375770, longitude: -99.202166 },
 { latitude:19.372855, longitude: -99.206886 },
@@ -115,7 +115,7 @@ zonaJagergin.todo = { id: 1, stroke: strokeOpt, fill: { color: '#F8012D', opacit
 { latitude:19.357105, longitude: -99.143414 },
 { latitude:19.358644, longitude: -99.170014 },
 { latitude:19.360425, longitude: -99.173280 },
-{ latitude:19.367835, longitude: -99.180622 },*/
+{ latitude:19.367835, longitude: -99.180622 },
 { latitude:19.399856, longitude: -99.170322 }
   ]
 }

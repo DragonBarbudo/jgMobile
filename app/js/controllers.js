@@ -1,5 +1,4 @@
 
-var point, area, insideZone;
 moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, geolocation){
 
 
@@ -68,12 +67,15 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
             longitude: $scope.coords.long
           }
         }];
+        // ¿INSIDE JAGERGIN ZONE?
+        var nupaths = { path:[ ] };
+        for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
+        var point = new google.maps.LatLng($scope.coords.lat, $scope.coords.long);
+        var area = new google.maps.Polygon( {paths: nupaths.path });
+        var insideZone = area.containsLatLng(point);
 
-
-        point = new google.maps.LatLng($scope.coords.lat, $scope.coords.long);
-        area = new google.maps.Polygon(zonaJagergin.todo.path);
-        insideZone = google.maps.geometry.poly.containsLocation( point , area );
         console.log( insideZone );
+
 
 
     }); //ends uiGmapGoogleMapApi
