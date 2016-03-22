@@ -58,7 +58,7 @@ ons-page(ng-controller="CuentaCtrl").account
   div(ng-show="loggedin")
     ons-row.profile
       ons-col
-        .profileEditBtn: ons-icon(icon="ion-edit")
+        .profileEditBtn(ng-click="editarPerfil()"): ons-icon(icon="ion-edit")
         .profileImage: img(ng-src="{{userApp.picture}}", alt="")
         .profileName {{userApp.name}}
         .profileMail {{userApp.email}}
@@ -90,3 +90,13 @@ ons-page(ng-controller="CuentaCtrl").account
                   ons-row
                     ons-col: .total $405.00
                     ons-col: .estado Por entregar
+
+
+ons-template(id="editProfile.html")
+  ons-dialog(var="editProfileDialog", cancelable, ng-controller="CuentaCtrl")
+    ons-toolbar(inline)
+      .center Edita tu perfil
+    p: input(type="text", ng-model="userEdit.name", placeholder="Nombre").text-input
+    p: input(type="email", ng-model="userEdit.email", placeholder="Correo electrónico").text-input
+    p: input(type="text", ng-model="userEdit.phone", placeholder="Teléfono móvil").text-input
+    p: ons-button(modifier="large", ng-click="actualizarPerfil(); editProfileDialog.hide()") Guardar

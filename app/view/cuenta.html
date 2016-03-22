@@ -65,7 +65,7 @@
   <div ng-show="loggedin">
     <ons-row class="profile">
       <ons-col>
-        <div class="profileEditBtn">
+        <div ng-click="editarPerfil()" class="profileEditBtn">
           <ons-icon icon="ion-edit"></ons-icon>
         </div>
         <div class="profileImage"><img ng-src="{{userApp.picture}}" alt=""/></div>
@@ -218,3 +218,22 @@
     </div>
   </div>
 </ons-page>
+<ons-template id="editProfile.html">
+  <ons-dialog var="editProfileDialog" cancelable="cancelable" ng-controller="CuentaCtrl">
+    <ons-toolbar inline="inline">
+      <div class="center">Edita tu perfil</div>
+    </ons-toolbar>
+    <p>
+      <input type="text" ng-model="userEdit.name" placeholder="Nombre" class="text-input"/>
+    </p>
+    <p>
+      <input type="email" ng-model="userEdit.email" placeholder="Correo electrónico" class="text-input"/>
+    </p>
+    <p>
+      <input type="text" ng-model="userEdit.phone" placeholder="Teléfono móvil" class="text-input"/>
+    </p>
+    <p>
+      <ons-button modifier="large" ng-click="actualizarPerfil(); editProfileDialog.hide()">Guardar</ons-button>
+    </p>
+  </ons-dialog>
+</ons-template>

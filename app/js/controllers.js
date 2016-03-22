@@ -2,6 +2,11 @@
 moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, geolocation){
 
 
+  menu.setMainPage('app/view/cuenta.html');
+
+  $scope.isInZone = false;
+  $scope.isInZone = "";
+
 
   $scope.cartCount;
 
@@ -43,15 +48,13 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
   }
 
 
+
   geolocation.getLocation().then(function(data){
     var geocoder = new google.maps.Geocoder();
     uiGmapGoogleMapApi.then(function(maps) {
       $scope.coords = { lat:data.coords.latitude, long: data.coords.longitude };
         $scope.map = {
-            center: {
-              latitude: $scope.coords.lat,
-              longitude: $scope.coords.long
-            },
+            center: { latitude: $scope.coords.lat, longitude: $scope.coords.long },
           zoom: 11,
           options: {
             mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -60,29 +63,25 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
           }
         }
         $scope.polygons = zonaJagergin;
-
         $scope.marker = [ {id:0, options: { icon:'app/img/icon_marker.png' },
-          coords: {
-            latitude: $scope.coords.lat,
-            longitude: $scope.coords.long
+          coords: { latitude: $scope.coords.lat, longitude: $scope.coords.long
           }
         }];
+
         // ¿INSIDE JAGERGIN ZONE?
-        var nupaths = { path:[ ] };
-        for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
-        var point = new google.maps.LatLng($scope.coords.lat, $scope.coords.long);
-        var area = new google.maps.Polygon( {paths: nupaths.path });
-        var insideZone = area.containsLatLng(point);
-
-        console.log( insideZone );
-
-
+        if(!$rootScope.zona){
+          var nupaths = { path:[ ] };
+          for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
+          var point = new google.maps.LatLng($scope.coords.lat, $scope.coords.long);
+          var area = new google.maps.Polygon( {paths: nupaths.path });
+          $scope.isInZone = area.containsLatLng(point);
+        }
 
     }); //ends uiGmapGoogleMapApi
 
   }); //ends geolocation
 
-})
+}) //ends PortadaCtrl
 
 moduleapp.directive('svgSnap', function(){
   return{
@@ -220,7 +219,7 @@ moduleapp.controller('CarritoCtrl', function ($scope, ShoppingCartSvc, SettingSv
 
 
 
-moduleapp.controller('CheckoutCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, PaypalSvc, geolocation) {
+moduleapp.controller('CheckoutCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, PaypalSvc, geolocation, uiGmapGoogleMapApi, $rootScope, cfpLoadingBar) {
     $scope.total = [];
 
     $scope.cartItems = ShoppingCartSvc.getCart();
@@ -250,88 +249,71 @@ moduleapp.controller('CheckoutCtrl', function ($scope, ShoppingCartSvc, SettingS
   		}
     }
 
-
+    $scope.checkoutPosition;
 
 
 
     geolocation.getLocation().then(function(data){
-      $scope.coords = {lat:data.coords.latitude, long: data.coords.longitude};
       var geocoder = new google.maps.Geocoder();
-      var interval = setInterval(function(){
-        if(!$('.centerPin').length>0){ $('.gm-style').append('<div class="centerPin"><img src="app/img/jagerPin.png"></div>'); }
-      }, 4000);
-      $scope.map = {
-          center: {
-            latitude: $scope.coords.lat,
-            longitude: $scope.coords.long
-          },
-          zoom: 12,
-          events:{
-            dragend : function(){
-              trackLocation($scope.map.center);
+      uiGmapGoogleMapApi.then(function(maps) {
+      setTimeout(function(){ $('.Cart .gm-style').append('<div class="centerPin"><img src="app/img/icon_marker.png"></div>'); }, 1000);
+        $scope.coords = { lat:data.coords.latitude, lng: data.coords.longitude };
+          $scope.map = {
+              center: { latitude: $scope.coords.lat, longitude: $scope.coords.lng },
+            zoom: 11,
+            options: {
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              mapTypeControl: false,
+              streetViewControl: false
+            },
+            events:{
+              dragend: function(e){
+
+                var point = e.center;
+                $scope.isInZone = area.containsLatLng(point);
+                if($scope.isInZone){ trackLocation($scope.map.center.latitude, $scope.map.center.longitude); }
+              }
             }
           }
-      };
-      $scope.polygons = zonaDraw;
+          $scope.polygons = zonaJagergin;
 
-    }); //geolocation
+          // ¿INSIDE JAGERGIN ZONE?
+          var nupaths = { path:[ ] };
+          for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
+          var area = new google.maps.Polygon( {paths: nupaths.path });
+          var point = new google.maps.LatLng($scope.coords.lat, $scope.coords.lng);
+          $scope.isInZone = area.containsLatLng(point);
+          if($scope.isInZone){ trackLocation($scope.coords.lat, $scope.coords.lng); }
+      }); //ends uiGmapGoogleMapApi
 
-    function trackLocation(center){
-      $scope.marker.coords.latitude = center.latitude;
-      $scope.marker.coords.longitude = center.longitude;
-      $scope.geocoder.geocode({ 'latLng': new google.maps.LatLng(center.latitude, center.longitude) }, function (results, status) {
+    }); //ends geolocation
+
+
+    $scope.order.address = {};
+    $scope.order.address.inmediato = true;
+    /*
+    $scope.hrentrega = function(){
+      $scope.order.address.inmediato = inmediato.isChecked();
+      console.log($scope.order.address.inmediato);
+    }
+*/
+    function trackLocation(lat, lng){
+      cfpLoadingBar.start();
+      $scope.geocoder.geocode({ 'latLng': new google.maps.LatLng(lat, lng) }, function (results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
               if (results[1]) {
-                  $scope.address = results[0].formatted_address;
+                  $scope.order.address.general = results[0].formatted_address;
+                  cfpLoadingBar.complete();
               } else {
-                  $scope.address =  'Location not found';
+                  $scope.order.address.general =  'No encontramos tu dirección';
+                  cfpLoadingBar.complete()
               }
           } else {
-              $scope.address =  'Geocoder failed due to: ' + status;
+              $scope.order.address.general =  'Error: ' + status;
           }
       });
     }
 
-
-
-
-  var zonaJag = [
-    new google.maps.LatLng(19.423535,-99.144745),
-    new google.maps.LatLng(19.436647,-99.150753),
-    new google.maps.LatLng(19.451216,-99.142857),
-    new google.maps.LatLng(19.449597,-99.122257),
-    new google.maps.LatLng(19.429201,-99.115391),
-    new google.maps.LatLng(19.420135,-99.102516),
-    new google.maps.LatLng(19.455262,-99.089470),
-    new google.maps.LatLng(19.474846,-99.113331),
-    new google.maps.LatLng(19.490706,-99.150238),
-    new google.maps.LatLng(19.472419,-99.159164),
-    new google.maps.LatLng(19.451540,-99.163456),
-    new google.maps.LatLng(19.439885,-99.183025),
-    new google.maps.LatLng(19.418516,-99.167233),
-    new google.maps.LatLng(19.406212,-99.134617),
-    new google.maps.LatLng(19.387753,-99.132557),
-    new google.maps.LatLng(19.394230,-99.116936),
-    new google.maps.LatLng(19.407831,-99.118652),
-    new google.maps.LatLng(19.417707,-99.137535)
-  ];
-
-  var zonaDraw = [
-      {
-          id: 1,
-          path: zonaJagergin.SanPedroDeLosPinos,
-          stroke: {
-              color: '#F8012D',
-              weight: 1
-          },
-          geodesic: false,
-          visible: true,
-          fill: {
-              color: '#00B9FF',
-              opacity: 0.8
-          }
-      }
-  ];
 
 });
 
@@ -385,7 +367,7 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
 
 
 
-moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, $filter) {
+moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, $filter, $rootScope) {
 
 
   $scope.choose     = true;
@@ -393,7 +375,7 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
   $scope.signInForm = false;
 
   $scope.signin = {};
-
+  $scope.userEdit = {};
 
   $scope.fbLogin = function(){
     hello('facebook').login({ scope: 'email' });
@@ -409,6 +391,21 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
     $scope.choose     = true;
     $scope.signUpForm = false;
     $scope.signInForm = false;
+    $rootScope.loggedin = false;
+    $rootScope.userApp = {};
+  }
+
+  $scope.editarPerfil = function(){
+    $scope.userEdit.name = $rootScope.userApp.name;
+    $scope.userEdit.email = $rootScope.userApp.email;
+    $scope.userEdit.phone = $rootScope.userApp.phone;
+    ons.createDialog('editProfile.html').then(function(dialog){
+      dialog.show();
+      $scope.userEdit.name = $rootScope.userApp.name;
+      $scope.userEdit.email = $rootScope.userApp.email;
+      $scope.userEdit.phone = $rootScope.userApp.phone;
+      editProfileDialog.userEdit.name="hola";
+    });
   }
 
 });

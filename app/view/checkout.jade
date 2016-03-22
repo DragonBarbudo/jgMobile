@@ -5,9 +5,10 @@ ons-page(ng-controller="CheckoutCtrl").Cart
     .left: ons-back-button Atras
     .center Checkout
     .right &nbsp;
-  ons-bottom-toolbar.navigation-bar
+
+  //ons-bottom-toolbar.navigation-bar
     .left.navigation-bar__left
-    .center.navigation-bar__title.amount.navigation-bar__center.totalAmount {{ order.total_amount | currency }}
+    .center.navigation-bar__title.amount.navigation-bar__center.totalAmount 
     .right.navigation-bar__right
       ons-toolbar-button.payBtn
         ons-icon(icon="ion-bag")
@@ -16,13 +17,46 @@ ons-page(ng-controller="CheckoutCtrl").Cart
   ons-row: ons-col.instrucciones Asigna el lugar donde será tu entrega. Recuerda que debe estar dentro de la zona JagerGin.
   ons-row
     ons-col
-      ui-gmap-google-map(control="map.control", center='map.center', zoom='map.zoom', events="map.events")
+      .notesAboutIntroMap
+        img(ng-src="app/img/icon_marker.png")
+        span(ng-show="isInZone") Estas en la zona JagerGin
+        span(ng-hide="isInZone", ng-class=" {'notIn':!isInZone} ") No estas en la zona JagerGin
+      //.notesAboutZonaJagergin
+        .zona
+        span Zona JagerGin
+      ui-gmap-google-map(control="map.control", center='map.center', zoom='map.zoom', events="map.events", options="map.options")
         ui-gmap-polygon(static="true", ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", visible="p.visible", geodesic="p.geodesic", fill="p.fill", fit="false")
-        //ui-gmap-marker(idKey="1", coords="marker.coords", options="marker.options")
-  ons-row  
+      
+      
+  ons-row(ng-hide="isInZone"): ons-col.instrucciones Lamentablemente la ubicación de tu fiesta no se encuentra dentro de nuestra zona de repartición.
+  
+  ons-row(ng-show="isInZone")
     ons-col
       form
-        input(type="text", placeholder="Dirección" ng-model="address")
-        input(type="text", placeholder="Código Postal" ng-model="order.customer_zipcode")
-        input(type="text", placeholder="Referencias del domicilio" ng-model="order.customer_references")
-        input(type="text", placeholder="Notas sobre la dirección" ng-model="order.customer_note")
+        input(type="text", placeholder="Dirección" ng-model="order.address.general").address
+        input(type="text", placeholder="Nº Interior, Departamento, Color, etc." ng-model="order.address.interior")
+        input(type="text", placeholder="Referencias de la ubicación" ng-model="order.address.referencias")
+        input(type="text", placeholder="Notas" ng-model="order.notes")
+        
+        ons-row(ng-hide="order.address.inmediato")
+          ons-col
+          ons-col(width="80%")
+            label Selecciona la hora de entrega
+            input(type="time", placeholder="hr:min", pattern="^[0-1]?[0-9]]")
+          ons-col
+        ons-row
+          ons-col
+          ons-col(width="80%")
+            label
+              ons-switch(var="inmediatoBtn", ng-model="order.address.inmediato", checked)
+              | ¿Entrega inmediata?
+        
+  .checkoutAmount(ng-show="isInZone")
+    ons-row
+      ons-col.totalAmountCheckout {{ order.total_amount | currency }}
+    ons-row
+      ons-col
+      ons-col(width="80%"): ons-button(ng-click="", modifier="large--cta")
+        i.fa.fa-paypal 
+        | Pagar
+      ons-col

@@ -53,10 +53,11 @@
       </ons-row>
       <ons-row>
         <ons-col>
-          <div class="notesAboutIntroMap"><img ng-src="app/img/icon_marker.png"/><span>Tu ubicación actual</span></div>
-          <div class="notesAboutZonaJagergin">
-            <div class="zona"></div><span>Zona JagerGin</span>
-          </div>
+          <div class="notesAboutIntroMap"><img ng-src="app/img/icon_marker.png"/><span ng-show="isInZone">Estas en la zona JagerGin</span><span ng-hide="isInZone">No estas en la zona JagerGin</span></div>
+          <!--.notesAboutZonaJagergin
+          .zona
+          span Zona JagerGin
+          -->
           <ui-gmap-google-map control="map.control" options="map.options" center="map.center" zoom="map.zoom" events="map.events">
             <ui-gmap-polygon ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" fill="p.fill"></ui-gmap-polygon>
             <ui-gmap-marker ng-repeat="m in marker track by m.id" coords="m.coords" options="m.options" idkey="m.id"></ui-gmap-marker>
@@ -64,7 +65,8 @@
           </ui-gmap-google-map>
         </ons-col>
       </ons-row>
-      <ons-button ng-click="okZone()">Aceptar</ons-button>
+      <ons-button ng-click="okZone()" ng-show="isInZone">Aceptar</ons-button>
+      <ons-button ng-click="okZone()" ng-hide="isInZone">Mi fiesta es en otro lugar.</ons-button>
     </div>
   </ons-page>
 </ons-navigator>

@@ -51,8 +51,8 @@ moduleapp.run(function($rootScope){
   $rootScope.userApp.name;
   $rootScope.userApp.picture;
 
-  hello.init({ facebook : '613671772113193', google: '473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com' }, { redirect_uri:'http://mobile.prototipo.xyz/redirect.html' });
-  //hello.init({ facebook : '613690458777991' }, { redirect_uri:'redirect.html' });
+  //hello.init({ facebook : '613671772113193', google: '473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com' }, { redirect_uri:'http://mobile.prototipo.xyz/redirect.html' });
+  hello.init({ facebook : '613690458777991' }, { redirect_uri:'redirect.html' });
 
   //hello('facebook').login({ scope: 'email' });
 
@@ -64,9 +64,10 @@ moduleapp.run(function($rootScope){
     }
 
     hello(auth.network).api('/me').then(function(r) {
+      console.log(r);
       $rootScope.userApp.name = r.name;
       $rootScope.userApp.email = r.email;
-      $rootScope.userApp.picture = r.picture;
+      $rootScope.userApp.picture = r.picture+'?width=200';
       //console.log(r);
     });
 

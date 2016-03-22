@@ -527,6 +527,9 @@ body {
   }
 
 
+  .angular-google-map-container{
+  }
+
 
 }
 .instrucciones{
@@ -667,7 +670,7 @@ body {
 
 .centerPin{
   position: absolute;
-  left: 50%; top: 50%;
+  left: 50%; top: 50%; margin-left: -54px; margin-top: -67px;
 }
 
 .searchBar{
@@ -751,12 +754,13 @@ body {
   left: 0; top: 0;
   width: 100%;
   height: 100%;
-  .gradient( fade(@b, 80%), fade(@b, 10%) );
+  .gradient( fade(@b/2, 100%), fade(@b/2, 50%) );
   .transition;
   .spinner-icon{
     position: absolute;
     left: 50%; top: 50%;
     margin: -7px 0 0 -7px;
+    .scale(4);
   }
 }
 
@@ -809,9 +813,40 @@ body {
   .box-shadow(0 0 10px @g);
   img{ height: 20px; vertical-align: middle; margin-right: 5px; }
   span{ display: inline-block; }
+  .notIn{
+    border-bottom: 2px solid @sec;
+  }
 }
+
 
 .notesAboutZonaJagergin{
   top: 114px;
   .zona{ display: inline-block; width: 16px; height: 12px; background: fade(@sec, 70%); border:1px solid @main; margin-right: 5px; vertical-align: bottom; .border-radius(3px);}
+}
+
+.Cart{
+  .notesAboutIntroMap{ top:50px; }
+  .notesAboutZonaJagergin{ top:86px }
+  .checkoutAmount{
+    margin: 20px 0;
+    padding: 20px 0;
+    border-top: 1px solid @main;
+    border-bottom: 1px solid @main;
+    .borderColorAnim;
+    .totalAmountCheckout{
+      color:@sec;
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+    ons-button{
+      background:@sec;
+      margin-top: 20px;
+    }
+  }
+}
+
+.dialog{
+  text-align: center;
+  p{margin: 10px;}
 }

@@ -28,8 +28,9 @@ ons-navigator(var="Navigator")
       ons-row: ons-col
           .notesAboutIntroMap
             img(ng-src="app/img/icon_marker.png")
-            span Tu ubicación actual
-          .notesAboutZonaJagergin
+            span(ng-show="isInZone") Estas en la zona JagerGin
+            span(ng-hide="isInZone") No estas en la zona JagerGin
+          //.notesAboutZonaJagergin
             .zona
             span Zona JagerGin
           ui-gmap-google-map(control="map.control", options="map.options", center='map.center', zoom='map.zoom', events="map.events")
@@ -38,6 +39,7 @@ ons-navigator(var="Navigator")
 
             //ui-gmap-polyline(ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", editable="true", draggable="true" , geodesic="true")
 
-      ons-button(ng-click="okZone()") Aceptar
+      ons-button(ng-click="okZone()", ng-show="isInZone") Aceptar
+      ons-button(ng-click="okZone()", ng-hide="isInZone") Mi fiesta es en otro lugar.
       
           
