@@ -2,7 +2,7 @@
 moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, geolocation){
 
 
-  menu.setMainPage('app/view/cuenta.html');
+//  menu.setMainPage('app/view/cuenta.html');
 
   $scope.isInZone = false;
   $scope.isInZone = "";
