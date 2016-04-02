@@ -32,14 +32,15 @@
         <ons-button ng-click="googleLogin()" class="googleIn">Ingresar con Google+ </ons-button>
         <p>- o - </p>
         <form>
-          <input type="email" ng-model="signin.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/>
-          <input type="text" ng-model="signin.name" placeholder="Nombre" class="text-input text-input--underbar"/>
-          <input type="tel" ng-model="signin.tel" placeholder="Teléfono móvil" class="text-input text-input--underbar"/>
-          <input type="password" ng-model="signin.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
-          <input type="password" ng-model="signin.password2" placeholder="Confirmar contraseña" class="text-input text-input--underbar"/>
-          <div class="errorInForm"></div>
-          <ons-button ng-click="loggedin=true" class="signInBtn">Crear cuenta</ons-button>
-          <p class="terms">Al crear una cuenta aceptas los <a ng-click="">Términos de servicio.</a></p><a ng-click="signInForm=true; signUpForm=false;" class="cancelar">¿Ya tienes cuenta?</a>
+          <input type="email" ng-model="signin.email" placeholder="Correo electrónico" ng-blur="checkEmail()" ng-change="validator()" class="text-input text-input--underbar"/>
+          <label ng-show="errorUsuario" class="errorUsuario">{{ errorUsuario }}</label>
+          <input type="text" ng-model="signin.name" placeholder="Nombre" ng-change="validator()" class="text-input text-input--underbar"/>
+          <input type="tel" ng-model="signin.tel" placeholder="Teléfono móvil" ng-change="validator()" class="text-input text-input--underbar"/>
+          <input type="password" ng-model="signin.password" placeholder="Contraseña" ng-change="validator()" class="text-input text-input--underbar"/>
+          <input type="password" ng-model="signin.password2" placeholder="Confirmar contraseña" ng-change="validator()" class="text-input text-input--underbar"/>
+          <label ng-show="errorPass" class="errorUsuario">{{ errorPass }}</label>
+          <ons-button ng-click="signup()" ng-show="allValid" class="signInBtn">Crear cuenta</ons-button>
+          <p class="terms">Al crear una cuenta aceptas los <a ng-click="">Términos de servicio.</a></p><a ng-click="signInForm=true; signUpForm=false;" class="cancelar">¿Ya tienes cuenta?  </a>
         </form>
       </ons-col>
       <ons-col></ons-col>
@@ -53,10 +54,10 @@
         <ons-button ng-click="googleLogin()" class="googleIn">Ingresar con Google+ </ons-button>
         <p>- o - </p>
         <form>
-          <input type="email" ng-model="signin.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/>
-          <input type="password" ng-model="signin.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
-          <div class="errorInForm"></div>
-          <ons-button ng-click="loggedin=true" class="signInBtn">Ingresar</ons-button><a ng-click="signInForm=false; signUpForm=true;" class="cancelar">Crear una cuenta</a>
+          <input type="email" ng-model="loggingIn.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/>
+          <input type="password" ng-model="loggingIn.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
+          <label ng-show="errorLogin" class="errorUsuario">{{ errorLogin }}</label>
+          <ons-button ng-click="login()" class="signInBtn">Ingresar</ons-button><a ng-click="signInForm=false; signUpForm=true;" class="cancelar">Crear una cuenta</a>
         </form>
       </ons-col>
       <ons-col></ons-col>
@@ -68,10 +69,10 @@
         <div ng-click="editarPerfil()" class="profileEditBtn">
           <ons-icon icon="ion-edit"></ons-icon>
         </div>
-        <div class="profileImage"><img ng-src="{{userApp.picture}}" alt=""/></div>
+        <div class="profileImage"><img ng-src="http://dbo.space/jagergin/cms/api/userFiles/{{userApp.id}}.jpg" alt=""/></div>
         <div class="profileName">{{userApp.name}}</div>
         <div class="profileMail">{{userApp.email}}</div>
-        <div class="profileCel">(55)8532-9420</div>
+        <div class="profileCel">{{userApp.tel}}</div>
       </ons-col>
     </ons-row>
     <div class="historial">
@@ -217,9 +218,17 @@
       </ons-row>
     </div>
   </div>
+  <div class="wavesContainer">
+    <ul class="waves">
+      <!--li.layer(data-depth="1.0"): img(src="app/img/wave_ice.png").t-->
+      <li data-depth="0.9" class="layer"><img src="app/img/wave_3.png" class="w"/></li>
+      <li data-depth="0.5" class="layer"><img src="app/img/wave_1.png" class="w"/></li>
+      <li data-depth="0.7" class="layer"><img src="app/img/wave_2.png" class="w"/></li>
+    </ul>
+  </div>
 </ons-page>
 <ons-template id="editProfile.html">
-  <ons-dialog var="editProfileDialog" cancelable="cancelable" ng-controller="CuentaCtrl">
+  <ons-dialog var="editProfileDialog" ng-controller="CuentaCtrl">
     <ons-toolbar inline="inline">
       <div class="center">Edita tu perfil</div>
     </ons-toolbar>
@@ -230,10 +239,11 @@
       <input type="email" ng-model="userEdit.email" placeholder="Correo electrónico" class="text-input"/>
     </p>
     <p>
-      <input type="text" ng-model="userEdit.phone" placeholder="Teléfono móvil" class="text-input"/>
+      <input type="text" ng-model="userEdit.tel" placeholder="Teléfono móvil" class="text-input"/>
     </p>
     <p>
-      <ons-button modifier="large" ng-click="actualizarPerfil(); editProfileDialog.hide()">Guardar</ons-button>
+      <ons-button modifier="" ng-click="cancelUpdatePerfil(); editProfileDialog.hide()">Cancelar</ons-button>
+      <ons-button modifier="" ng-click="actualizarPerfil(); editProfileDialog.hide()">Guardar</ons-button>
     </p>
   </ons-dialog>
 </ons-template>

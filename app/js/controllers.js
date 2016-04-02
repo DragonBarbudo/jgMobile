@@ -1,8 +1,10 @@
 
-moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, geolocation){
+moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, geolocation, $location, $anchorScroll, $document){
 
 
 //  menu.setMainPage('app/view/cuenta.html');
+
+  $('.waves').parallax({ limitY: 30, scalarX: 20 });
 
   $scope.isInZone = false;
   $scope.isInZone = "";
@@ -81,6 +83,13 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
 
   }); //ends geolocation
 
+
+  $scope.scrollBottom = function(){
+    console.log('scrooooll');
+    $anchorScroll('thebottom');
+  }
+
+
 }) //ends PortadaCtrl
 
 moduleapp.directive('svgSnap', function(){
@@ -110,7 +119,12 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
 
   $scope.cartCount;
 
+  $scope.cantidades = [1,2,3,4,5,6,7,8,9,10];
+
+
   $scope.itemsInCart = ShoppingCartSvc.getCart();
+
+  $('.waves').parallax({ limitY: 30, scalarX: 20 });
 
 
   ProductsSvc.findByCategoryId($scope.category).then(function(result){
@@ -145,6 +159,8 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
     return lowCase;
   }
 
+
+
 });
 
 
@@ -159,6 +175,9 @@ moduleapp.controller('CarritoCtrl', function ($scope, ShoppingCartSvc, SettingSv
     $scope.cartCount;
 
     $scope.carous = [];
+
+    $scope.cantidades = [1,2,3,4,5,6,7,8,9,10];
+
 
     getTotalAmount();
 
@@ -328,6 +347,8 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
   $scope.itemsInCart = ShoppingCartSvc.getCart();
   $scope.categories;
   $scope.cartCount;
+  $scope.cantidades = [1,2,3,4,5,6,7,8,9,10];
+
 
 
   ProductsSvc.list(0, 1000, 0).then(function(resultPrd){
@@ -367,7 +388,7 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
 
 
 
-moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, $filter, $rootScope) {
+moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, UsersSvc, StoreLocalSvc, $filter, $rootScope) {
 
 
   $scope.choose     = true;
@@ -375,7 +396,76 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
   $scope.signInForm = false;
 
   $scope.signin = {};
-  $scope.userEdit = {};
+  $scope.userEdit = $rootScope.userApp;
+
+  $scope.errorUsuario = false;
+  $scope.errorPass = false;
+  $scope.errorLogin = false;
+
+  $scope.allValid = false;
+
+  var prevProfile = {};
+  prevProfile.name = $scope.userEdit.name;
+  prevProfile.email = $scope.userEdit.email;
+  prevProfile.tel = $scope.userEdit.tel;
+
+
+$('.waves').parallax({ limitY: 30, scalarX: 20 });
+
+
+  $scope.signup = function(){
+    $scope.newUser = {};
+    $scope.newUser.name = $scope.signin.name;
+    $scope.newUser.password = $scope.signin.password;
+    $scope.newUser.email = $scope.signin.email;
+    $scope.newUser.tel = $scope.signin.tel;
+    UsersSvc.createUser($scope.newUser).then(function(result){
+      if(result.data){
+        $rootScope.loggedin = true;
+        $rootScope.userApp = $scope.newUser;
+        $rootScope.userApp.id = result.data;
+      }
+    });
+  }
+
+  $scope.checkEmail = function(){
+    if($scope.signin.email){
+      UsersSvc.searchUser($scope.signin.email).then(function(result){
+        //console.log(result.data.length);
+        if(result.data.length>0){
+          $scope.errorUsuario = 'Este correo ya esta registrado';
+        } else {
+          $scope.errorUsuario = false;
+        }
+      });
+    }
+  }
+
+  $scope.validator = function(){
+    if(!$scope.errorUsuario && $scope.signin.email && $scope.signin.name && $scope.signin.tel && $scope.signin.password && $scope.signin.password2 ){
+      if($scope.signin.password != $scope.signin.password2){
+        $scope.errorPass = "No coinciden las contraseñas";
+        $scope.allValid = false;
+      } else {
+        $scope.errorPass = false;
+        $scope.allValid = true;
+      }
+
+    }
+  }
+
+  $scope.login = function(){
+    UsersSvc.loginUser($scope.loggingIn).then(function(result){
+      if(!result.data){
+        $scope.errorLogin = "Los datos de acceso son incorrectos.";
+      } else {
+        $scope.errorLogin = false;
+        $rootScope.loggedin = true;
+        $rootScope.userApp = result.data;
+      }
+    });
+  }
+
 
   $scope.fbLogin = function(){
     hello('facebook').login({ scope: 'email' });
@@ -396,16 +486,26 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
   }
 
   $scope.editarPerfil = function(){
-    $scope.userEdit.name = $rootScope.userApp.name;
-    $scope.userEdit.email = $rootScope.userApp.email;
-    $scope.userEdit.phone = $rootScope.userApp.phone;
     ons.createDialog('editProfile.html').then(function(dialog){
       dialog.show();
-      $scope.userEdit.name = $rootScope.userApp.name;
-      $scope.userEdit.email = $rootScope.userApp.email;
-      $scope.userEdit.phone = $rootScope.userApp.phone;
-      editProfileDialog.userEdit.name="hola";
     });
   }
 
+  $scope.cancelUpdatePerfil = function(){
+    $scope.userApp.name = prevProfile.name;
+    $scope.userApp.email = prevProfile.email;
+    $scope.userApp.tel = prevProfile.tel;
+  }
+  $scope.actualizarPerfil = function(){
+    UsersSvc.updateUser($scope.userEdit, $scope.userApp.id).then(function(result){
+      console.log(result);
+    });
+  }
+
+});
+
+
+
+moduleapp.controller('AcercaCtrl', function ($scope) {
+    $('.waves').parallax({ limitY: 30, scalarX: 20 });
 });

@@ -9,16 +9,17 @@ ons-navigator(var="Navigator")
 
     +mainSlider
 
-    ons-row
+    ons-row(ng-click="scrollBottom()")
       ons-col.primaryPhrase Haz tu pedido
-    ons-row
+    ons-row(ng-click="scrollBottom()")
       ons-col.bottomArrow: ons-icon(icon="ion-chevron-down")
       
-    .categoriesGrid
+    .categoriesGrid#thebottom
       ons-row.categories
         ons-col(ng-repeat="cat in categoriesList | filter : { description : 0 } | orderBy: 'order'", ng-click="categoryOpen(cat.id, cat.name, cat.parent);", width="48%"): .tb: .cell
           .icon: svg-snap(path="app/img/icon_{{ rSpace(cat.name) }}.svg")
           .text {{cat.name}}
+    +bottomwaves
           
     
     .zonaJagergin(ng-hide="zona")

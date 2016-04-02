@@ -1,5 +1,5 @@
 
-<ons-page class="about">
+<ons-page ng-controller="AcercaCtrl" class="about">
   <ons-toolbar>
     <div class="left">
       <ons-toolbar-button ng-click="menu.toggleMenu()">
@@ -26,4 +26,12 @@
     </ons-col>
     <ons-col>&nbsp;</ons-col>
   </ons-row>
+  <div class="wavesContainer">
+    <ul class="waves">
+      <!--li.layer(data-depth="1.0"): img(src="app/img/wave_ice.png").t-->
+      <li data-depth="0.9" class="layer"><img src="app/img/wave_3.png" class="w"/></li>
+      <li data-depth="0.5" class="layer"><img src="app/img/wave_1.png" class="w"/></li>
+      <li data-depth="0.7" class="layer"><img src="app/img/wave_2.png" class="w"/></li>
+    </ul>
+  </div>
 </ons-page>

@@ -8,7 +8,7 @@ ons-page(ng-controller="ProductosCtrl")
 
   ons-row.selectionMode(style="background-image: url( app/img/header_{{ rSpace(categoryName) }}.jpg )") 
     ons-col &nbsp;
-    ons-col
+  ons-row: ons-col.selectionModeBtn
       .button-bar
         .button-bar__item
           input(type="radio", name="vista", ng-checked="!grid", ng-click="grid=false")
@@ -30,7 +30,13 @@ ons-page(ng-controller="ProductosCtrl")
               .price
                 span.qtyTxt {{prod.quantity}}x  
                 span {{prod.new_price * prod.quantity | currency}}
-            ons-col(ng-hide="InCart(prod.refId)", width="20px").tac
+            
+            
+            ons-col(ng-hide="InCart(prod.refId)", width="50px")
+              select(ng-change="prod.quantity=prod.quantitySelect", ng-model="prod.quantitySelect", ng-init="prod.quantitySelect=1", ng-options="ct for ct in cantidades").selectQty
+
+
+            //ons-col(ng-hide="InCart(prod.refId)", width="20px").tac
               ons-icon(icon="ion-android-add", ng-click="prod.quantity = (prod.quantity*1)+1").qtyButtons.listQty  
               ons-icon(icon="ion-android-remove", ng-show="prod.quantity>1" ng-click="prod.quantity = (prod.quantity*1)-1", ng-class="{'eliminate' : cartItems[$index].quantity == 1}").qtyButtons.listQty
               
@@ -48,9 +54,13 @@ ons-page(ng-controller="ProductosCtrl")
                 span.qtyTxt {{prod.quantity}}x  
                 span.price {{prod.new_price * prod.quantity | currency}}
             ons-row
-              ons-col(ng-hide="InCart(prod.refId)").tac
+              //ons-col(ng-hide="InCart(prod.refId)").tac
                 ons-icon(icon="ion-android-remove", ng-show="prod.quantity>1" ng-click="prod.quantity = (prod.quantity*1)-1", ng-class="{'eliminate' : cartItems[$index].quantity == 1}").qtyButtons
                 ons-icon(icon="ion-android-add", ng-click="prod.quantity = (prod.quantity*1)+1").qtyButtons
+              ons-col(ng-hide="InCart(prod.refId)", width="50px")
+                select(ng-change="prod.quantity=prod.quantitySelect", ng-model="prod.quantitySelect", ng-init="prod.quantitySelect=1", ng-options="ct for ct in cantidades").selectQty.selectQtyGrid
               ons-col
                 .cartBtn(ng-hide="InCart(prod.refId)"): ons-button(ng-click="addToCart(prod)"): ons-icon(icon="ion-ios-cart-outline")
                 .cartBtn(ng-show="InCart(prod.refId)"): ons-button.isInCart: ons-icon(icon="ion-ios-checkmark-empty")
+
+  +bottomwaves

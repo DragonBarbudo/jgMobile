@@ -1,6 +1,6 @@
 include mixins
 
-ons-page.about
+ons-page.about(ng-controller="AcercaCtrl")
   ons-toolbar
     .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
     .center Acerca de JagerGin
@@ -19,3 +19,5 @@ ons-page.about
         a(href="#").fa.fa-facebook
         a(href="#").fa.fa-twitter
     ons-col &nbsp;
+
+  +bottomwaves

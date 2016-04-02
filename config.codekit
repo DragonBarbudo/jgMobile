@@ -482,6 +482,61 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/app\/img\/wave_1.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2946,
+		"inputAbbreviatedPath": "\/app\/img\/wave_1.png",
+		"outputAbbreviatedPath": "\/app\/img\/wave_1.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/app\/img\/wave_2.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1451,
+		"inputAbbreviatedPath": "\/app\/img\/wave_2.png",
+		"outputAbbreviatedPath": "\/app\/img\/wave_2.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/app\/img\/wave_3.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 1444,
+		"inputAbbreviatedPath": "\/app\/img\/wave_3.png",
+		"outputAbbreviatedPath": "\/app\/img\/wave_3.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/app\/img\/wave_ice.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 3758,
+		"inputAbbreviatedPath": "\/app\/img\/wave_ice.png",
+		"outputAbbreviatedPath": "\/app\/img\/wave_ice.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/app\/img\/wave_top.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 791,
+		"inputAbbreviatedPath": "\/app\/img\/wave_top.png",
+		"outputAbbreviatedPath": "\/app\/img\/wave_top.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/app\/js\/app.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -570,6 +625,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/app\/js\/lib\/angular-scroll.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/lib\/angular-scroll.js",
+		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/angular-scroll-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/app\/js\/lib\/angular-simple-logger.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -653,6 +719,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/app\/js\/lib\/jquery.min.js",
 		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/jquery.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/app\/js\/lib\/jquery.parallax.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/lib\/jquery.parallax.js",
+		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/jquery.parallax-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,

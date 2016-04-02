@@ -28,7 +28,10 @@
             <ons-col>
               <div class="name">{{prod.name}}</div>
               <div class="description">{{prod.description}} | {{ prod.categoryName }}</div>
-              <div class="price">{{prod.new_price | currency}}</div>
+              <div class="price"> <span class="qtyTxt">{{prod.quantity}}x  </span><span>{{prod.new_price * prod.quantity | currency}}</span></div>
+            </ons-col>
+            <ons-col ng-hide="InCart(prod.refId)" width="50px">
+              <select ng-change="prod.quantity=prod.quantitySelect" ng-model="prod.quantitySelect" ng-init="prod.quantitySelect=1" ng-options="ct for ct in cantidades" class="selectQty"></select>
             </ons-col>
             <ons-col width="70px" ng-hide="InCart(prod.refId)" class="cartBtn">
               <ons-button ng-click="addToCart(prod)">

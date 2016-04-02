@@ -362,3 +362,83 @@ moduleapp.factory("ShoppingCartSvc", function($window, $cookieStore){
 		    onPayPalMobileInit: onPayPalMobileInit,
 		};
 	});
+
+
+
+
+
+moduleapp.factory("UsersSvc", function($q, $http, SettingSvc){
+
+
+	function listUsers(){
+		var deferred = $q.defer();
+		$http({
+			method: "GET",
+			url: SettingSvc.getRootUrl()+"/v1/users/",
+			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+		}).then(function(result){
+			deferred.resolve(result);
+		});
+		return deferred.promise;
+	}
+
+	function createUser(user){
+		var deferred = $q.defer();
+		$http({
+			method: "POST",
+			data: user,
+			url: SettingSvc.getRootUrl()+"/v1/user_signup/",
+			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+		}).then(function(result){
+			deferred.resolve(result);
+		});
+		return deferred.promise;
+	}
+
+	function searchUser(email){
+		var deferred = $q.defer();
+		$http({
+			method: "GET",
+			url: SettingSvc.getRootUrl()+"/v1/search_user/"+email,
+			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+		}).then(function(result){
+			deferred.resolve(result);
+		});
+		return deferred.promise;
+	}
+
+	function loginUser(loginInfo){
+		var deferred = $q.defer();
+		$http({
+			method: "POST",
+			data: loginInfo,
+			url: SettingSvc.getRootUrl()+"/v1/user_login/",
+			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+		}).then(function(result){
+			deferred.resolve(result);
+		});
+		return deferred.promise;
+	}
+
+	function updateUser(user, id){
+		var deferred = $q.defer();
+			$http({
+	            method: "POST",
+	            data : user,
+	            url: SettingSvc.getRootUrl() + "/v1/user_update/" + id,
+	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+	}
+
+	return{
+		listUsers: listUsers,
+		createUser: createUser,
+		searchUser: searchUser,
+		loginUser: loginUser,
+		updateUser: updateUser
+	}
+
+});

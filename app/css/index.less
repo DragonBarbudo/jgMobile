@@ -355,7 +355,7 @@ body {
     .qtyTxt{
       color:@g;
       display: inline-block;
-      font-size: 0.9em;
+      font-size: 0.7em;
       margin-right: 5px;
     }
 
@@ -417,17 +417,21 @@ body {
   background-position: center;
   border-bottom: 2px solid @main;
   margin-bottom: 5px;
+}
+.selectionModeBtn{
   .button-bar{
-    float: right;
+    width: 50%;
+    margin: .5% auto 2% auto;
     .button-bar__button{
-      font-size: 12px;
-      color:@w;
-      border-color:@b;
+      font-size: 10px;
+      color:@w/1.2;
+      border-color:@w*2;
+      line-height: 1;
     }
   }
   .button-bar__item.active > .button-bar__button, :checked + .button-bar__button{
-    color:@main;
-    background: @b;
+    color:@w;
+    background: @w/1.2;
   }
 }
 
@@ -849,4 +853,51 @@ body {
 .dialog{
   text-align: center;
   p{margin: 10px;}
+}
+
+
+
+.errorUsuario{
+  color:@sec*2;
+  font-size: 0.7em;
+}
+
+.wavesContainer{
+  height: 90px;
+  overflow: hidden;
+  .waves{
+    margin-top: 40px;
+    margin-bottom: 0px;
+    li{
+      margin-bottom: -40px;
+      img{
+        &.w{
+          width: 220%;
+          margin-left: -60%;
+
+        }
+        &.t{
+          margin-left: 60%;
+        }
+      }
+      &:nth-child(1){ img{.floating(3s);} }
+      &:nth-child(2){ img{.floating(2.6s);} }
+      &:nth-child(3){ img{.floating(2.7s);} }
+      &:nth-child(4){ img{.floating(2.8s);} }
+    }
+  }
+}
+
+.selectQty{
+  appearence: none;
+  -webkit-appearance:none;
+  color:@g/1.2;
+  padding: 5px 5px 5px 15px;
+  text-align: center;
+  font-size: 1em;
+  margin-top: 8px;
+  border-color:@sec;
+  &.selectQtyGrid{
+    margin-top: 18px;
+  }
 }

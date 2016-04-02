@@ -22,15 +22,15 @@
       <div><img ng-src="app/img/promo1.png" alt=""/></div>
       <div><img ng-src="app/img/promo2.png" alt=""/></div>
     </slick>
-    <ons-row>
+    <ons-row ng-click="scrollBottom()">
       <ons-col class="primaryPhrase">Haz tu pedido</ons-col>
     </ons-row>
-    <ons-row>
+    <ons-row ng-click="scrollBottom()">
       <ons-col class="bottomArrow">
         <ons-icon icon="ion-chevron-down"></ons-icon>
       </ons-col>
     </ons-row>
-    <div class="categoriesGrid">
+    <div id="thebottom" class="categoriesGrid">
       <ons-row class="categories">
         <ons-col ng-repeat="cat in categoriesList | filter : { description : 0 } | orderBy: 'order'" ng-click="categoryOpen(cat.id, cat.name, cat.parent);" width="48%">
           <div class="tb">
@@ -43,6 +43,14 @@
           </div>
         </ons-col>
       </ons-row>
+    </div>
+    <div class="wavesContainer">
+      <ul class="waves">
+        <!--li.layer(data-depth="1.0"): img(src="app/img/wave_ice.png").t-->
+        <li data-depth="0.9" class="layer"><img src="app/img/wave_3.png" class="w"/></li>
+        <li data-depth="0.5" class="layer"><img src="app/img/wave_1.png" class="w"/></li>
+        <li data-depth="0.7" class="layer"><img src="app/img/wave_2.png" class="w"/></li>
+      </ul>
     </div>
     <div ng-hide="zona" class="zonaJagergin">
       <ons-row>

@@ -10,3 +10,13 @@ mixin mainSlider
   slick(infinit="true", lazy-load="ondemand", autoplay="true", arrows="false").portadaSlider
     div: img(ng-src="app/img/promo1.png", alt="")
     div: img(ng-src="app/img/promo2.png", alt="")
+
+
+mixin bottomwaves
+  .wavesContainer
+    ul.waves
+      //li.layer(data-depth="1.0"): img(src="app/img/wave_ice.png").t
+      li.layer(data-depth="0.9"): img(src="app/img/wave_3.png").w
+      li.layer(data-depth="0.5"): img(src="app/img/wave_1.png").w
+      li.layer(data-depth="0.7"): img(src="app/img/wave_2.png").w
+      

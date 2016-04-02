@@ -31,11 +31,14 @@ ons-page(ng-controller="CarritoCtrl").Cart
                     .description {{prod.description}}
                     .price {{prod.new_price | currency }}
                   ons-col.qty
-                    ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")
-                    ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")
-                    .priceTotal 
-                      span {{cartItems[$index].quantity}}x | 
-                      | {{ cartItems[$index].subTotal | currency}}
+                    select(ng-change="prod.quantity=prod.quantitySelect", ng-model="prod.quantitySelect", ng-init="prod.quantitySelect=prod.quantity", ng-options="ct for ct in cantidades").selectQty
+                    
+                    //ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")
+                    //ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")
+                  ons-col
+                      .priceTotal 
+                        span x | 
+                        | {{ cartItems[$index].subTotal | currency}}
               ons-carousel-item.delete
                 ons-row
                   ons-col

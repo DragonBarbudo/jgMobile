@@ -4783,13 +4783,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     transform: translate(0px, 0px);
   }
 }
-.floating {
-  -webkit-animation-name: floating;
-  -webkit-animation-duration: 2s;
-  -webkit-transform-origin: 50% 50%;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: ease-in-out;
-}
 .breath {
   -webkit-animation-name: breathing;
   -webkit-animation-duration: 2s;
@@ -5334,7 +5327,7 @@ body {
 .productsGrid .product .qtyTxt {
   color: #A3A3A3;
   display: inline-block;
-  font-size: 0.9em;
+  font-size: 0.7em;
   margin-right: 5px;
 }
 .productsList .cartBtn,
@@ -5434,18 +5427,20 @@ body {
   border-bottom: 2px solid #2EB9FF;
   margin-bottom: 5px;
 }
-.selectionMode .button-bar {
-  float: right;
+.selectionModeBtn .button-bar {
+  width: 50%;
+  margin: .5% auto 2% auto;
 }
-.selectionMode .button-bar .button-bar__button {
-  font-size: 12px;
+.selectionModeBtn .button-bar .button-bar__button {
+  font-size: 10px;
+  color: #cccccc;
+  border-color: #ffffff;
+  line-height: 1;
+}
+.selectionModeBtn .button-bar__item.active > .button-bar__button,
+.selectionModeBtn :checked + .button-bar__button {
   color: #f5f5f5;
-  border-color: #202325;
-}
-.selectionMode .button-bar__item.active > .button-bar__button,
-.selectionMode :checked + .button-bar__button {
-  color: #2EB9FF;
-  background: #202325;
+  background: #cccccc;
 }
 .Cart .productsList .qty {
   text-align: right;
@@ -6051,4 +6046,67 @@ body {
 }
 .dialog p {
   margin: 10px;
+}
+.errorUsuario {
+  color: #ff0c58;
+  font-size: 0.7em;
+}
+.wavesContainer {
+  height: 90px;
+  overflow: hidden;
+}
+.wavesContainer .waves {
+  margin-top: 40px;
+  margin-bottom: 0px;
+}
+.wavesContainer .waves li {
+  margin-bottom: -40px;
+}
+.wavesContainer .waves li img.w {
+  width: 220%;
+  margin-left: -60%;
+}
+.wavesContainer .waves li img.t {
+  margin-left: 60%;
+}
+.wavesContainer .waves li:nth-child(1) img {
+  -webkit-animation-name: floating;
+  -webkit-animation-duration: 3s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.wavesContainer .waves li:nth-child(2) img {
+  -webkit-animation-name: floating;
+  -webkit-animation-duration: 2.6s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.wavesContainer .waves li:nth-child(3) img {
+  -webkit-animation-name: floating;
+  -webkit-animation-duration: 2.7s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.wavesContainer .waves li:nth-child(4) img {
+  -webkit-animation-name: floating;
+  -webkit-animation-duration: 2.8s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.selectQty {
+  appearence: none;
+  -webkit-appearance: none;
+  color: #888888;
+  padding: 5px 5px 5px 15px;
+  text-align: center;
+  font-size: 1em;
+  margin-top: 8px;
+  border-color: #DD062C;
+}
+.selectQty.selectQtyGrid {
+  margin-top: 18px;
 }

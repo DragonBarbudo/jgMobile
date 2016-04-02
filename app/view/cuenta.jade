@@ -27,18 +27,19 @@ ons-page(ng-controller="CuentaCtrl").account
         ons-button.googleIn(ng-click="googleLogin()") Ingresar con Google+ 
         p - o - 
         form
-          input(type="email", ng-model="signin.email", placeholder="Correo electrónico").text-input.text-input--underbar
-          input(type="text", ng-model="signin.name", placeholder="Nombre").text-input.text-input--underbar
-          input(type="tel", ng-model="signin.tel", placeholder="Teléfono móvil").text-input.text-input--underbar
-          input(type="password", ng-model="signin.password", placeholder="Contraseña").text-input.text-input--underbar
-          input(type="password", ng-model="signin.password2", placeholder="Confirmar contraseña").text-input.text-input--underbar
-          .errorInForm
-          ons-button.signInBtn(ng-click="loggedin=true") Crear cuenta
+          input(type="email", ng-model="signin.email", placeholder="Correo electrónico", ng-blur="checkEmail()", ng-change="validator()").text-input.text-input--underbar
+          label(ng-show="errorUsuario").errorUsuario {{ errorUsuario }}
+          input(type="text", ng-model="signin.name", placeholder="Nombre", ng-change="validator()").text-input.text-input--underbar
+          input(type="tel", ng-model="signin.tel", placeholder="Teléfono móvil", ng-change="validator()").text-input.text-input--underbar
+          input(type="password", ng-model="signin.password", placeholder="Contraseña", ng-change="validator()").text-input.text-input--underbar
+          input(type="password", ng-model="signin.password2", placeholder="Confirmar contraseña", ng-change="validator()").text-input.text-input--underbar
+          label(ng-show="errorPass").errorUsuario {{ errorPass }}
+          ons-button.signInBtn(ng-click="signup()", ng-show="allValid") Crear cuenta
           p.terms Al crear una cuenta aceptas los 
             a(ng-click="") Términos de servicio.
-          a.cancelar(ng-click="signInForm=true; signUpForm=false;") ¿Ya tienes cuenta?
-          
+          a.cancelar(ng-click="signInForm=true; signUpForm=false;") ¿Ya tienes cuenta?  
       ons-col
+        
     ons-row(ng-show="signInForm").signInArea
       ons-col
       ons-col
@@ -48,10 +49,10 @@ ons-page(ng-controller="CuentaCtrl").account
         ons-button.googleIn(ng-click="googleLogin()") Ingresar con Google+ 
         p - o - 
         form
-          input(type="email", ng-model="signin.email", placeholder="Correo electrónico").text-input.text-input--underbar
-          input(type="password", ng-model="signin.password", placeholder="Contraseña").text-input.text-input--underbar
-          .errorInForm
-          ons-button.signInBtn(ng-click="loggedin=true") Ingresar
+          input(type="email", ng-model="loggingIn.email", placeholder="Correo electrónico").text-input.text-input--underbar
+          input(type="password", ng-model="loggingIn.password", placeholder="Contraseña").text-input.text-input--underbar
+          label(ng-show="errorLogin").errorUsuario {{ errorLogin }}
+          ons-button.signInBtn(ng-click="login()") Ingresar
           a.cancelar(ng-click="signInForm=false; signUpForm=true;") Crear una cuenta
       ons-col
         
@@ -59,10 +60,10 @@ ons-page(ng-controller="CuentaCtrl").account
     ons-row.profile
       ons-col
         .profileEditBtn(ng-click="editarPerfil()"): ons-icon(icon="ion-edit")
-        .profileImage: img(ng-src="{{userApp.picture}}", alt="")
+        .profileImage: img(ng-src="http://dbo.space/jagergin/cms/api/userFiles/{{userApp.id}}.jpg", alt="")
         .profileName {{userApp.name}}
         .profileMail {{userApp.email}}
-        .profileCel (55)8532-9420
+        .profileCel {{userApp.tel}}
     
     .historial
       ons-row: ons-col.instrucciones Desliza a la derecha para ver tu historial de compras
@@ -90,13 +91,15 @@ ons-page(ng-controller="CuentaCtrl").account
                   ons-row
                     ons-col: .total $405.00
                     ons-col: .estado Por entregar
-
+  +bottomwaves
 
 ons-template(id="editProfile.html")
-  ons-dialog(var="editProfileDialog", cancelable, ng-controller="CuentaCtrl")
+  ons-dialog(var="editProfileDialog", ng-controller="CuentaCtrl")
     ons-toolbar(inline)
       .center Edita tu perfil
     p: input(type="text", ng-model="userEdit.name", placeholder="Nombre").text-input
     p: input(type="email", ng-model="userEdit.email", placeholder="Correo electrónico").text-input
-    p: input(type="text", ng-model="userEdit.phone", placeholder="Teléfono móvil").text-input
-    p: ons-button(modifier="large", ng-click="actualizarPerfil(); editProfileDialog.hide()") Guardar
+    p: input(type="text", ng-model="userEdit.tel", placeholder="Teléfono móvil").text-input
+    p
+      ons-button(modifier="", ng-click="cancelUpdatePerfil(); editProfileDialog.hide()") Cancelar
+      ons-button(modifier="", ng-click="actualizarPerfil(); editProfileDialog.hide()") Guardar
