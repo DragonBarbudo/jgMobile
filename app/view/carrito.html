@@ -13,13 +13,21 @@
     -->
   </ons-toolbar>
   <ons-bottom-toolbar ng-show="cartCount&gt;0" class="navigation-bar">
-    <div class="left navigation-bar__left"></div>
-    <div class="center navigation-bar__title amount navigation-bar__center totalAmount">{{ order.total_amount | currency }}</div>
-    <div class="right navigation-bar__right">
-      <ons-toolbar-button ng-click="Navigator.pushPage('app/view/checkout.html')" class="payBtn">
-        <ons-icon icon="ion-bag"></ons-icon> Siguiente
-      </ons-toolbar-button>
-    </div>
+    <ons-row>
+      <ons-col width="50%">
+        <div class="totalAmount">{{ order.total_amount | currency }}</div>
+      </ons-col>
+      <ons-col width="50%">
+        <div class="nextStep">
+          <ons-toolbar-button ng-click="Navigator.pushPage('app/view/checkout.html')" ng-show="loggedin" class="payBtn">
+            <ons-icon icon="ion-bag"></ons-icon> Siguiente
+          </ons-toolbar-button>
+          <ons-toolbar-button ng-click="menu.setMainPage('app/view/cuenta.html')" ng-hide="loggedin" class="payBtn">
+            <ons-icon icon="ion-person"></ons-icon> Necesitas loguearte
+          </ons-toolbar-button>
+        </div>
+      </ons-col>
+    </ons-row>
   </ons-bottom-toolbar>
   <div ng-show="cartCount&gt;0">
     <ons-row>

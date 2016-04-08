@@ -23,7 +23,7 @@ moduleapp.factory("StoreLocalSvc", function(){
 
 			"viewsUrl" : "app/app-pages",
 
-			"payPalSandbox" : "AS1LaPmotXY-rYhKIwcvqdokB1hhSN817_OP4j61F3Jhxx3MbmJI61nVj6isEnJ3bnUTRt52S21oRfMG",
+			"payPalSandbox" : "AaNAb3q2ipAiLfJBiMcSTZ-cQWA_PvxhkmxhBqoZQ2z5Mys6qj9tB_euGd20tSRco2QfOkLkLVwO61Je",
 			"payPalProduction" : "YOUR_PRODUCTION_CLIENT_ID"
 		}
 		return setting;
@@ -407,6 +407,19 @@ moduleapp.factory("UsersSvc", function($q, $http, SettingSvc){
 		return deferred.promise;
 	}
 
+	function searchClientId(idnumber){
+		var deferred = $q.defer();
+		$http({
+			method: "GET",
+			url: SettingSvc.getRootUrl()+"/v1/search_client_id/"+idnumber,
+			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+		}).then(function(result){
+
+			deferred.resolve(result);
+		});
+		return deferred.promise;
+	}
+
 	function loginUser(loginInfo){
 		var deferred = $q.defer();
 		$http({
@@ -438,7 +451,99 @@ moduleapp.factory("UsersSvc", function($q, $http, SettingSvc){
 		createUser: createUser,
 		searchUser: searchUser,
 		loginUser: loginUser,
-		updateUser: updateUser
+		updateUser: updateUser,
+		searchClientId: searchClientId
 	}
 
 });
+
+
+
+
+
+moduleapp.factory("OrderItemSvc", function($q, $http, SettingSvc){
+		function create(order_item){
+			var deferred = $q.defer();
+			$http({
+	            method: "POST",
+	            data : order_item,
+	            url: SettingSvc.getRootUrl() + "/v1/order_item",
+	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+		}
+		return {
+		    create : create,
+		};
+	});
+
+
+
+moduleapp.factory("OrdersSvc", function($q, $http, SettingSvc){
+		function create(category){
+			var deferred = $q.defer();
+			$http({
+	            method: "POST",
+	            data : category,
+	            url: SettingSvc.getRootUrl() + "/v1/orders",
+	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+		}
+		function findById(id){
+			var deferred = $q.defer();
+			$http({
+	            method: "GET",
+	            url: SettingSvc.getRootUrl() + "/v1/orders/" + id,
+	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+		}
+
+		function list(){
+			var deferred = $q.defer();
+			$http({
+	            method: "GET",
+	            url: SettingSvc.getRootUrl() + "/v1/orders",
+	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+		}
+		function items(id){
+			var deferred = $q.defer();
+			$http({
+	            method: "GET",
+	            url: SettingSvc.getRootUrl() + "/v1/order_items/" + id,
+	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+		}
+		function search(search_text){
+			var deferred = $q.defer();
+			$http({
+	            method: "GET",
+	            url: SettingSvc.getRootUrl() + "/v1/search_orders/" + search_text,
+	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+		}
+
+		return {
+		    create : create,
+		    findById : findById,
+		    list : list,
+		    items : items
+		};
+	});

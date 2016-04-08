@@ -9,12 +9,15 @@ ons-page(ng-controller="CarritoCtrl").Cart
         ons-toolbar-button(ng-click="menu.setMainPage('app/view/portada.html')"): ons-icon(icon="ion-android-bar")
 
   ons-bottom-toolbar.navigation-bar(ng-show="cartCount>0")
-    .left.navigation-bar__left
-    .center.navigation-bar__title.amount.navigation-bar__center.totalAmount {{ order.total_amount | currency }}
-    .right.navigation-bar__right
-      ons-toolbar-button.payBtn(ng-click="Navigator.pushPage('app/view/checkout.html')")
-        ons-icon(icon="ion-bag")
-        |  Siguiente
+    ons-row
+      ons-col(width="50%"): .totalAmount {{ order.total_amount | currency }}
+      ons-col(width="50%"): .nextStep
+        ons-toolbar-button.payBtn(ng-click="Navigator.pushPage('app/view/checkout.html')", ng-show="loggedin")
+          ons-icon(icon="ion-bag")
+          |  Siguiente
+        ons-toolbar-button.payBtn(ng-click="menu.setMainPage('app/view/cuenta.html')", ng-hide="loggedin")
+          ons-icon(icon="ion-person")
+          |  Necesitas loguearte
 
   div(ng-show="cartCount>0")
     ons-row: ons-col.instrucciones Desliza hacia la izquierda para eliminar productos.

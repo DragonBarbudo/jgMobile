@@ -432,7 +432,7 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
     if($scope.signin.email){
       UsersSvc.searchUser($scope.signin.email).then(function(result){
         //console.log(result.data.length);
-        if(result.data.length>0){
+        if(result.data){
           $scope.errorUsuario = 'Este correo ya esta registrado';
         } else {
           $scope.errorUsuario = false;
@@ -462,18 +462,78 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
         $scope.errorLogin = false;
         $rootScope.loggedin = true;
         $rootScope.userApp = result.data;
+        console.log(result.data);
       }
     });
   }
 
 
   $scope.fbLogin = function(){
-    hello('facebook').login({ scope: 'email' });
+    hello('facebook').login({ scope: 'email'}).then(function(rLogin){
+      hello('facebook').api('/me').then(function(r){
+        loginWithNetwork(r, rLogin);
+      });
+    });
   }//fbLogin
 
   $scope.googleLogin = function(){
-    hello('google').login({ scope: 'email' });
+    hello('google').login({ scope: 'email' }, function(e){
+      console.log(e);
+    });
   }
+
+
+
+  function loginWithNetwork(r, rLogin){
+    //Validate Client_id
+    UsersSvc.searchClientId(r.id).then(function(resultC){
+      if(resultC.data){
+        //Exists:TRUE | Then SIGNIN
+        console.log('Client ID Exists. Signing In');
+        $rootScope.userApp = resultC.data;
+        $rootScope.loggedin = true;
+      } else {
+        //Exists:FALSE | Check if previous email
+        console.log('Client ID null. Searching by Email');
+        UsersSvc.searchUser(r.email).then(function(resultE){
+          if(resultE.data){
+            //Previous UserEmail: TRUE | Update & SIGNIN
+              console.log('Client Email Exists. Updating with Network & Signing In');
+              console.log(resultE.data.name);
+              $rootScope.userApp = resultE.data;
+              $rootScope.userApp.network= rLogin.network;
+              $rootScope.userApp.access_token= rLogin.authResponse.access_token;
+              $rootScope.userApp.client_id= r.id;
+              $rootScope.loggedin = true;
+              //console.log($rootScope.userApp);
+              UsersSvc.updateUser($rootScope.userApp, $rootScope.userApp.id).then(function(updatedResult){
+                console.log(updatedResult);
+              });
+
+          } else {
+            //Previous UserEmail: FALSE | SIGNUP
+            console.log('New User. Signing Up');
+            $scope.newUser = {};
+            $scope.newUser.name = r.name;
+            $scope.newUser.email = r.email;
+            $scope.newUser.network= rLogin.network;
+            $scope.newUser.access_token= rLogin.authResponse.access_token;
+            $scope.newUser.client_id= r.id;
+            UsersSvc.createUser($scope.newUser).then(function(result){
+              if(result.data){
+                $rootScope.loggedin = true;
+                $rootScope.userApp = $scope.newUser;
+                $rootScope.userApp.id = result.data;
+              }
+            });
+          } // ends signup with network
+        });
+      }
+    });
+
+  }
+
+
 
   $scope.logout = function(){
     hello('facebook').logout();

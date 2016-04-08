@@ -52,11 +52,14 @@ moduleapp.run(function($rootScope){
   $rootScope.userApp.picture;
 
   //hello.init({ facebook : '613671772113193', google: '473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com' }, { redirect_uri:'http://mobile.prototipo.xyz/redirect.html' });
-  //hello.init({ facebook : '613690458777991' }, { redirect_uri:'redirect.html' });
+  hello.init({
+    facebook : '613690458777991',
+    google: '473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com'
+   }, { redirect_uri:'redirect.html' });
 
   //hello('facebook').login({ scope: 'email' });
 
-  hello.on('auth.login', function(auth) {
+  /*hello.on('auth.login', function(auth) {
     if(auth){
       $rootScope.loggedin   = true;
       $rootScope.userApp.client     = auth.authResponse.client_id;
@@ -72,6 +75,8 @@ moduleapp.run(function($rootScope){
     });
 
   });
+  */
+
 });
 
 
