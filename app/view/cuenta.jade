@@ -78,26 +78,23 @@ ons-navigator(var="Navigator")
           ons-col
         ons-row
           ons-col
-            ons-carousel(style="height:290px; width:100%;", swipeable, overscrollable, auto-scroll )
-              - for(i=0; i<4; i++)
-                ons-carousel-item
+            ons-carousel(style="height:290px; width:100%;", swipeable, overscrollable, auto-scroll, auto-refresh)
+                ons-carousel-item(ng-repeat="orden in historial | orderBy: 'id':true ")
                   .pedido
                     ons-row
-                      ons-col: .num 39194
-                      ons-col: .fecha 15-02-2016
+                      ons-col: .num {{orden.code}}
+                      ons-col: .fecha {{orden.date_time | date}}
                     ons-row
-                      .detalles(ng-scrollable style="height:80px;")
-                        | - Botella x2 <br>
-                        | - Vasos x5<br>
-                        | - Cubiertos x1<br>
-                        | - Cervilletas x1<br>
-                        | - Botella x2 <br>
-                        | - Vasos x5<br>
-                        | - Cubiertos x1<br>
-                        | - Cervilletas x1<br>
+                      .detalles
+                        div(ng-repeat="itm in orden.items ")
+                          span {{itm.product_name}} 
+                          span | x{{itm.product_quantity}}
+                        
                     ons-row
-                      ons-col: .total $405.00
-                      ons-col: .estado Por entregar
+                      ons-col: .total {{orden.total_amount | currency}}
+                      ons-col
+                        .estado.entregado(ng-hide="orden.entregado == '0' ") Entregado
+                        .estado(ng-hide="orden.entregado == '1'") Por entregar
     +bottomwaves
 
   ons-template(id="editProfile.html")

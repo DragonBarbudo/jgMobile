@@ -193,7 +193,7 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
 
 
 
-moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, CategoriesSvc, $filter) {
+moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, CategoriesSvc, $filter, $auth) {
   $scope.url = SettingSvc.getPhotoUrl();
   $scope.search="";
   $scope.searchResult = [];
@@ -256,7 +256,7 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
 
 
 
-moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, UsersSvc, StoreLocalSvc, $filter, $rootScope) {
+moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, UsersSvc, StoreLocalSvc, $filter, $rootScope, $auth, OrdersSvc) {
 
 
   $scope.choose     = true;
@@ -277,6 +277,9 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
   prevProfile.email = $scope.userEdit.email;
   prevProfile.tel = $scope.userEdit.tel;
 
+
+  $scope.historial = {};
+  $scope.historialItems = {};
 
 $('.waves').parallax({ limitY: 30, scalarX: 20 });
 
@@ -330,17 +333,58 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
         $scope.errorLogin = false;
         $rootScope.loggedin = true;
         $rootScope.userApp = result.data;
-        console.log(result.data);
+
+        cargarHistorial();
+
       }
     });
   }
 
+
+  function cargarHistorial(){
+    //Historial
+    OrdersSvc.search($rootScope.userApp.email).then(function(result){
+      //console.log(result.data);
+      $scope.historial = result.data
+      for(var i=0; i<$scope.historial.length; i++){
+        OrdersSvc.items($scope.historial[i].id).then(function(resultItems){
+             $scope.historial[i-1].items = resultItems.data;
+        });
+      }
+
+    });
+    //Termina historial
+
+  }
+
   $scope.helloLogin = function(network){
-    var hi = hello(network);
-    hi.login({ scope: 'email'}).then(function(r){
-      logHello(r);
-      return hi.api('me');
-    }).then(logHello,logHello);
+    console.log('loginSo');
+    /*
+    $auth.authenticate(network).then(function(response){
+      //loginNetwork(response);
+      console.log('ok');
+      console.log(response);
+    }).catch(function(error){
+      console.log('error');
+      console.log(error);
+    });
+    */
+
+
+//      var hi = hello(network);
+/*      hi.login({ scope: 'email'}).then(function(r){
+      console.log('login()');
+        loginNetwork(r);
+        return hi.api('me');
+      }).then(loginNetwork,loginNetwork);
+*/
+      hello(network).login({ scope: 'email'}).then(function(rLogin){
+        console.log(rLogin);
+        hello(network).api('/me').then(function(r){
+          loginNetwork(r);
+        });
+      });
+
 
   };
 
@@ -362,7 +406,8 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
 */
 
 
-  function logHello(r){
+  function loginNetwork(r){
+    console.log('loginNetwork()');
     console.log(r);
     //Validate Client_id
     UsersSvc.searchClientId(r.id).then(function(resultC){
@@ -371,6 +416,7 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
         console.log('Client ID Exists. Signing In');
         $rootScope.userApp = resultC.data;
         $rootScope.loggedin = true;
+        cargarHistorial();
       } else {
         //Exists:FALSE | Check if previous email
         console.log('Client ID null. Searching by Email');
@@ -385,6 +431,7 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
               $rootScope.userApp.access_token= ' - ';
               $rootScope.userApp.client_id= r.id;
               $rootScope.loggedin = true;
+              cargarHistorial();
               //console.log($rootScope.userApp);
               UsersSvc.updateUser($rootScope.userApp, $rootScope.userApp.id).then(function(updatedResult){
                 console.log(updatedResult);
@@ -404,6 +451,7 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
                 $rootScope.loggedin = true;
                 $rootScope.userApp = $scope.newUser;
                 $rootScope.userApp.id = result.data;
+                cargarHistorial();
               }
             });
           } // ends signup with network
@@ -441,6 +489,10 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
       console.log(result);
     });
   }
+
+
+  $
+
 
 });
 

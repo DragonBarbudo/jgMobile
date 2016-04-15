@@ -5556,6 +5556,9 @@ body {
   padding: 5px;
   text-align: center;
 }
+.instrucciones.instruccionesBig {
+  font-size: 1.2em;
+}
 .angular-google-map-container {
   height: 320px;
 }

@@ -11,14 +11,15 @@ var moduleapp = angular.module('JagerginMobileApp',
     'slick',
     'ngScrollable',
     'cfp.loadingBar',
-    'ngCordova'
+    'ngCordova',
+    'satellizer'
   ]);
 
 
 
 
 
-moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $authProvider) {
 
 
 
@@ -31,8 +32,17 @@ moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
       url: '/',
       templateUrl: 'app/view/mainNav.html',
       //controller: 'ProductsViewCtrl'
+    })
+    .state('facebook',{
+      url: '/auth/facebook'
+    })
+    .state('google',{
+      url: '/auth/google'
     });
     $urlRouterProvider.otherwise('/');
+
+
+
 });
 
 

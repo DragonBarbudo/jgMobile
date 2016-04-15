@@ -28,7 +28,7 @@ ons-page(ng-controller="CheckoutCtrl").Cart
         ui-gmap-polygon(static="true", ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", visible="p.visible", geodesic="p.geodesic", fill="p.fill", fit="false")
       
       
-  ons-row(ng-hide="isInZone"): ons-col.instrucciones Lamentablemente la ubicación de tu fiesta no se encuentra dentro de nuestra zona de repartición.
+  ons-row(ng-hide="isInZone"): ons-col.instrucciones.instruccionesBig Lamentablemente la ubicación de tu fiesta no se encuentra dentro de nuestra zona de entrega.
   
   ons-row(ng-show="isInZone")
     ons-col

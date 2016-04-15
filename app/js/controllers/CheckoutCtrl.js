@@ -1,5 +1,5 @@
 
-moduleapp.controller('CheckoutCtrl', function (CategoriesSvc, $scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, PaypalSvc, geolocation, uiGmapGoogleMapApi, $rootScope, cfpLoadingBar, UtilsSvc, OrdersSvc, $cordovaGeolocation, uiGmapIsReady) {
+moduleapp.controller('CheckoutCtrl', function (CategoriesSvc, $scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, PaypalSvc, geolocation, uiGmapGoogleMapApi, $rootScope, cfpLoadingBar, UtilsSvc, OrdersSvc, $cordovaGeolocation, uiGmapIsReady, OrderItemSvc) {
 
 
 
@@ -16,7 +16,7 @@ moduleapp.controller('CheckoutCtrl', function (CategoriesSvc, $scope, ShoppingCa
 
     $scope.order = {
   		code: UtilsSvc.createRandomCode(),
-  		date_time: UtilsSvc.formatDate(new Date(), "dddd h:mmtt d MMM yyyy"),
+  		date_time: UtilsSvc.formatDate(new Date(), "YYYY-MM-DDTHH:MM:SS"),
   		customer_name: $rootScope.userApp.name,
   		customer_email_address: $rootScope.userApp.email,
       address_coord_lat: "",

@@ -92,131 +92,29 @@
         </ons-row>
         <ons-row>
           <ons-col>
-            <ons-carousel style="height:290px; width:100%;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll">
-              <ons-carousel-item>
+            <ons-carousel style="height:290px; width:100%;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll" auto-refresh="auto-refresh">
+              <ons-carousel-item ng-repeat="orden in historial | orderBy: 'id':true ">
                 <div class="pedido">
                   <ons-row>
                     <ons-col>
-                      <div class="num">39194</div>
+                      <div class="num">{{orden.code}}</div>
                     </ons-col>
                     <ons-col>
-                      <div class="fecha">15-02-2016</div>
+                      <div class="fecha">{{orden.date_time | date}}</div>
                     </ons-col>
                   </ons-row>
                   <ons-row>
-                    <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
+                    <div class="detalles">
+                      <div ng-repeat="itm in orden.items "><span>{{itm.product_name}} </span><span>| x{{itm.product_quantity}}</span></div>
                     </div>
                   </ons-row>
                   <ons-row>
                     <ons-col>
-                      <div class="total">$405.00</div>
+                      <div class="total">{{orden.total_amount | currency}}</div>
                     </ons-col>
                     <ons-col>
-                      <div class="estado">Por entregar</div>
-                    </ons-col>
-                  </ons-row>
-                </div>
-              </ons-carousel-item>
-              <ons-carousel-item>
-                <div class="pedido">
-                  <ons-row>
-                    <ons-col>
-                      <div class="num">39194</div>
-                    </ons-col>
-                    <ons-col>
-                      <div class="fecha">15-02-2016</div>
-                    </ons-col>
-                  </ons-row>
-                  <ons-row>
-                    <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
-                    </div>
-                  </ons-row>
-                  <ons-row>
-                    <ons-col>
-                      <div class="total">$405.00</div>
-                    </ons-col>
-                    <ons-col>
-                      <div class="estado">Por entregar</div>
-                    </ons-col>
-                  </ons-row>
-                </div>
-              </ons-carousel-item>
-              <ons-carousel-item>
-                <div class="pedido">
-                  <ons-row>
-                    <ons-col>
-                      <div class="num">39194</div>
-                    </ons-col>
-                    <ons-col>
-                      <div class="fecha">15-02-2016</div>
-                    </ons-col>
-                  </ons-row>
-                  <ons-row>
-                    <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
-                    </div>
-                  </ons-row>
-                  <ons-row>
-                    <ons-col>
-                      <div class="total">$405.00</div>
-                    </ons-col>
-                    <ons-col>
-                      <div class="estado">Por entregar</div>
-                    </ons-col>
-                  </ons-row>
-                </div>
-              </ons-carousel-item>
-              <ons-carousel-item>
-                <div class="pedido">
-                  <ons-row>
-                    <ons-col>
-                      <div class="num">39194</div>
-                    </ons-col>
-                    <ons-col>
-                      <div class="fecha">15-02-2016</div>
-                    </ons-col>
-                  </ons-row>
-                  <ons-row>
-                    <div ng-scrollable="ng-scrollable" style="height:80px;" class="detalles">
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
-                      - Botella x2 <br>
-                      - Vasos x5<br>
-                      - Cubiertos x1<br>
-                      - Cervilletas x1<br>
-                    </div>
-                  </ons-row>
-                  <ons-row>
-                    <ons-col>
-                      <div class="total">$405.00</div>
-                    </ons-col>
-                    <ons-col>
-                      <div class="estado">Por entregar</div>
+                      <div ng-hide="orden.entregado == '0' " class="estado entregado">Entregado</div>
+                      <div ng-hide="orden.entregado == '1'" class="estado">Por entregar</div>
                     </ons-col>
                   </ons-row>
                 </div>

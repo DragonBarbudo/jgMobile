@@ -856,6 +856,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/app\/js\/satellizer.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/satellizer.js",
+		"outputAbbreviatedPath": "\/app\/js\/min\/satellizer-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/app\/js\/services.js": {
 		"fileType": 64,
 		"ignore": 1,

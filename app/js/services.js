@@ -1,6 +1,6 @@
 moduleapp.factory("SettingSvc", function(){
 	//Your Website URL
-	var url = 'https://dbo.space/jagergin';
+	var url = 'http://jagergin.com';
 	function getRootUrl(){
 		return url + '/cms/api';
 	}
@@ -556,7 +556,8 @@ moduleapp.factory("OrdersSvc", function($q, $http, SettingSvc){
 		    createOrder : createOrder,
 		    findById : findById,
 		    list : list,
-		    items : items
+		    items : items,
+				search: search
 		};
 	});
 
