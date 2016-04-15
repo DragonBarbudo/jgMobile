@@ -17,7 +17,7 @@ ons-page(ng-controller="BusquedaCtrl")
       ons-list
         ons-list-item(ng-repeat="prod in products | orderBy:'name'").product
           ons-row
-            ons-col(width="70px"): .thumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
+            ons-col(width="70px"): .thumb: img(ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
             ons-col
               .name {{prod.name}}
               .description {{prod.description}} | {{ prod.categoryName }}

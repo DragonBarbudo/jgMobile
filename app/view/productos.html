@@ -42,7 +42,7 @@
         <ons-list-item ng-repeat="prod in products | orderBy:'name'" class="product">
           <ons-row>
             <ons-col width="70px">
-              <div class="thumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
+              <div class="thumb"><img ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
             </ons-col>
             <ons-col>
               <div class="name">{{ prod.name =  prod.name.replace(categoryName, '') }}</div>
@@ -75,7 +75,7 @@
   <ons-row ng-show="grid" class="productsGrid">
     <ons-col ng-repeat="prod in products | orderBy:'name'" width="46%" class="product">
       <ons-row>
-        <div class="bigthumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
+        <div class="bigthumb"><img ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
         <div class="name">{{prod.name}}</div>
         <ons-row>
           <ons-col>
