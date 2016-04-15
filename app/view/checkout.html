@@ -37,15 +37,15 @@
   <ons-row ng-show="isInZone">
     <ons-col>
       <form>
-        <input type="text" placeholder="Dirección" ng-model="order.address.general" class="address"/>
-        <input type="text" placeholder="Nº Interior, Departamento, Color, etc." ng-model="order.address.interior"/>
-        <input type="text" placeholder="Referencias de la ubicación" ng-model="order.address.referencias"/>
+        <input type="text" placeholder="Dirección" ng-model="order.address_general" class="address"/>
+        <input type="text" placeholder="Nº Interior, Departamento, Color, etc." ng-model="order.address_interior"/>
+        <input type="text" placeholder="Referencias de la ubicación" ng-model="order.address_referencias"/>
         <input type="text" placeholder="Notas" ng-model="order.notes"/>
-        <ons-row ng-hide="order.address.inmediato">
+        <ons-row ng-hide="order.entrega_inmediata">
           <ons-col></ons-col>
           <ons-col width="80%">
             <label>Selecciona la hora de entrega</label>
-            <input type="time" placeholder="hr:min" pattern="^[0-1]?[0-9]]"/>
+            <input type="time" placeholder="hr:min" pattern="^[0-1]?[0-9]]" ng-model="order.entrega_hora"/>
           </ons-col>
           <ons-col></ons-col>
         </ons-row>
@@ -53,7 +53,7 @@
           <ons-col></ons-col>
           <ons-col width="80%">
             <label>
-              <ons-switch var="inmediatoBtn" ng-model="order.address.inmediato" checked="checked"></ons-switch>¿Entrega inmediata?
+              <ons-switch var="inmediatoBtn" ng-model="order.entrega_inmediata" checked="checked"></ons-switch>¿Entrega inmediata?
             </label>
           </ons-col>
         </ons-row>
@@ -67,7 +67,7 @@
     <ons-row>
       <ons-col></ons-col>
       <ons-col width="80%">
-        <ons-button ng-click="" modifier="large--cta"><i class="fa fa-paypal"> </i>Pagar</ons-button>
+        <ons-button ng-click="pay()" modifier="large--cta"><i class="fa fa-paypal"> </i>Pagar</ons-button>
       </ons-col>
       <ons-col></ons-col>
     </ons-row>

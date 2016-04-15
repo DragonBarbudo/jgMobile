@@ -1,105 +1,112 @@
 include mixins
+ons-navigator(var="Navigator") 
 
-ons-page(ng-controller="CuentaCtrl").account
-  ons-toolbar
-    .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
-    .center Tu cuenta
-    //.right: +toolbar-right
-  
-  
-  div(ng-hide="loggedin").signIn
-    ons-row(ng-show="choose")
-      ons-col
-      ons-col
-        .logo: img(src="app/img/jagergin.svg", alt="")
-        p ¡Que la fiesta nunca termine!
-        .buttons
-          ons-button.signupBtn(ng-click="signUpForm=true; choose=false;") Regístrate
-          ons-button.signInBtn(ng-click="signInForm=true; choose=false;") ¿Ya tienes cuenta?
-      ons-col
+  ons-page(ng-controller="CuentaCtrl").account
+    ons-toolbar
+      .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
+      .center Tu cuenta
+      .right: +toolbar-right
     
-    ons-row(ng-show="signUpForm").signUpArea
-      ons-col
-      ons-col
-        div.fa.fa-facebook
-        ons-button.facebookIn(ng-click="fbLogin()") Ingresar con Facebook
-        div.fa.fa-google-plus
-        ons-button.googleIn(ng-click="googleLogin()") Ingresar con Google+ 
-        p - o - 
-        form
-          input(type="email", ng-model="signin.email", placeholder="Correo electrónico", ng-blur="checkEmail()", ng-change="validator()").text-input.text-input--underbar
-          label(ng-show="errorUsuario").errorUsuario {{ errorUsuario }}
-          input(type="text", ng-model="signin.name", placeholder="Nombre", ng-change="validator()").text-input.text-input--underbar
-          input(type="tel", ng-model="signin.tel", placeholder="Teléfono móvil", ng-change="validator()").text-input.text-input--underbar
-          input(type="password", ng-model="signin.password", placeholder="Contraseña", ng-change="validator()").text-input.text-input--underbar
-          input(type="password", ng-model="signin.password2", placeholder="Confirmar contraseña", ng-change="validator()").text-input.text-input--underbar
-          label(ng-show="errorPass").errorUsuario {{ errorPass }}
-          ons-button.signInBtn(ng-click="signup()", ng-show="allValid") Crear cuenta
-          p.terms Al crear una cuenta aceptas los 
-            a(ng-click="") Términos de servicio.
-          a.cancelar(ng-click="signInForm=true; signUpForm=false;") ¿Ya tienes cuenta?  
-      ons-col
-        
-    ons-row(ng-show="signInForm").signInArea
-      ons-col
-      ons-col
-        div.fa.fa-facebook
-        ons-button.facebookIn(ng-click="fbLogin()") Ingresar con Facebook 
-        div.fa.fa-google-plus
-        ons-button.googleIn(ng-click="googleLogin()") Ingresar con Google+ 
-        p - o - 
-        form
-          input(type="email", ng-model="loggingIn.email", placeholder="Correo electrónico").text-input.text-input--underbar
-          input(type="password", ng-model="loggingIn.password", placeholder="Contraseña").text-input.text-input--underbar
-          label(ng-show="errorLogin").errorUsuario {{ errorLogin }}
-          ons-button.signInBtn(ng-click="login()") Ingresar
-          a.cancelar(ng-click="signInForm=false; signUpForm=true;") Crear una cuenta
-      ons-col
-        
-  div(ng-show="loggedin")
-    ons-row.profile
-      ons-col
-        .profileEditBtn(ng-click="editarPerfil()"): ons-icon(icon="ion-edit")
-        .profileImage: img(ng-src="http://dbo.space/jagergin/cms/api/userFiles/{{userApp.id}}.jpg", alt="")
-        .profileName {{userApp.name}}
-        .profileMail {{userApp.email}}
-        .profileCel {{userApp.tel}}
     
-    .historial
-      ons-row: ons-col.instrucciones Desliza a la derecha para ver tu historial de compras
-      ons-row
+    div(ng-hide="loggedin").signIn
+      ons-row(ng-show="choose")
         ons-col
-      ons-row
         ons-col
-          ons-carousel(style="height:290px; width:100%;", swipeable, overscrollable, auto-scroll )
-            - for(i=0; i<4; i++)
-              ons-carousel-item
-                .pedido
-                  ons-row
-                    ons-col: .num 39194
-                    ons-col: .fecha 15-02-2016
-                  ons-row
-                    .detalles(ng-scrollable style="height:80px;")
-                      | - Botella x2 <br>
-                      | - Vasos x5<br>
-                      | - Cubiertos x1<br>
-                      | - Cervilletas x1<br>
-                      | - Botella x2 <br>
-                      | - Vasos x5<br>
-                      | - Cubiertos x1<br>
-                      | - Cervilletas x1<br>
-                  ons-row
-                    ons-col: .total $405.00
-                    ons-col: .estado Por entregar
-  +bottomwaves
+          .logo: img(src="app/img/jagergin.svg", alt="")
+          p ¡Que la fiesta nunca termine!
+          .buttons
+            ons-button.signupBtn(ng-click="signUpForm=true; choose=false;") Regístrate
+            ons-button.signInBtn(ng-click="signInForm=true; choose=false;") ¿Ya tienes cuenta?
+        ons-col
+      
+      ons-row(ng-show="signUpForm").signUpArea
+        ons-col
+        ons-col
+          div.fa.fa-facebook
+          br
+          ons-button.facebookIn(ng-click="helloLogin('facebook')") Ingresar con Facebook
+          br
+          div.fa.fa-google-plus
+          br
+          ons-button.googleIn(ng-click="helloLogin('google')") Ingresar con Google+ 
+          p - o - 
+          form
+            input(type="email", ng-model="signin.email", placeholder="Correo electrónico", ng-blur="checkEmail()", ng-change="validator()").text-input.text-input--underbar
+            label(ng-show="errorUsuario").errorUsuario {{ errorUsuario }}
+            input(type="text", ng-model="signin.name", placeholder="Nombre", ng-change="validator()").text-input.text-input--underbar
+            input(type="tel", ng-model="signin.tel", placeholder="Teléfono móvil", ng-change="validator()").text-input.text-input--underbar
+            input(type="password", ng-model="signin.password", placeholder="Contraseña", ng-change="validator()").text-input.text-input--underbar
+            input(type="password", ng-model="signin.password2", placeholder="Confirmar contraseña", ng-change="validator()").text-input.text-input--underbar
+            label(ng-show="errorPass").errorUsuario {{ errorPass }}
+            ons-button.signInBtn(ng-click="signup()", ng-show="allValid") Crear cuenta
+            p.terms Al crear una cuenta aceptas los 
+              a(ng-click="") Términos de servicio.
+            a.cancelar(ng-click="signInForm=true; signUpForm=false;") ¿Ya tienes cuenta?  
+        ons-col
+          
+      ons-row(ng-show="signInForm").signInArea
+        ons-col
+        ons-col
+          div.fa.fa-facebook
+          br
+          ons-button.facebookIn(ng-click="helloLogin('facebook')") Ingresar con Facebook
+          br 
+          div.fa.fa-google-plus
+          br
+          ons-button.googleIn(ng-click="helloLogin('google')") Ingresar con Google+ 
+          p - o - 
+          form
+            input(type="email", ng-model="loggingIn.email", placeholder="Correo electrónico").text-input.text-input--underbar
+            input(type="password", ng-model="loggingIn.password", placeholder="Contraseña").text-input.text-input--underbar
+            label(ng-show="errorLogin").errorUsuario {{ errorLogin }}
+            ons-button.signInBtn(ng-click="login()") Ingresar
+            a.cancelar(ng-click="signInForm=false; signUpForm=true;") Crear una cuenta
+        ons-col
+          
+    div(ng-show="loggedin")
+      ons-row.profile
+        ons-col
+          .profileEditBtn(ng-click="editarPerfil()"): ons-icon(icon="ion-edit")
+          .profileImage: img(ng-src="http://dbo.space/jagergin/cms/api/userFiles/{{userApp.id}}.jpg", alt="")
+          .profileName {{userApp.name}}
+          .profileMail {{userApp.email}}
+          .profileCel {{userApp.tel}}
+      
+      .historial
+        ons-row: ons-col.instrucciones Desliza a la derecha para ver tu historial de compras
+        ons-row
+          ons-col
+        ons-row
+          ons-col
+            ons-carousel(style="height:290px; width:100%;", swipeable, overscrollable, auto-scroll )
+              - for(i=0; i<4; i++)
+                ons-carousel-item
+                  .pedido
+                    ons-row
+                      ons-col: .num 39194
+                      ons-col: .fecha 15-02-2016
+                    ons-row
+                      .detalles(ng-scrollable style="height:80px;")
+                        | - Botella x2 <br>
+                        | - Vasos x5<br>
+                        | - Cubiertos x1<br>
+                        | - Cervilletas x1<br>
+                        | - Botella x2 <br>
+                        | - Vasos x5<br>
+                        | - Cubiertos x1<br>
+                        | - Cervilletas x1<br>
+                    ons-row
+                      ons-col: .total $405.00
+                      ons-col: .estado Por entregar
+    +bottomwaves
 
-ons-template(id="editProfile.html")
-  ons-dialog(var="editProfileDialog", ng-controller="CuentaCtrl")
-    ons-toolbar(inline)
-      .center Edita tu perfil
-    p: input(type="text", ng-model="userEdit.name", placeholder="Nombre").text-input
-    p: input(type="email", ng-model="userEdit.email", placeholder="Correo electrónico").text-input
-    p: input(type="text", ng-model="userEdit.tel", placeholder="Teléfono móvil").text-input
-    p
-      ons-button(modifier="", ng-click="cancelUpdatePerfil(); editProfileDialog.hide()") Cancelar
-      ons-button(modifier="", ng-click="actualizarPerfil(); editProfileDialog.hide()") Guardar
+  ons-template(id="editProfile.html")
+    ons-dialog(var="editProfileDialog", ng-controller="CuentaCtrl")
+      ons-toolbar(inline)
+        .center Edita tu perfil
+      p: input(type="text", ng-model="userEdit.name", placeholder="Nombre").text-input
+      p: input(type="email", ng-model="userEdit.email", placeholder="Correo electrónico").text-input
+      p: input(type="text", ng-model="userEdit.tel", placeholder="Teléfono móvil").text-input
+      p
+        ons-button(modifier="", ng-click="cancelUpdatePerfil(); editProfileDialog.hide()") Cancelar
+        ons-button(modifier="", ng-click="actualizarPerfil(); editProfileDialog.hide()") Guardar

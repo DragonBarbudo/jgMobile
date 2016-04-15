@@ -33,22 +33,22 @@ ons-page(ng-controller="CheckoutCtrl").Cart
   ons-row(ng-show="isInZone")
     ons-col
       form
-        input(type="text", placeholder="Dirección" ng-model="order.address.general").address
-        input(type="text", placeholder="Nº Interior, Departamento, Color, etc." ng-model="order.address.interior")
-        input(type="text", placeholder="Referencias de la ubicación" ng-model="order.address.referencias")
+        input(type="text", placeholder="Dirección" ng-model="order.address_general").address
+        input(type="text", placeholder="Nº Interior, Departamento, Color, etc." ng-model="order.address_interior")
+        input(type="text", placeholder="Referencias de la ubicación" ng-model="order.address_referencias")
         input(type="text", placeholder="Notas" ng-model="order.notes")
         
-        ons-row(ng-hide="order.address.inmediato")
+        ons-row(ng-hide="order.entrega_inmediata")
           ons-col
           ons-col(width="80%")
             label Selecciona la hora de entrega
-            input(type="time", placeholder="hr:min", pattern="^[0-1]?[0-9]]")
+            input(type="time", placeholder="hr:min", pattern="^[0-1]?[0-9]]", ng-model="order.entrega_hora")
           ons-col
         ons-row
           ons-col
           ons-col(width="80%")
             label
-              ons-switch(var="inmediatoBtn", ng-model="order.address.inmediato", checked)
+              ons-switch(var="inmediatoBtn", ng-model="order.entrega_inmediata", checked)
               | ¿Entrega inmediata?
         
   .checkoutAmount(ng-show="isInZone")
@@ -56,7 +56,7 @@ ons-page(ng-controller="CheckoutCtrl").Cart
       ons-col.totalAmountCheckout {{ order.total_amount | currency }}
     ons-row
       ons-col
-      ons-col(width="80%"): ons-button(ng-click="", modifier="large--cta")
+      ons-col(width="80%"): ons-button(ng-click="pay()", modifier="large--cta")
         i.fa.fa-paypal 
         | Pagar
       ons-col

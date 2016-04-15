@@ -438,17 +438,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/app\/img\/promo1.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 209729,
-		"inputAbbreviatedPath": "\/app\/img\/promo1.jpg",
-		"outputAbbreviatedPath": "\/app\/img\/promo1.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/app\/img\/promo1.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -456,17 +445,6 @@
 		"initialSize": 628945,
 		"inputAbbreviatedPath": "\/app\/img\/promo1.png",
 		"outputAbbreviatedPath": "\/app\/img\/promo1.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/app\/img\/promo2.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 150880,
-		"inputAbbreviatedPath": "\/app\/img\/promo2.jpg",
-		"outputAbbreviatedPath": "\/app\/img\/promo2.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -554,6 +532,39 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/app\/js\/controllers.js",
 		"outputAbbreviatedPath": "\/app\/js\/min\/controllers-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/app\/js\/controllers\/CarritoCtrl.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/controllers\/CarritoCtrl.js",
+		"outputAbbreviatedPath": "\/app\/js\/controllers\/min\/CarritoCtrl-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/app\/js\/controllers\/CheckoutCtrl.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/controllers\/CheckoutCtrl.js",
+		"outputAbbreviatedPath": "\/app\/js\/controllers\/min\/CheckoutCtrl-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
+	"\/app\/js\/gmapStyle.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/gmapStyle.js",
+		"outputAbbreviatedPath": "\/app\/js\/min\/gmapStyle-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
@@ -779,6 +790,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/app\/js\/lib\/ngCordova.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/lib\/ngCordova.js",
+		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/ngCordova-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/app\/js\/lib\/ngGeolocation.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -952,6 +974,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/app\/view\/cuenta.jade",
 		"outputAbbreviatedPath": "\/app\/view\/cuenta.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0
+		},
+	"\/app\/view\/gracias-por-compra.jade": {
+		"compileDebug": 1,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/view\/gracias-por-compra.jade",
+		"outputAbbreviatedPath": "\/app\/view\/gracias-por-compra.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0

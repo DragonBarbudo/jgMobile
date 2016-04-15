@@ -4996,7 +4996,7 @@ body {
   top: 0;
 }
 .centralLogo {
-  margin-top: 10px;
+  margin: 10px auto 0 auto;
   width: 120px;
 }
 .portada .page__background {
@@ -5779,12 +5779,18 @@ body {
   background: #2B3439;
 }
 .searchBar input {
-  width: 100%;
+  width: 85%;
   -webkit-animation-name: borderColorAnimation;
   -webkit-animation-duration: 4s;
   -webkit-transform-origin: 50% 50%;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
+  float: left;
+}
+.searchBar ons-button {
+  float: right;
+  background: #DD062C;
+  line-height: 0.5em;
 }
 .account .page__background {
   background: #202325;

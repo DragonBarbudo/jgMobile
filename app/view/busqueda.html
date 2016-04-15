@@ -15,12 +15,15 @@
   <ons-row>
     <ons-col class="searchBar">
       <input type="text" placeholder="Buscar producto" ng-model="search" class="search-input"/>
+      <ons-button ng-click="buscarProducto()">
+        <ons-icon icon="ion-search"></ons-icon>
+      </ons-button>
     </ons-col>
   </ons-row>
   <ons-row class="productsList">
     <ons-col>
       <ons-list>
-        <ons-list-item ng-repeat="prod in products | filter: search | orderBy:'name'" class="product">
+        <ons-list-item ng-repeat="prod in products | orderBy:'name'" class="product">
           <ons-row>
             <ons-col width="70px">
               <div class="thumb"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
@@ -31,7 +34,7 @@
               <div class="price"> <span class="qtyTxt">{{prod.quantity}}x  </span><span>{{prod.new_price * prod.quantity | currency}}</span></div>
             </ons-col>
             <ons-col ng-hide="InCart(prod.refId)" width="50px">
-              <select ng-change="prod.quantity=prod.quantitySelect" ng-model="prod.quantitySelect" ng-init="prod.quantitySelect=1" ng-options="ct for ct in cantidades" class="selectQty"></select>
+              <select ng-model="prod.quantity" ng-options="ct for ct in cantidades track by ct" class="selectQty"></select>
             </ons-col>
             <ons-col width="70px" ng-hide="InCart(prod.refId)" class="cartBtn">
               <ons-button ng-click="addToCart(prod)">

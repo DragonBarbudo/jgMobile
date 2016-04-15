@@ -49,7 +49,7 @@
                     <div class="price">{{prod.new_price | currency }}</div>
                   </ons-col>
                   <ons-col class="qty">
-                    <select ng-change="prod.quantity=prod.quantitySelect" ng-model="prod.quantitySelect" ng-init="prod.quantitySelect=prod.quantity" ng-options="ct for ct in cantidades" class="selectQty"></select>
+                    <select ng-change="setQty(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-model="prod.quantity" ng-options="ct for ct in cantidades track by ct" class="selectQty"></select>
                     <!--ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")-->
                     <!--ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")-->
                   </ons-col>

@@ -1,8 +1,8 @@
 
-moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, geolocation, $location, $anchorScroll, $document){
+moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCartSvc, $rootScope, uiGmapGoogleMapApi, uiGmapIsReady, geolocation, $location, $anchorScroll, $document, $cordovaGeolocation, cfpLoadingBar){
 
 
-//  menu.setMainPage('app/view/cuenta.html');
+  //Navigator.pushPage('app/view/checkout.html');
 
   $('.waves').parallax({ limitY: 30, scalarX: 20 });
 
@@ -51,41 +51,61 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
 
 
 
-  geolocation.getLocation().then(function(data){
-    var geocoder = new google.maps.Geocoder();
-    uiGmapGoogleMapApi.then(function(maps) {
-      $scope.coords = { lat:data.coords.latitude, long: data.coords.longitude };
+  console.log('running');
+
+
+if(!$rootScope.zona){
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: true, maximumAge: 0};
+  $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+      cfpLoadingBar.start();
+      var lat  = position.coords.latitude;
+      var long = position.coords.longitude;
+
+      uiGmapGoogleMapApi.then(function(maps) {
         $scope.map = {
-            center: { latitude: $scope.coords.lat, longitude: $scope.coords.long },
+            center: { latitude: lat, longitude: long },
           zoom: 11,
           options: {
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: false,
-            streetViewControl: false
+            streetViewControl: false,
+            styles: gmapStyle
           }
-        }
+        } //map
+
         $scope.polygons = zonaJagergin;
         $scope.marker = [ {id:0, options: { icon:'app/img/icon_marker.png' },
-          coords: { latitude: $scope.coords.lat, longitude: $scope.coords.long
-          }
-        }];
+          coords: { latitude: lat, longitude: long }
+        }]; //marker
 
         // ¿INSIDE JAGERGIN ZONE?
         if(!$rootScope.zona){
           var nupaths = { path:[ ] };
           for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
-          var point = new google.maps.LatLng($scope.coords.lat, $scope.coords.long);
+          var point = new google.maps.LatLng(lat, long);
           var area = new google.maps.Polygon( {paths: nupaths.path });
           $scope.isInZone = area.containsLatLng(point);
-        }
+        } // Inside
 
-    }); //ends uiGmapGoogleMapApi
 
-  }); //ends geolocation
+      });
+
+
+    }, function(err) {
+      // error
+      alert('Debes tener la ubicación activa en tu dispositivo. Ingresa a los ajustes de tu dispositivo.');
+      console.log(err);
+    });
+
+    uiGmapIsReady.promise(1).then(function(instances){
+      cfpLoadingBar.complete();
+    });
+}
+
 
 
   $scope.scrollBottom = function(){
-    console.log('scrooooll');
     $anchorScroll('thebottom');
   }
 
@@ -165,176 +185,9 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
 
 
 
-moduleapp.controller('CarritoCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, PaypalSvc, geolocation) {
-    $scope.total = [];
-
-    $scope.cartItems = ShoppingCartSvc.getCart();
-    $scope.url = SettingSvc.getPhotoUrl();
-    $scope.order = [];
-    $scope.order.total_amount;
-    $scope.cartCount;
-
-    $scope.carous = [];
-
-    $scope.cantidades = [1,2,3,4,5,6,7,8,9,10];
-
-
-    getTotalAmount();
-
-
-    function updateCart(){
-  		$scope.cartItems = ShoppingCartSvc.getCart();
-      getTotalAmount();
-  	}
-
-    function getTotalAmount(){
-      $scope.order.total_amount = 0;
-  		for(var i=0;i<$scope.cartItems.length;i++){
-        $scope.cartItems[i].subTotal= $scope.cartItems[i].quantity * $scope.cartItems[i].new_price;
-  			$scope.order.total_amount += $scope.cartItems[i].subTotal;
-  		}
-    }
-
-    $scope.increaseQuantity_tap = function(item){
-    	ShoppingCartSvc.increaseQuantity(item);
-      item.subTotal = item.quantity * item.new_price;
-    	updateCart();
-    }
-    $scope.decreaseQuantity_tap = function(item, qty, itemindx){
-    	ShoppingCartSvc.decreaseQuantity(item);
-      item.subTotal = item.quantity * item.new_price;
-    	updateCart();
-      if(qty == 1){
-        $scope[itemindx].next();
-      }
-    }
-
-    $scope.removeFromCart = function(item){
-      ShoppingCartSvc.removeItem(item);
-      updateCart();
-    }
-
-    $scope.totalAmount = function(){
-  		$scope.order.total_amount = 0;
-  		for(var i=0;i<$scope.cartItems.length;i++){
-  			$scope.order.total_amount += $scope.cartItems[i].subTotal;
-  		}
-  		return $scope.order.total_amount;
-  	}
-
-    $scope.$watch(function () {
-         return ShoppingCartSvc.count();
-       },
-        function() {
-          $scope.cartCount = ShoppingCartSvc.count();
-      }, true);
 
 
 
-
-
-});
-
-
-
-
-moduleapp.controller('CheckoutCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, PaypalSvc, geolocation, uiGmapGoogleMapApi, $rootScope, cfpLoadingBar) {
-    $scope.total = [];
-
-    $scope.cartItems = ShoppingCartSvc.getCart();
-    $scope.url = SettingSvc.getPhotoUrl();
-    $scope.order = [];
-    $scope.order.total_amount;
-    $scope.cartCount;
-
-    $scope.address="";
-    $scope.geocoder = new google.maps.Geocoder();
-
-    getTotalAmount();
-
-    $scope.totalAmount = function(){
-  		$scope.order.total_amount = 0;
-  		for(var i=0;i<$scope.cartItems.length;i++){
-  			$scope.order.total_amount += $scope.cartItems[i].subTotal;
-  		}
-  		return $scope.order.total_amount;
-  	}
-
-    function getTotalAmount(){
-      $scope.order.total_amount = 0;
-  		for(var i=0;i<$scope.cartItems.length;i++){
-        $scope.cartItems[i].subTotal= $scope.cartItems[i].quantity * $scope.cartItems[i].new_price;
-  			$scope.order.total_amount += $scope.cartItems[i].subTotal;
-  		}
-    }
-
-    $scope.checkoutPosition;
-
-
-
-    geolocation.getLocation().then(function(data){
-      var geocoder = new google.maps.Geocoder();
-      uiGmapGoogleMapApi.then(function(maps) {
-      setTimeout(function(){ $('.Cart .gm-style').append('<div class="centerPin"><img src="app/img/icon_marker.png"></div>'); }, 1000);
-        $scope.coords = { lat:data.coords.latitude, lng: data.coords.longitude };
-          $scope.map = {
-              center: { latitude: $scope.coords.lat, longitude: $scope.coords.lng },
-            zoom: 11,
-            options: {
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              mapTypeControl: false,
-              streetViewControl: false
-            },
-            events:{
-              dragend: function(e){
-
-                var point = e.center;
-                $scope.isInZone = area.containsLatLng(point);
-                if($scope.isInZone){ trackLocation($scope.map.center.latitude, $scope.map.center.longitude); }
-              }
-            }
-          }
-          $scope.polygons = zonaJagergin;
-
-          // ¿INSIDE JAGERGIN ZONE?
-          var nupaths = { path:[ ] };
-          for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
-          var area = new google.maps.Polygon( {paths: nupaths.path });
-          var point = new google.maps.LatLng($scope.coords.lat, $scope.coords.lng);
-          $scope.isInZone = area.containsLatLng(point);
-          if($scope.isInZone){ trackLocation($scope.coords.lat, $scope.coords.lng); }
-      }); //ends uiGmapGoogleMapApi
-
-    }); //ends geolocation
-
-
-    $scope.order.address = {};
-    $scope.order.address.inmediato = true;
-    /*
-    $scope.hrentrega = function(){
-      $scope.order.address.inmediato = inmediato.isChecked();
-      console.log($scope.order.address.inmediato);
-    }
-*/
-    function trackLocation(lat, lng){
-      cfpLoadingBar.start();
-      $scope.geocoder.geocode({ 'latLng': new google.maps.LatLng(lat, lng) }, function (results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-              if (results[1]) {
-                  $scope.order.address.general = results[0].formatted_address;
-                  cfpLoadingBar.complete();
-              } else {
-                  $scope.order.address.general =  'No encontramos tu dirección';
-                  cfpLoadingBar.complete()
-              }
-          } else {
-              $scope.order.address.general =  'Error: ' + status;
-          }
-      });
-    }
-
-
-});
 
 
 
@@ -364,6 +217,21 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
   	});
 
   });
+
+  $scope.buscarProducto = function(){
+    if($scope.search!=""){
+      ProductsSvc.searchByName($scope.search).then(function(resultPrd){
+        CategoriesSvc.list().then(function(resultCat){
+          $scope.products = resultPrd.data;
+      		$scope.categories = resultCat.data;
+          for(var i = 0; i<$scope.products.length; i++){
+            var found = $filter('filter')($scope.categories, {id:$scope.products[i].categories_id}, true);
+            $scope.products[i].categoryName = found[0].name;
+          }
+      	});
+      });
+    }
+  }
 
   $scope.addToCart = function(theItem){
     ShoppingCartSvc.addItem(theItem);
@@ -467,13 +335,23 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
     });
   }
 
+  $scope.helloLogin = function(network){
+    var hi = hello(network);
+    hi.login({ scope: 'email'}).then(function(r){
+      logHello(r);
+      return hi.api('me');
+    }).then(logHello,logHello);
+
+  };
+
+/*
 
   $scope.fbLogin = function(){
     hello('facebook').login({ scope: 'email'}).then(function(rLogin){
-      hello('facebook').api('/me').then(function(r){
-        loginWithNetwork(r, rLogin);
-      });
-    });
+
+
+
+    }).then(loginWithNetwork, loginWithNetwork);
   }//fbLogin
 
   $scope.googleLogin = function(){
@@ -481,10 +359,11 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
       console.log(e);
     });
   }
+*/
 
 
-
-  function loginWithNetwork(r, rLogin){
+  function logHello(r){
+    console.log(r);
     //Validate Client_id
     UsersSvc.searchClientId(r.id).then(function(resultC){
       if(resultC.data){
@@ -501,8 +380,9 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
               console.log('Client Email Exists. Updating with Network & Signing In');
               console.log(resultE.data.name);
               $rootScope.userApp = resultE.data;
-              $rootScope.userApp.network= rLogin.network;
-              $rootScope.userApp.access_token= rLogin.authResponse.access_token;
+              $rootScope.userApp.network= r.network;
+              //$rootScope.userApp.access_token= rLogin.authResponse.access_token;
+              $rootScope.userApp.access_token= ' - ';
               $rootScope.userApp.client_id= r.id;
               $rootScope.loggedin = true;
               //console.log($rootScope.userApp);
@@ -516,8 +396,8 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
             $scope.newUser = {};
             $scope.newUser.name = r.name;
             $scope.newUser.email = r.email;
-            $scope.newUser.network= rLogin.network;
-            $scope.newUser.access_token= rLogin.authResponse.access_token;
+            $scope.newUser.network= r.network;
+            $scope.newUser.access_token= ' - ';
             $scope.newUser.client_id= r.id;
             UsersSvc.createUser($scope.newUser).then(function(result){
               if(result.data){

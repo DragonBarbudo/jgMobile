@@ -9,11 +9,13 @@ ons-page(ng-controller="BusquedaCtrl")
   ons-row
     ons-col.searchBar
       input(type="text", placeholder="Buscar producto", ng-model="search").search-input
+      ons-button(ng-click="buscarProducto()"): ons-icon(icon="ion-search")
+      
 
   ons-row.productsList
     ons-col
       ons-list
-        ons-list-item(ng-repeat="prod in products | filter: search | orderBy:'name'").product
+        ons-list-item(ng-repeat="prod in products | orderBy:'name'").product
           ons-row
             ons-col(width="70px"): .thumb: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
             ons-col
@@ -24,7 +26,7 @@ ons-page(ng-controller="BusquedaCtrl")
                 span {{prod.new_price * prod.quantity | currency}}
             
             ons-col(ng-hide="InCart(prod.refId)", width="50px")
-              select(ng-change="prod.quantity=prod.quantitySelect", ng-model="prod.quantitySelect", ng-init="prod.quantitySelect=1", ng-options="ct for ct in cantidades").selectQty
+              select(ng-model="prod.quantity", ng-options="ct for ct in cantidades track by ct").selectQty
             ons-col(width="70px", ng-hide="InCart(prod.refId)").cartBtn: ons-button(ng-click="addToCart(prod)"): ons-icon(icon="ion-ios-cart-outline")
             ons-col(width="70px", ng-show="InCart(prod.refId)").cartBtn: ons-button.isInCart: ons-icon(icon="ion-ios-checkmark-empty")
           

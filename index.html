@@ -7,10 +7,12 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--meta(http-equiv="Content-Security-Policy", content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *")-->
     <link rel="stylesheet" type="text/css" href="app/css/index.css">
   </head>
   <body ng-app="JagerginMobileApp">
     <div ui-view>   </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9hJDD0-6XD2GX4HkmpWqf6TrkbLxxsxo&amp;libraries=geometry"></script>
     <script src="app/js/lib/loadash.js"></script>
     <script src="app/js/lib/angular.min.js"></script>
     <script src="app/js/lib/jquery.min.js"></script>
@@ -27,16 +29,22 @@
     <script src="app/js/lib/onsenui.min.js"></script>
     <script src="app/js/lib/slick.js"></script>
     <script src="app/js/lib/angular-slick.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9hJDD0-6XD2GX4HkmpWqf6TrkbLxxsxo&amp;libraries=geometry"></script>
     <script src="app/js/lib/maps-point-in-polygon.js"></script>
     <script src="app/js/lib/ngScrollable.js"></script>
     <script src="app/js/lib/hello.js"></script>
     <script src="app/js/lib/jquery.parallax.js"></script>
-    <!--script(type='text/javascript', src='cordova.js')-->
+    <script src="app/js/lib/ngCordova.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/paypal-mobile-js-helper.js"> </script>
     <script type="text/javascript" src="app/js/index.js"></script>
+    <script src="app/js/gmapStyle.js"></script>
     <script src="app/js/zonaJagergin.js"></script>
     <script src="app/js/app.js"></script>
     <script src="app/js/services.js"></script>
+    <!--Controllers-->
+    <script src="app/js/controllers/CarritoCtrl.js"> </script>
+    <script src="app/js/controllers/CheckoutCtrl.js"></script>
     <script src="app/js/controllers.js"></script>
+    <script src="http://192.168.0.5:8080/target/target-script-min.js#anonymous"></script>
   </body>
 </html>

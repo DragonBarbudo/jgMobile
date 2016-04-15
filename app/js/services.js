@@ -1,6 +1,6 @@
 moduleapp.factory("SettingSvc", function(){
 	//Your Website URL
-	var url = 'http://dbo.space/jagergin';
+	var url = 'https://dbo.space/jagergin';
 	function getRootUrl(){
 		return url + '/cms/api';
 	}
@@ -17,14 +17,14 @@ moduleapp.factory("SettingSvc", function(){
 moduleapp.factory("StoreLocalSvc", function(){
 	function get(){
 		var setting = {
-			"currency" : "$",
+			"currency" : "MXN",
 			"logo" : "assets/images/jagergin_imago.svg",
 			"name" : "JagerGin",
 
 			"viewsUrl" : "app/app-pages",
 
 			"payPalSandbox" : "AaNAb3q2ipAiLfJBiMcSTZ-cQWA_PvxhkmxhBqoZQ2z5Mys6qj9tB_euGd20tSRco2QfOkLkLVwO61Je",
-			"payPalProduction" : "YOUR_PRODUCTION_CLIENT_ID"
+			"payPalProduction" : "AYqK95EuSPivywD5MmpASfTf-2nTMW9ExnunOde9jqQJWQo2UJH2WFOPcdb1tvz5lF_3-Z1Gq041adiB"
 		}
 		return setting;
 	}
@@ -306,6 +306,13 @@ moduleapp.factory("ShoppingCartSvc", function($window, $cookieStore){
 				}
 			}
 		}
+		function setQuantity(item, qty){
+			for(var i = 0; i < cartItems.length; i++){
+				if(cartItems[i].id == item.id){
+					cartItems[i].quantity = qty;
+				}
+			}
+		}
 		function count(){
 			if(cartItems == null)
 				return 0;
@@ -323,7 +330,8 @@ moduleapp.factory("ShoppingCartSvc", function($window, $cookieStore){
 			decreaseQuantity:decreaseQuantity,
 			count:count,
 			isExist:isExist,
-			clear: clear
+			clear: clear,
+			setQuantity : setQuantity
 		};
 	});
 
@@ -341,11 +349,11 @@ moduleapp.factory("ShoppingCartSvc", function($window, $cookieStore){
 
 	   function createPayment(total_price) {
 	     var paymentDetails = new PayPalPaymentDetails(total_price, "0.00", "0.00");
-	     var payment = new PayPalPayment(total_price, StoreLocalSvc.get().currency, "Your Orders", "Sale", paymentDetails);
+	     var payment = new PayPalPayment(total_price, StoreLocalSvc.get().currency, "Tu pedido", "Venta", paymentDetails);
 	     return payment;
 	   }
 	   function configuration() {
-	     var config = new PayPalConfiguration({merchantName: StoreLocalSvc.get().name, merchantPrivacyPolicyURL: "https://mytestshop.com/policy", merchantUserAgreementURL: "https://mytestshop.com/agreement"});
+	     var config = new PayPalConfiguration({merchantName: StoreLocalSvc.get().name, merchantPrivacyPolicyURL: "http://jagergin.com/#/aviso-de-privacidad", merchantUserAgreementURL: "http://jagergin.com/#/terminos-de-servicio", acceptCreditCards: false, languageOrLocale:'es_MX'});
 	     return config;
 	   }
 	   function onPayPalMobileInit() {
@@ -482,18 +490,22 @@ moduleapp.factory("OrderItemSvc", function($q, $http, SettingSvc){
 
 
 moduleapp.factory("OrdersSvc", function($q, $http, SettingSvc){
-		function create(category){
+		function createOrder(order){
 			var deferred = $q.defer();
 			$http({
 	            method: "POST",
-	            data : category,
-	            url: SettingSvc.getRootUrl() + "/v1/orders",
+	            data : order,
+	            url: SettingSvc.getRootUrl() + "/v1/createOrder/",
 	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
         	}).then(function (result) {
 	            deferred.resolve(result);
 	        });
 			return deferred.promise;
 		}
+
+
+
+
 		function findById(id){
 			var deferred = $q.defer();
 			$http({
@@ -541,9 +553,164 @@ moduleapp.factory("OrdersSvc", function($q, $http, SettingSvc){
 		}
 
 		return {
-		    create : create,
+		    createOrder : createOrder,
 		    findById : findById,
 		    list : list,
 		    items : items
+		};
+	});
+
+
+
+
+moduleapp.factory("UtilsSvc", function(StoreLocalSvc){
+		function hideKeyboard(){
+			var field = document.createElement('input');
+		    field.setAttribute('type', 'text');
+		    document.body.appendChild(field);
+		      setTimeout(function() {
+		          field.focus();
+		          setTimeout(function() {
+		              field.setAttribute('style', 'display:none;');
+		          }, 50);
+		      }, 50);
+		}
+		function createRandomCode()
+		{
+		    var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+		    for( var i=0; i < 5; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		    return text;
+		}
+		function formatDate(date, format, utc) {
+		    var MMMM = ["\x00", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		    var MMM = ["\x01", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		    var dddd = ["\x02", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		    var ddd = ["\x03", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+		    function ii(i, len) {
+		        var s = i + "";
+		        len = len || 2;
+		        while (s.length < len) s = "0" + s;
+		        return s;
+		    }
+
+		    var y = utc ? date.getUTCFullYear() : date.getFullYear();
+		    format = format.replace(/(^|[^\\])yyyy+/g, "$1" + y);
+		    format = format.replace(/(^|[^\\])yy/g, "$1" + y.toString().substr(2, 2));
+		    format = format.replace(/(^|[^\\])y/g, "$1" + y);
+
+		    var M = (utc ? date.getUTCMonth() : date.getMonth()) + 1;
+		    format = format.replace(/(^|[^\\])MMMM+/g, "$1" + MMMM[0]);
+		    format = format.replace(/(^|[^\\])MMM/g, "$1" + MMM[0]);
+		    format = format.replace(/(^|[^\\])MM/g, "$1" + ii(M));
+		    format = format.replace(/(^|[^\\])M/g, "$1" + M);
+
+		    var d = utc ? date.getUTCDate() : date.getDate();
+		    format = format.replace(/(^|[^\\])dddd+/g, "$1" + dddd[0]);
+		    format = format.replace(/(^|[^\\])ddd/g, "$1" + ddd[0]);
+		    format = format.replace(/(^|[^\\])dd/g, "$1" + ii(d));
+		    format = format.replace(/(^|[^\\])d/g, "$1" + d);
+
+		    var H = utc ? date.getUTCHours() : date.getHours();
+		    format = format.replace(/(^|[^\\])HH+/g, "$1" + ii(H));
+		    format = format.replace(/(^|[^\\])H/g, "$1" + H);
+
+		    var h = H > 12 ? H - 12 : H == 0 ? 12 : H;
+		    format = format.replace(/(^|[^\\])hh+/g, "$1" + ii(h));
+		    format = format.replace(/(^|[^\\])h/g, "$1" + h);
+
+		    var m = utc ? date.getUTCMinutes() : date.getMinutes();
+		    format = format.replace(/(^|[^\\])mm+/g, "$1" + ii(m));
+		    format = format.replace(/(^|[^\\])m/g, "$1" + m);
+
+		    var s = utc ? date.getUTCSeconds() : date.getSeconds();
+		    format = format.replace(/(^|[^\\])ss+/g, "$1" + ii(s));
+		    format = format.replace(/(^|[^\\])s/g, "$1" + s);
+
+		    var f = utc ? date.getUTCMilliseconds() : date.getMilliseconds();
+		    format = format.replace(/(^|[^\\])fff+/g, "$1" + ii(f, 3));
+		    f = Math.round(f / 10);
+		    format = format.replace(/(^|[^\\])ff/g, "$1" + ii(f));
+		    f = Math.round(f / 10);
+		    format = format.replace(/(^|[^\\])f/g, "$1" + f);
+
+		    var T = H < 12 ? "AM" : "PM";
+		    format = format.replace(/(^|[^\\])TT+/g, "$1" + T);
+		    format = format.replace(/(^|[^\\])T/g, "$1" + T.charAt(0));
+
+		    var t = T.toLowerCase();
+		    format = format.replace(/(^|[^\\])tt+/g, "$1" + t);
+		    format = format.replace(/(^|[^\\])t/g, "$1" + t.charAt(0));
+
+		    var tz = -date.getTimezoneOffset();
+		    var K = utc || !tz ? "Z" : tz > 0 ? "+" : "-";
+		    if (!utc) {
+		        tz = Math.abs(tz);
+		        var tzHrs = Math.floor(tz / 60);
+		        var tzMin = tz % 60;
+		        K += ii(tzHrs) + ":" + ii(tzMin);
+		    }
+		    format = format.replace(/(^|[^\\])K/g, "$1" + K);
+
+		    var day = (utc ? date.getUTCDay() : date.getDay()) + 1;
+		    format = format.replace(new RegExp(dddd[0], "g"), dddd[day]);
+		    format = format.replace(new RegExp(ddd[0], "g"), ddd[day]);
+
+		    format = format.replace(new RegExp(MMMM[0], "g"), MMMM[M]);
+		    format = format.replace(new RegExp(MMM[0], "g"), MMM[M]);
+
+		    format = format.replace(/\\(.)/g, "$1");
+
+		    return format;
+		}
+		function getObjSize(obj) {
+		    var size = 0, key;
+		    for (key in obj) {
+		        if (obj.hasOwnProperty(key)) size++;
+		    }
+		    return size;
+		}
+		function setTrueFormValidation(data){
+			var validate_data = JSON.parse(JSON.stringify(data));
+			for(var key in data){
+				validate_data[key] = true;
+			}
+			return validate_data;
+		}
+		function formValidation(data){
+			var validate_data = JSON.parse(JSON.stringify(data));
+			var isAllValidate = false;
+			var counter =0;
+			for(var key in data){
+				if(data[key] == "" || data[key] == 0 || data[key] == undefined){
+					validate_data[key] = false;
+				}
+				else
+					validate_data[key] = true;
+			}
+			for(var key in validate_data){
+				if(validate_data[key] == true){
+					counter++;
+				}
+				else
+					counter--;
+			}
+			if(counter == getObjSize(validate_data))
+				validate_data.validateAll = true;
+			else
+				validate_data.validateAll = false;
+			return validate_data;
+		}
+		return {
+		    hideKeyboard: hideKeyboard,
+		    createRandomCode: createRandomCode,
+		    formatDate : formatDate,
+		    formValidation : formValidation,
+		    getObjSize : getObjSize,
+		    setTrueFormValidation : setTrueFormValidation
 		};
 	});
