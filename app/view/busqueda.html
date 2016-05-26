@@ -14,10 +14,12 @@
   </ons-toolbar>
   <ons-row>
     <ons-col class="searchBar">
-      <input type="text" placeholder="Buscar producto" ng-model="search" class="search-input"/>
-      <ons-button ng-click="buscarProducto()">
-        <ons-icon icon="ion-search"></ons-icon>
-      </ons-button>
+      <form ng-submit="buscarProducto()">
+        <input type="text" placeholder="Buscar producto" ng-model="search" class="text-input"/>
+        <button class="button">
+          <ons-icon icon="ion-search"></ons-icon>
+        </button>
+      </form>
     </ons-col>
   </ons-row>
   <ons-row class="productsList">
@@ -29,7 +31,7 @@
               <div class="thumb"><img ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
             </ons-col>
             <ons-col>
-              <div class="name">{{prod.name}}</div>
+              <div class="name">{{ clean( prod.name ) }}</div>
               <div class="description">{{prod.description}} | {{ prod.categoryName }}</div>
               <div class="price"> <span class="qtyTxt">{{prod.quantity}}x  </span><span>{{prod.new_price * prod.quantity | currency}}</span></div>
             </ons-col>

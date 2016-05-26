@@ -51,62 +51,59 @@ moduleapp.controller('PortadaCtrl', function($scope, CategoriesSvc, ShoppingCart
 
 
 
-  console.log('running');
+$scope.clean = function(str){
+    str = str.replace( /\[(.+?)\]/g , '' );
+    return str;
+  }
 
 
 if(!$rootScope.zona){
-
+  var nupaths = { path:[ ] };
+  for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
+  var area = new google.maps.Polygon( {paths: nupaths.path });
   var posOptions = {timeout: 10000, enableHighAccuracy: true, maximumAge: 0};
-  $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
-      cfpLoadingBar.start();
-      var lat  = position.coords.latitude;
-      var long = position.coords.longitude;
-
-      uiGmapGoogleMapApi.then(function(maps) {
-        $scope.map = {
-            center: { latitude: lat, longitude: long },
-          zoom: 11,
-          options: {
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: false,
-            streetViewControl: false,
-            styles: gmapStyle
+  var geocoder = new google.maps.Geocoder();
+  $cordovaGeolocation.getCurrentPosition(posOptions).then(function (data) {
+    $scope.coords = { lat:data.coords.latitude, lng: data.coords.longitude };
+    $scope.map.control.refresh( {latitude: $scope.coords.lat, longitude: $scope.coords.lng} );
+    $scope.isInZone = area.containsLatLng(new google.maps.LatLng($scope.coords.lat, $scope.coords.lng));
+  }); //ends geolocation
+  uiGmapGoogleMapApi.then(function(maps) {
+    setTimeout(function(){ $('.zonaJagergin .gm-style').append('<div class="centerPin"><img src="app/img/icon_marker.png"></div>'); }, 2000);
+    $scope.coords = { lat:19.3981294, lng: -99.1203205 };
+      $scope.map = {
+        control : {},
+        center: { latitude: $scope.coords.lat, longitude: $scope.coords.lng },
+        zoom: 11,
+        options: {
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          mapTypeControl: false,
+          streetViewControl: false,
+          styles: gmapStyle
+        },
+        events:{
+          dragend: function(e){
+            var point = e.center;
+            $scope.isInZone = area.containsLatLng(point);
           }
-        } //map
+        }
+      }
+      $scope.polygons = zonaJagergin;
 
-        $scope.polygons = zonaJagergin;
-        $scope.marker = [ {id:0, options: { icon:'app/img/icon_marker.png' },
-          coords: { latitude: lat, longitude: long }
-        }]; //marker
-
-        // ¿INSIDE JAGERGIN ZONE?
-        if(!$rootScope.zona){
-          var nupaths = { path:[ ] };
-          for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
-          var point = new google.maps.LatLng(lat, long);
-          var area = new google.maps.Polygon( {paths: nupaths.path });
-          $scope.isInZone = area.containsLatLng(point);
-        } // Inside
-
-
-      });
-
-
-    }, function(err) {
-      // error
-      alert('Debes tener la ubicación activa en tu dispositivo. Ingresa a los ajustes de tu dispositivo.');
-      console.log(err);
-    });
+  }, function(err){
+    alert('Debes tener la ubicación activa en tu dispositivo. Modifica los ajustes.');
+    console.log(err);
+  }); //ends uiGmapGoogleMapApi
 
     uiGmapIsReady.promise(1).then(function(instances){
       cfpLoadingBar.complete();
     });
-}
+} // ENDS inZone
 
 
 
   $scope.scrollBottom = function(){
-    $anchorScroll('thebottom');
+    $('.page__content').animate({ scrollTop: 420 }, 1000);
   }
 
 
@@ -153,6 +150,8 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
 
   $scope.addToCart = function(theItem){
     ShoppingCartSvc.addItem(theItem);
+    localStorageService.set('cart',ShoppingCartSvc.getCart());
+
   }
 
 
@@ -180,6 +179,11 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
   }
 
 
+  $scope.clean = function(str){
+    str = str.replace( /\[(.+?)\]/g , '' );
+    return str;
+  }
+
 
 });
 
@@ -193,7 +197,7 @@ moduleapp.controller('ProductosCtrl', function ($scope, ShoppingCartSvc, Setting
 
 
 
-moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, CategoriesSvc, $filter, $auth) {
+moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, StoreLocalSvc, ProductsSvc, CategoriesSvc, $filter) {
   $scope.url = SettingSvc.getPhotoUrl();
   $scope.search="";
   $scope.searchResult = [];
@@ -221,20 +225,20 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
   $scope.buscarProducto = function(){
     if($scope.search!=""){
       ProductsSvc.searchByName($scope.search).then(function(resultPrd){
-        CategoriesSvc.list().then(function(resultCat){
           $scope.products = resultPrd.data;
-      		$scope.categories = resultCat.data;
+          console.log($scope.products.length);
           for(var i = 0; i<$scope.products.length; i++){
+            console.log($scope.products[i]);
             var found = $filter('filter')($scope.categories, {id:$scope.products[i].categories_id}, true);
             $scope.products[i].categoryName = found[0].name;
           }
-      	});
       });
     }
   }
 
   $scope.addToCart = function(theItem){
     ShoppingCartSvc.addItem(theItem);
+    localStorageService.set('cart',ShoppingCartSvc.getCart());
   }
 
 
@@ -252,13 +256,20 @@ moduleapp.controller('BusquedaCtrl', function ($scope, ShoppingCartSvc, SettingS
     }, true);
 
 
+    $scope.clean = function(str){
+    str = str.replace( /\[(.+?)\]/g , '' );
+    return str;
+  }
+
 });
 
 
 
-moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, UsersSvc, StoreLocalSvc, $filter, $rootScope, $auth, OrdersSvc) {
+moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc, UsersSvc, StoreLocalSvc, $filter, $rootScope, OrdersSvc, $cordovaOauth, $http, localStorageService) {
 
 
+
+  $scope.url = SettingSvc.getPhotoUrl();
   $scope.choose     = true;
   $scope.signUpForm = false;
   $scope.signInForm = false;
@@ -274,6 +285,7 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
 
   var prevProfile = {};
   prevProfile.name = $scope.userEdit.name;
+  prevProfile.lastname = $scope.userEdit.lastname;
   prevProfile.email = $scope.userEdit.email;
   prevProfile.tel = $scope.userEdit.tel;
 
@@ -281,12 +293,27 @@ moduleapp.controller('CuentaCtrl', function ($scope, ShoppingCartSvc, SettingSvc
   $scope.historial = {};
   $scope.historialItems = {};
 
-$('.waves').parallax({ limitY: 30, scalarX: 20 });
+  $scope.reloadparam = Math.random();
+
+
+  if($rootScope.userApp.name!=""){
+    cargarHistorial();
+  }
+
+$scope.cartCount;
+
+$scope.$watch(function () {
+     return ShoppingCartSvc.count();
+   },
+    function() {
+      $scope.cartCount = ShoppingCartSvc.count();
+  }, true);
 
 
   $scope.signup = function(){
     $scope.newUser = {};
     $scope.newUser.name = $scope.signin.name;
+    $scope.newUser.lastname = $scope.signin.lastname;
     $scope.newUser.password = $scope.signin.password;
     $scope.newUser.email = $scope.signin.email;
     $scope.newUser.tel = $scope.signin.tel;
@@ -313,7 +340,7 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
   }
 
   $scope.validator = function(){
-    if(!$scope.errorUsuario && $scope.signin.email && $scope.signin.name && $scope.signin.tel && $scope.signin.password && $scope.signin.password2 ){
+    if(!$scope.errorUsuario && $scope.signin.email && $scope.signin.name && $scope.signin.lastname && $scope.signin.tel && $scope.signin.password && $scope.signin.password2 ){
       if($scope.signin.password != $scope.signin.password2){
         $scope.errorPass = "No coinciden las contraseñas";
         $scope.allValid = false;
@@ -333,14 +360,16 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
         $scope.errorLogin = false;
         $rootScope.loggedin = true;
         $rootScope.userApp = result.data;
-
+        localStorageService.set('user', $rootScope.userApp);
         cargarHistorial();
-
+        loginRetorno();
       }
     });
   }
 
-
+  function loginRetorno(){
+    if($rootScope.retorno){ Navigator.pushPage('app/view/carrito.html'); $rootScope.retorno=false; }
+  }
   function cargarHistorial(){
     //Historial
     OrdersSvc.search($rootScope.userApp.email).then(function(result){
@@ -359,55 +388,62 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
 
   $scope.helloLogin = function(network){
     console.log('loginSo');
-    /*
-    $auth.authenticate(network).then(function(response){
-      //loginNetwork(response);
-      console.log('ok');
-      console.log(response);
-    }).catch(function(error){
-      console.log('error');
-      console.log(error);
-    });
-    */
 
+  if(network=='google'){
 
-//      var hi = hello(network);
-/*      hi.login({ scope: 'email'}).then(function(r){
-      console.log('login()');
-        loginNetwork(r);
-        return hi.api('me');
-      }).then(loginNetwork,loginNetwork);
-*/
-      hello(network).login({ scope: 'email'}).then(function(rLogin){
-        console.log(rLogin);
-        hello(network).api('/me').then(function(r){
-          loginNetwork(r);
-        });
+    $cordovaOauth.google('473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com', ["email"]).then(function(result) {
+      console.log(result);
+      var token = result.access_token;
+      $http.get("https://www.googleapis.com/oauth2/v2/userinfo", { params: { access_token: token, fields: "id,name,email,picture", format: "json" }}).then(function(resultME) {
+        console.log(resultME.data);
+        var user = {};
+        user.id = resultME.data.id;
+        user.name = resultME.data.name;
+        user.email = resultME.data.email;
+        user.picture = resultME.data.picture;
+        loginNetwork(user, network);
+      }, function(error) {
+          alert("Ocurrió un problema con tu perfil. Intentalo de nuevo.");
+          console.log(error);
       });
+    }, function(error) {
+        // error
+        console.log('error: ' + error);
+        alert('Error al iniciar sesión. Intente de nuevo.');
+    });
+  }
+
+  if(network=="facebook"){
+    $cordovaOauth.facebook("613671772113193", ["email"]).then(function(result) {
+            // results
+            console.log(result);
+            var token = result.access_token;
+            $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: token, fields: "id,name,email,picture", format: "json" }}).then(function(resultME) {
+              console.log(resultME.data);
+              var user = {};
+              user.id = resultME.data.id;
+              user.name = resultME.data.name;
+              user.email = resultME.data.email;
+              user.picture = resultME.data.picture.data.url;
+              loginNetwork(user, network);
+            }, function(error) {
+                alert("Ocurrió un problema con tu perfil. Intentalo de nuevo.");
+                console.log(error);
+            });
+
+        }, function(error) {
+            // error
+            console.log('error: ' + error);
+            alert('Error al iniciar sesión. Intente de nuevo.');
+        });
+  }
 
 
   };
 
-/*
-
-  $scope.fbLogin = function(){
-    hello('facebook').login({ scope: 'email'}).then(function(rLogin){
 
 
-
-    }).then(loginWithNetwork, loginWithNetwork);
-  }//fbLogin
-
-  $scope.googleLogin = function(){
-    hello('google').login({ scope: 'email' }, function(e){
-      console.log(e);
-    });
-  }
-*/
-
-
-  function loginNetwork(r){
-    console.log('loginNetwork()');
+  function loginNetwork(r, network){
     console.log(r);
     //Validate Client_id
     UsersSvc.searchClientId(r.id).then(function(resultC){
@@ -417,6 +453,8 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
         $rootScope.userApp = resultC.data;
         $rootScope.loggedin = true;
         cargarHistorial();
+        loginRetorno();
+        localStorageService.set('user', $rootScope.userApp);
       } else {
         //Exists:FALSE | Check if previous email
         console.log('Client ID null. Searching by Email');
@@ -426,15 +464,16 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
               console.log('Client Email Exists. Updating with Network & Signing In');
               console.log(resultE.data.name);
               $rootScope.userApp = resultE.data;
-              $rootScope.userApp.network= r.network;
-              //$rootScope.userApp.access_token= rLogin.authResponse.access_token;
+              $rootScope.userApp.network= network;
               $rootScope.userApp.access_token= ' - ';
               $rootScope.userApp.client_id= r.id;
               $rootScope.loggedin = true;
               cargarHistorial();
+              loginRetorno();
               //console.log($rootScope.userApp);
               UsersSvc.updateUser($rootScope.userApp, $rootScope.userApp.id).then(function(updatedResult){
                 console.log(updatedResult);
+                localStorageService.set('user', $rootScope.userApp);
               });
 
           } else {
@@ -442,16 +481,34 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
             console.log('New User. Signing Up');
             $scope.newUser = {};
             $scope.newUser.name = r.name;
+            $scope.newUser.lastname = r.last_name;
             $scope.newUser.email = r.email;
-            $scope.newUser.network= r.network;
+            $scope.newUser.network= network;
             $scope.newUser.access_token= ' - ';
             $scope.newUser.client_id= r.id;
             UsersSvc.createUser($scope.newUser).then(function(result){
               if(result.data){
-                $rootScope.loggedin = true;
                 $rootScope.userApp = $scope.newUser;
                 $rootScope.userApp.id = result.data;
-                cargarHistorial();
+
+                var picture = r.picture;
+                if(network == 'facebook'){ picture = picture+"&width=300";  }
+                if(network == 'google'){ picture = picture+"?sz=300"; }
+
+                UsersSvc.remoteImage(picture, $rootScope.userApp.id).then(function(imageResult){
+                  console.log(imageResult);
+                  $rootScope.loggedin = true;
+                  if($scope.regreso){$state.go('carrito');}
+                  $scope.reloadparam = Math.random();
+                  localStorageService.set('user', $rootScope.userApp);
+                  cargarHistorial();
+                  loginRetorno();
+
+
+                });
+
+
+
               }
             });
           } // ends signup with network
@@ -471,6 +528,7 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
     $scope.signInForm = false;
     $rootScope.loggedin = false;
     $rootScope.userApp = {};
+    localStorageService.remove('user');
   }
 
   $scope.editarPerfil = function(){
@@ -481,6 +539,7 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
 
   $scope.cancelUpdatePerfil = function(){
     $scope.userApp.name = prevProfile.name;
+    $scope.userApp.lastname = prevProfile.lastname;
     $scope.userApp.email = prevProfile.email;
     $scope.userApp.tel = prevProfile.tel;
   }
@@ -491,7 +550,18 @@ $('.waves').parallax({ limitY: 30, scalarX: 20 });
   }
 
 
-  $
+  $scope.uploadImage = function(files){
+    console.log(files[0]);
+      var fd = new FormData();
+        fd.append("image", files[0]);
+        fd.append("name", 'id_'+$scope.userApp.id);
+        console.log(fd);
+        UsersSvc.uploadImage(fd).then(function(result){
+          console.log(result);
+          $scope.reloadparam = Math.random();
+          menu.setMainPage('app/view/cuenta.html');
+        });
+    }
 
 
 });

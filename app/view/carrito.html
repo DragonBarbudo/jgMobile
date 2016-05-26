@@ -22,9 +22,7 @@
           <ons-toolbar-button ng-click="Navigator.pushPage('app/view/checkout.html')" ng-show="loggedin" class="payBtn">
             <ons-icon icon="ion-bag"></ons-icon> Siguiente
           </ons-toolbar-button>
-          <ons-toolbar-button ng-click="menu.setMainPage('app/view/cuenta.html')" ng-hide="loggedin" class="payBtn">
-            <ons-icon icon="ion-person"></ons-icon> Necesitas loguearte
-          </ons-toolbar-button>
+          <ons-toolbar-button ng-click="registroCarrito()" ng-hide="loggedin" class="payBtn">Necesitas registrarte</ons-toolbar-button>
         </div>
       </ons-col>
     </ons-row>
@@ -37,24 +35,30 @@
       <ons-col>
         <ons-list>
           <ons-list-item ng-repeat="prod in cartItems" class="product">
-            <ons-carousel style="width:100%; height: 70px;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll" var="carousel{{prod.id}}">
+            <ons-carousel style="width:100%; height: 100px;" swipeable="swipeable" overscrollable="overscrollable" auto-scroll="auto-scroll" var="carousel{{prod.id}}">
               <ons-carousel-item>
                 <ons-row>
-                  <ons-col width="70px">
+                  <ons-col width="60px">
                     <div class="thumb"><img ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg" alt=""/></div>
                   </ons-col>
                   <ons-col>
-                    <div class="name">{{prod.name}}</div>
-                    <div class="description">{{prod.description}}</div>
-                    <div class="price">{{prod.new_price | currency }}</div>
-                  </ons-col>
-                  <ons-col class="qty">
-                    <select ng-change="setQty(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-model="prod.quantity" ng-options="ct for ct in cantidades track by ct" class="selectQty"></select>
-                    <!--ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")-->
-                    <!--ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")-->
-                  </ons-col>
-                  <ons-col>
-                    <div class="priceTotal"> <span>x | </span>{{ cartItems[$index].subTotal | currency}}</div>
+                    <ons-row>
+                      <ons-col class="infoPrd">
+                        <div class="name">{{ clean( prod.name ) }}</div>
+                        <div class="description">{{prod.description}}</div>
+                      </ons-col>
+                    </ons-row>
+                    <ons-row>
+                      <ons-col class="qty">
+                        <select ng-change="setQty(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)" ng-model="prod.quantity" ng-options="ct for ct in cantidades track by ct" class="selectQty"></select>
+                        <!--ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")-->
+                        <!--ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")-->
+                        <div class="priceTotal"> <span>x | </span>{{ cartItems[$index].subTotal | currency}}</div>
+                      </ons-col>
+                    </ons-row>
+                    <ons-button ng-click="deleteFirst('carousel'+prod.id)" modifier="button--quiet" class="delete">
+                      <ons-icon icon="ion-trash-b"></ons-icon>
+                    </ons-button>
                   </ons-col>
                 </ons-row>
               </ons-carousel-item>

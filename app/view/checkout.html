@@ -41,22 +41,21 @@
         <input type="text" placeholder="Nº Interior, Departamento, Color, etc." ng-model="order.address_interior"/>
         <input type="text" placeholder="Referencias de la ubicación" ng-model="order.address_referencias"/>
         <input type="text" placeholder="Notas" ng-model="order.notes"/>
-        <ons-row ng-hide="order.entrega_inmediata">
-          <ons-col></ons-col>
-          <ons-col width="80%">
-            <label>Selecciona la hora de entrega</label>
-            <input type="time" placeholder="hr:min" pattern="^[0-1]?[0-9]]" ng-model="order.entrega_hora"/>
-          </ons-col>
-          <ons-col></ons-col>
-        </ons-row>
-        <ons-row>
-          <ons-col></ons-col>
-          <ons-col width="80%">
-            <label>
-              <ons-switch var="inmediatoBtn" ng-model="order.entrega_inmediata" checked="checked"></ons-switch>¿Entrega inmediata?
-            </label>
-          </ons-col>
-        </ons-row>
+        <!--ons-row(ng-hide="order.entrega_inmediata")
+        ons-col
+        ons-col(width="80%")
+          label Selecciona la hora de entrega
+          input(type="time", placeholder="hr:min", pattern="^[0-1]?[0-9]]", ng-model="order.entrega_hora")
+        ons-col
+        -->
+        <!--ons-row
+        ons-col
+        ons-col(width="80%")
+          label
+            ons-switch(var="inmediatoBtn", ng-model="order.entrega_inmediata", checked)
+            | ¿Entrega inmediata?
+        
+        -->
       </form>
     </ons-col>
   </ons-row>

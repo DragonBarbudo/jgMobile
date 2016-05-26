@@ -1,31 +1,38 @@
 
-<ons-page ng-controller="AcercaCtrl" class="about">
-  <ons-toolbar>
-    <div class="left">
-      <ons-toolbar-button ng-click="menu.toggleMenu()">
-        <ons-icon icon="ion-navicon"></ons-icon>
-      </ons-toolbar-button>
-    </div>
-    <div class="center">Acerca de JagerGin</div>
-    <!--.right: +toolbar-right-->
-  </ons-toolbar>
-  <ons-row>
-    <ons-col>
-      <div class="mainLogo"><img src="app/img/jagergin.svg" alt=""/></div>
-    </ons-col>
-  </ons-row>
-  <ons-row>
-    <ons-col>&nbsp;</ons-col>
-    <ons-col width="80%">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla totam deleniti voluptatum quidem iure aut suscipit et necessitatibus perspiciatis ea unde dolor, nobis, similique id ducimus, magnam! Aut quos, ducimus.</p>
-      <div class="tac">
-        <p>correo@jagergin.com</p>
-        <p>(55) 5535 - 5262</p>
+<ons-navigator var="JagNavigator"> 
+  <ons-page ng-controller="AcercaCtrl" class="about">
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button ng-click="menu.toggleMenu()">
+          <ons-icon icon="ion-navicon"></ons-icon>
+        </ons-toolbar-button>
       </div>
-      <div class="social"><a href="#" class="fa fa-facebook"></a><a href="#" class="fa fa-twitter"></a></div>
-    </ons-col>
-    <ons-col>&nbsp;</ons-col>
-  </ons-row>
+      <div class="center">Acerca de JagerGin</div>
+      <!--.right: +toolbar-right-->
+    </ons-toolbar>
+    <ons-row>
+      <ons-col>
+        <div class="mainLogo"><img src="app/img/jagergin.svg" alt=""/></div>
+      </ons-col>
+    </ons-row>
+    <ons-row>
+      <ons-col>&nbsp;</ons-col>
+      <ons-col width="80%">
+        <p>¿Te ha pasado que estás en plena fiesta y de repente se acabó el alcohol?</p>
+        <p>Sabemos lo que eso significa, por eso, acercamos hasta donde estés todo lo que necesitas para que la fiesta nunca termine. </p>
+        <p>¡No te expongas en la noche! disfruta de tu bebida preferida sin salir a la calle, sin preocuparte por el alcoholímetro ni mucho menos, exponiendote a la delincuencia.  </p>
+        <p class="tac">contacto@jagergin.com</p>
+        <div class="social"><a href="https://www.facebook.com/Jagergin/" class="fa fa-facebook"></a><a href="https://twitter.com/jagergin" class="fa fa-twitter"></a><a href="https://www.instagram.com/jagergin/" class="fa fa-instagram"></a><a href="https://plus.google.com/+JagerginApp" class="fa fa-google"></a></div>
+        <p class="tac">
+          <ons-button ng-click="JagNavigator.pushPage('app/view/aviso.html')" modifier="outline">Aviso de privacidad</ons-button>
+        </p>
+        <p class="tac">
+          <ons-button ng-click="JagNavigator.pushPage('app/view/terminos.html')" modifier="outline">Términos y condiciones</ons-button>
+        </p>
+      </ons-col>
+      <ons-col>&nbsp;</ons-col>
+    </ons-row>
+  </ons-page>
   <div class="wavesContainer">
     <ul class="waves">
       <!--li.layer(data-depth="1.0"): img(src="app/img/wave_ice.png").t-->
@@ -34,4 +41,4 @@
       <li data-depth="0.7" class="layer"><img src="app/img/wave_2.png" class="w"/></li>
     </ul>
   </div>
-</ons-page>
+</ons-navigator>

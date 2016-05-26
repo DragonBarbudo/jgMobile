@@ -439,6 +439,15 @@ body {
 
 .Cart{
   .productsList{
+    text-align: left;
+    .thumb{
+      img{ max-width: 100%;}
+    }
+    .infoPrd{
+      text-align: left;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
     .qty{
       text-align: right;
       ons-icon{
@@ -460,16 +469,27 @@ body {
     }
   }
   .priceTotal{
+    display: inline-block;
     line-height: 2.4;
     padding: 5px;
     color:@dark;
     font-size: 0.9em;
     font-weight: bold;
+    text-align: right;
     span{
       color:@g;
       font-weight: lighter;
       font-size: 0.9em;
     }
+
+  }
+  ons-button.delete{
+    position: absolute;
+    left: 0; bottom: 0;
+    background:@w;
+    color:@sec;
+    padding: 1px 2px;
+    line-height: 0.8;
   }
   .delete{
     background: @sec/1.3;
@@ -478,7 +498,7 @@ body {
     ons-button{
       background: @sec/1.1;
       color:@w;
-      margin-top: 16px;
+      margin-top: 30px;
       font-size: 0.9em;
       padding: 2px 40px;
       ons-icon{
@@ -508,20 +528,20 @@ body {
     .toolbar-button{
       color:@w !important;
     }
+    span{
+      font-size: 1em;
+      padding: 0;
+    }
   }
 
   .noItemsInCart{
+    text-align: center;
     .instrucciones{
       padding: 40px 0;
     }
     ons-button{
       background: @main;
-      width: 100%;
-      ons-icon{
-        margin-right: 10px;
-        font-size: 0.9em;
-        vertical-align: baseline;
-      }
+
     }
   }
 
@@ -562,7 +582,7 @@ body {
 
 
 .profile{
-  background-image: url(http://lorempixel.com/960/300);
+    background-image: url(../img/profile.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     padding: 10px 0 20px 0;
@@ -690,7 +710,7 @@ body {
   padding: 20px;
   background: @dark;
   input{ width: 85%; .borderColorAnim; float:left;}
-  ons-button{float:right; background:@sec; line-height: 0.5em;}
+  button{float:right; background:@sec; line-height: 0.5em;}
 }
 
 
@@ -768,7 +788,7 @@ body {
   left: 0; top: 0;
   width: 100%;
   height: 100%;
-  .gradient( fade(@b/2, 100%), fade(@b/2, 50%) );
+  //.gradient( fade(@b/2, 100%), fade(@b/2, 50%) );
   .transition;
   .spinner-icon{
     position: absolute;
@@ -909,5 +929,24 @@ body {
   border-color:@sec;
   &.selectQtyGrid{
     margin-top: 18px;
+  }
+}
+
+.accountLogo{max-height: 60px; padding: 60px 0;}
+
+
+.hide{display: none !important;}
+
+
+.profileImageInput{
+  width: 0.1px;
+  height: 0.1px;
+  .opacity(0);
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  &+label{
+    background: @sec;
+    margin-top: 10px;
   }
 }

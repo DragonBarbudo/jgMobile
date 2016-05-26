@@ -1,6 +1,6 @@
 {
 "CodeKitInfo": "This is a CodeKit 2.x project configuration file. It is designed to sync project settings across multiple machines. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. If you do so, you will likely cause CodeKit to crash. This file is not useful unless accompanied by the project that created it in CodeKit 2. This file is not backwards-compatible with CodeKit 1.x. For more information, see: http:\/\/incident57.com\/codekit",
-"creatorBuild": "19115",
+"creatorBuild": "19127",
 "files": {
 	"\/app\/css\/font_awesome\/css\/font-awesome.css": {
 		"fileType": 16,
@@ -427,13 +427,13 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/app\/img\/profile.png": {
-		"fileType": 32768,
+	"\/app\/img\/profile.jpg": {
+		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 302456,
-		"inputAbbreviatedPath": "\/app\/img\/profile.png",
-		"outputAbbreviatedPath": "\/app\/img\/profile.png",
+		"initialSize": 56107,
+		"inputAbbreviatedPath": "\/app\/img\/profile.jpg",
+		"outputAbbreviatedPath": "\/app\/img\/profile.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -614,6 +614,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/app\/js\/lib\/angular-local-storage.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/lib\/angular-local-storage.js",
+		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/angular-local-storage-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/app\/js\/lib\/angular-preload-image.min.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -713,6 +724,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/app\/js\/lib\/fastclick.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/lib\/fastclick.js",
+		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/fastclick-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/app\/js\/lib\/hello.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -790,6 +812,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/app\/js\/lib\/ng-cordova-oauth.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/js\/lib\/ng-cordova-oauth.js",
+		"outputAbbreviatedPath": "\/app\/js\/lib\/min\/ng-cordova-oauth-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/app\/js\/lib\/ngCordova.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -856,17 +889,6 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
-	"\/app\/js\/satellizer.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/app\/js\/satellizer.js",
-		"outputAbbreviatedPath": "\/app\/js\/min\/satellizer-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
-		"syntaxCheckerStyle": 0
-		},
 	"\/app\/js\/services.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -908,6 +930,35 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0
+		},
+	"\/app\/view\/aviso.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/view\/aviso.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/app\/view\/aviso.jade": {
+		"compileDebug": 1,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/view\/aviso.jade",
+		"outputAbbreviatedPath": "\/app\/view\/aviso.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0
+		},
+	"\/app\/view\/busqueda.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/view\/busqueda.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/app\/view\/busqueda.jade": {
 		"compileDebug": 1,
@@ -1116,6 +1167,26 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/app\/view\/subcategorias.jade",
 		"outputAbbreviatedPath": "\/app\/view\/subcategorias.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0
+		},
+	"\/app\/view\/terminos.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/view\/terminos.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/app\/view\/terminos.jade": {
+		"compileDebug": 1,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/view\/terminos.jade",
+		"outputAbbreviatedPath": "\/app\/view\/terminos.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0

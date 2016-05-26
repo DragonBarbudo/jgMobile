@@ -1,23 +1,28 @@
 include mixins
 
-ons-page.about(ng-controller="AcercaCtrl")
-  ons-toolbar
-    .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
-    .center Acerca de JagerGin
-    //.right: +toolbar-right
-  
-  ons-row
-    ons-col: .mainLogo: img(src="app/img/jagergin.svg", alt="")
-  ons-row
-    ons-col &nbsp;
-    ons-col(width="80%")
-      p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla totam deleniti voluptatum quidem iure aut suscipit et necessitatibus perspiciatis ea unde dolor, nobis, similique id ducimus, magnam! Aut quos, ducimus.
-      .tac
-        p correo@jagergin.com
-        p (55) 5535 - 5262
-      .social
-        a(href="#").fa.fa-facebook
-        a(href="#").fa.fa-twitter
-    ons-col &nbsp;
+ons-navigator(var="JagNavigator") 
+  ons-page.about(ng-controller="AcercaCtrl")
+    ons-toolbar
+      .left: ons-toolbar-button(ng-click="menu.toggleMenu()"): ons-icon(icon="ion-navicon")
+      .center Acerca de JagerGin
+      //.right: +toolbar-right
+    
+    ons-row
+      ons-col: .mainLogo: img(src="app/img/jagergin.svg", alt="")
+    ons-row
+      ons-col &nbsp;
+      ons-col(width="80%")
+        p ¿Te ha pasado que estás en plena fiesta y de repente se acabó el alcohol?
+        p Sabemos lo que eso significa, por eso, acercamos hasta donde estés todo lo que necesitas para que la fiesta nunca termine. 
+        p ¡No te expongas en la noche! disfruta de tu bebida preferida sin salir a la calle, sin preocuparte por el alcoholímetro ni mucho menos, exponiendote a la delincuencia.  
+        p.tac contacto@jagergin.com
+        .social
+          a(href="https://www.facebook.com/Jagergin/").fa.fa-facebook
+          a(href="https://twitter.com/jagergin").fa.fa-twitter
+          a(href="https://www.instagram.com/jagergin/").fa.fa-instagram
+          a(href="https://plus.google.com/+JagerginApp").fa.fa-google
+        p.tac: ons-button(ng-click="JagNavigator.pushPage('app/view/aviso.html')", modifier="outline") Aviso de privacidad
+        p.tac: ons-button(ng-click="JagNavigator.pushPage('app/view/terminos.html')", modifier="outline") Términos y condiciones
+      ons-col &nbsp;
 
   +bottomwaves

@@ -35,6 +35,8 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
         console.log('Device Ready');
+        FastClick.attach(document.body);
+        console.log('Fastclick');
         //window.open = cordova.InAppBrowser.open;
     },
     // Update DOM on a Received Event

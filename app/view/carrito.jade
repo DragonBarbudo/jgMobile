@@ -15,9 +15,7 @@ ons-page(ng-controller="CarritoCtrl").Cart
         ons-toolbar-button.payBtn(ng-click="Navigator.pushPage('app/view/checkout.html')", ng-show="loggedin")
           ons-icon(icon="ion-bag")
           |  Siguiente
-        ons-toolbar-button.payBtn(ng-click="menu.setMainPage('app/view/cuenta.html')", ng-hide="loggedin")
-          ons-icon(icon="ion-person")
-          |  Necesitas loguearte
+        ons-toolbar-button.payBtn(ng-click="registroCarrito()", ng-hide="loggedin") Necesitas registrarte
 
   div(ng-show="cartCount>0")
     ons-row: ons-col.instrucciones Desliza hacia la izquierda para eliminar productos.
@@ -25,23 +23,24 @@ ons-page(ng-controller="CarritoCtrl").Cart
       ons-col
         ons-list
           ons-list-item(ng-repeat="prod in cartItems").product
-            ons-carousel(style="width:100%; height: 70px;", swipeable, overscrollable, auto-scroll, var="carousel{{prod.id}}")
+            ons-carousel(style="width:100%; height: 100px;", swipeable, overscrollable, auto-scroll, var="carousel{{prod.id}}")
               ons-carousel-item
                 ons-row
-                  ons-col(width="70px"): .thumb: img(ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
+                  ons-col(width="60px"): .thumb: img(ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
                   ons-col
-                    .name {{prod.name}}
-                    .description {{prod.description}}
-                    .price {{prod.new_price | currency }}
-                  ons-col.qty
-                    select(ng-change="setQty(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-model="prod.quantity", ng-options="ct for ct in cantidades track by ct").selectQty
-                    
-                    //ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")
-                    //ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")
-                  ons-col
-                      .priceTotal 
-                        span x | 
-                        | {{ cartItems[$index].subTotal | currency}}
+                    ons-row
+                      ons-col.infoPrd
+                        .name {{ clean( prod.name ) }}
+                        .description {{prod.description}}
+                    ons-row
+                      ons-col.qty
+                        select(ng-change="setQty(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-model="prod.quantity", ng-options="ct for ct in cantidades track by ct").selectQty
+                        //ons-icon(icon="ion-android-remove", ng-click="decreaseQuantity_tap(cartItems[$index], cartItems[$index].quantity, 'carousel'+prod.id)", ng-class="{'eliminate' : cartItems[$index].quantity == 1}")
+                        //ons-icon(icon="ion-android-add", ng-click="increaseQuantity_tap(cartItems[$index])")
+                        .priceTotal 
+                          span x | 
+                          | {{ cartItems[$index].subTotal | currency}}
+                    ons-button(ng-click="deleteFirst('carousel'+prod.id)", modifier="button--quiet").delete: ons-icon(icon="ion-trash-b")
               ons-carousel-item.delete
                 ons-row
                   ons-col

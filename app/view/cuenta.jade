@@ -11,17 +11,18 @@ ons-navigator(var="Navigator")
     div(ng-hide="loggedin").signIn
       ons-row(ng-show="choose")
         ons-col
-        ons-col
-          .logo: img(src="app/img/jagergin.svg", alt="")
+        ons-col(width="90%")
+          .logo.tac: img(src="app/img/jagergin.svg", alt="").accountLogo
           p ¡Que la fiesta nunca termine!
           .buttons
             ons-button.signupBtn(ng-click="signUpForm=true; choose=false;") Regístrate
+            br
             ons-button.signInBtn(ng-click="signInForm=true; choose=false;") ¿Ya tienes cuenta?
         ons-col
       
       ons-row(ng-show="signUpForm").signUpArea
         ons-col
-        ons-col
+        ons-col(width="90%")
           div.fa.fa-facebook
           br
           ons-button.facebookIn(ng-click="helloLogin('facebook')") Ingresar con Facebook
@@ -34,19 +35,20 @@ ons-navigator(var="Navigator")
             input(type="email", ng-model="signin.email", placeholder="Correo electrónico", ng-blur="checkEmail()", ng-change="validator()").text-input.text-input--underbar
             label(ng-show="errorUsuario").errorUsuario {{ errorUsuario }}
             input(type="text", ng-model="signin.name", placeholder="Nombre", ng-change="validator()").text-input.text-input--underbar
+            input(type="text", ng-model="signin.lastname", placeholder="Apellido", ng-change="validator()").text-input.text-input--underbar
             input(type="tel", ng-model="signin.tel", placeholder="Teléfono móvil", ng-change="validator()").text-input.text-input--underbar
             input(type="password", ng-model="signin.password", placeholder="Contraseña", ng-change="validator()").text-input.text-input--underbar
             input(type="password", ng-model="signin.password2", placeholder="Confirmar contraseña", ng-change="validator()").text-input.text-input--underbar
             label(ng-show="errorPass").errorUsuario {{ errorPass }}
             ons-button.signInBtn(ng-click="signup()", ng-show="allValid") Crear cuenta
             p.terms Al crear una cuenta aceptas los 
-              a(ng-click="") Términos de servicio.
+              a(ng-click="menu.setMainPage('app/view/acerca.html')") Términos de servicio.
             a.cancelar(ng-click="signInForm=true; signUpForm=false;") ¿Ya tienes cuenta?  
         ons-col
           
       ons-row(ng-show="signInForm").signInArea
         ons-col
-        ons-col
+        ons-col(width="90%")
           div.fa.fa-facebook
           br
           ons-button.facebookIn(ng-click="helloLogin('facebook')") Ingresar con Facebook
@@ -57,8 +59,11 @@ ons-navigator(var="Navigator")
           p - o - 
           form
             input(type="email", ng-model="loggingIn.email", placeholder="Correo electrónico").text-input.text-input--underbar
+            br
             input(type="password", ng-model="loggingIn.password", placeholder="Contraseña").text-input.text-input--underbar
+            br
             label(ng-show="errorLogin").errorUsuario {{ errorLogin }}
+            br
             ons-button.signInBtn(ng-click="login()") Ingresar
             a.cancelar(ng-click="signInForm=false; signUpForm=true;") Crear una cuenta
         ons-col
@@ -67,8 +72,8 @@ ons-navigator(var="Navigator")
       ons-row.profile
         ons-col
           .profileEditBtn(ng-click="editarPerfil()"): ons-icon(icon="ion-edit")
-          .profileImage: img(ng-src="http://jagergin.com/cms/api/userFiles/{{userApp.id}}.jpg", alt="")
-          .profileName {{userApp.name}}
+          .profileImage: img(ng-src="{{url}}../profileImgs/id_{{userApp.id}}.jpg?v={{reloadparam}}", alt="")
+          .profileName {{userApp.name}} {{userApp.lastname}}
           .profileMail {{userApp.email}}
           .profileCel {{userApp.tel}}
       
@@ -101,6 +106,11 @@ ons-navigator(var="Navigator")
     ons-dialog(var="editProfileDialog", ng-controller="CuentaCtrl")
       ons-toolbar(inline)
         .center Edita tu perfil
+      input(name="imgprofile", id="imgprofile", type="file", onchange="angular.element(this).scope().uploadImage(this.files)").profileImageInput
+      label(for="imgprofile").button
+        ons-icon(icon="ion-upload")
+        |  Imagen de perfil
+      hr
       p: input(type="text", ng-model="userEdit.name", placeholder="Nombre").text-input
       p: input(type="email", ng-model="userEdit.email", placeholder="Correo electrónico").text-input
       p: input(type="text", ng-model="userEdit.tel", placeholder="Teléfono móvil").text-input

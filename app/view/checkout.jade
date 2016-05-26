@@ -38,13 +38,13 @@ ons-page(ng-controller="CheckoutCtrl").Cart
         input(type="text", placeholder="Referencias de la ubicación" ng-model="order.address_referencias")
         input(type="text", placeholder="Notas" ng-model="order.notes")
         
-        ons-row(ng-hide="order.entrega_inmediata")
+        //ons-row(ng-hide="order.entrega_inmediata")
           ons-col
           ons-col(width="80%")
             label Selecciona la hora de entrega
             input(type="time", placeholder="hr:min", pattern="^[0-1]?[0-9]]", ng-model="order.entrega_hora")
           ons-col
-        ons-row
+        //ons-row
           ons-col
           ons-col(width="80%")
             label

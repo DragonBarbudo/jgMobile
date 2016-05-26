@@ -21,11 +21,11 @@
     <div ng-hide="loggedin" class="signIn">
       <ons-row ng-show="choose">
         <ons-col></ons-col>
-        <ons-col>
-          <div class="logo"><img src="app/img/jagergin.svg" alt=""/></div>
+        <ons-col width="90%">
+          <div class="logo tac"><img src="app/img/jagergin.svg" alt="" class="accountLogo"/></div>
           <p>¡Que la fiesta nunca termine!</p>
           <div class="buttons">
-            <ons-button ng-click="signUpForm=true; choose=false;" class="signupBtn">Regístrate</ons-button>
+            <ons-button ng-click="signUpForm=true; choose=false;" class="signupBtn">Regístrate</ons-button><br/>
             <ons-button ng-click="signInForm=true; choose=false;" class="signInBtn">¿Ya tienes cuenta?</ons-button>
           </div>
         </ons-col>
@@ -33,7 +33,7 @@
       </ons-row>
       <ons-row ng-show="signUpForm" class="signUpArea">
         <ons-col></ons-col>
-        <ons-col>
+        <ons-col width="90%">
           <div class="fa fa-facebook"></div><br/>
           <ons-button ng-click="helloLogin('facebook')" class="facebookIn">Ingresar con Facebook</ons-button><br/>
           <div class="fa fa-google-plus"></div><br/>
@@ -43,28 +43,29 @@
             <input type="email" ng-model="signin.email" placeholder="Correo electrónico" ng-blur="checkEmail()" ng-change="validator()" class="text-input text-input--underbar"/>
             <label ng-show="errorUsuario" class="errorUsuario">{{ errorUsuario }}</label>
             <input type="text" ng-model="signin.name" placeholder="Nombre" ng-change="validator()" class="text-input text-input--underbar"/>
+            <input type="text" ng-model="signin.lastname" placeholder="Apellido" ng-change="validator()" class="text-input text-input--underbar"/>
             <input type="tel" ng-model="signin.tel" placeholder="Teléfono móvil" ng-change="validator()" class="text-input text-input--underbar"/>
             <input type="password" ng-model="signin.password" placeholder="Contraseña" ng-change="validator()" class="text-input text-input--underbar"/>
             <input type="password" ng-model="signin.password2" placeholder="Confirmar contraseña" ng-change="validator()" class="text-input text-input--underbar"/>
             <label ng-show="errorPass" class="errorUsuario">{{ errorPass }}</label>
             <ons-button ng-click="signup()" ng-show="allValid" class="signInBtn">Crear cuenta</ons-button>
-            <p class="terms">Al crear una cuenta aceptas los <a ng-click="">Términos de servicio.</a></p><a ng-click="signInForm=true; signUpForm=false;" class="cancelar">¿Ya tienes cuenta?  </a>
+            <p class="terms">Al crear una cuenta aceptas los <a ng-click="menu.setMainPage('app/view/acerca.html')">Términos de servicio.</a></p><a ng-click="signInForm=true; signUpForm=false;" class="cancelar">¿Ya tienes cuenta?  </a>
           </form>
         </ons-col>
         <ons-col></ons-col>
       </ons-row>
       <ons-row ng-show="signInForm" class="signInArea">
         <ons-col></ons-col>
-        <ons-col>
+        <ons-col width="90%">
           <div class="fa fa-facebook"></div><br/>
           <ons-button ng-click="helloLogin('facebook')" class="facebookIn">Ingresar con Facebook</ons-button><br/>
           <div class="fa fa-google-plus"></div><br/>
           <ons-button ng-click="helloLogin('google')" class="googleIn">Ingresar con Google+ </ons-button>
           <p>- o - </p>
           <form>
-            <input type="email" ng-model="loggingIn.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/>
-            <input type="password" ng-model="loggingIn.password" placeholder="Contraseña" class="text-input text-input--underbar"/>
-            <label ng-show="errorLogin" class="errorUsuario">{{ errorLogin }}</label>
+            <input type="email" ng-model="loggingIn.email" placeholder="Correo electrónico" class="text-input text-input--underbar"/><br/>
+            <input type="password" ng-model="loggingIn.password" placeholder="Contraseña" class="text-input text-input--underbar"/><br/>
+            <label ng-show="errorLogin" class="errorUsuario">{{ errorLogin }}</label><br/>
             <ons-button ng-click="login()" class="signInBtn">Ingresar</ons-button><a ng-click="signInForm=false; signUpForm=true;" class="cancelar">Crear una cuenta</a>
           </form>
         </ons-col>
@@ -77,8 +78,8 @@
           <div ng-click="editarPerfil()" class="profileEditBtn">
             <ons-icon icon="ion-edit"></ons-icon>
           </div>
-          <div class="profileImage"><img ng-src="http://jagergin.com/cms/api/userFiles/{{userApp.id}}.jpg" alt=""/></div>
-          <div class="profileName">{{userApp.name}}</div>
+          <div class="profileImage"><img ng-src="{{url}}../profileImgs/id_{{userApp.id}}.jpg?v={{reloadparam}}" alt=""/></div>
+          <div class="profileName">{{userApp.name}} {{userApp.lastname}}</div>
           <div class="profileMail">{{userApp.email}}</div>
           <div class="profileCel">{{userApp.tel}}</div>
         </ons-col>
@@ -138,6 +139,11 @@
       <ons-toolbar inline="inline">
         <div class="center">Edita tu perfil</div>
       </ons-toolbar>
+      <input name="imgprofile" id="imgprofile" type="file" onchange="angular.element(this).scope().uploadImage(this.files)" class="profileImageInput"/>
+      <label for="imgprofile" class="button">
+        <ons-icon icon="ion-upload"></ons-icon> Imagen de perfil
+      </label>
+      <hr/>
       <p>
         <input type="text" ng-model="userEdit.name" placeholder="Nombre" class="text-input"/>
       </p>

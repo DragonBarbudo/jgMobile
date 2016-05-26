@@ -25,7 +25,7 @@ ons-navigator(var="Navigator")
     .zonaJagergin(ng-hide="zona")
       ons-row: ons-col.inst
         h2 Zona de cobertura JagerGin
-        p Podemos entregar tu pedido si tu fiesta esta dentro de la zona marcada.
+        p Podemos entregar tu pedido si tu fiesta esta dentro de la zona marcada. Colócate dentro para recibir tu pedido.
       ons-row: ons-col
           .notesAboutIntroMap
             img(ng-src="app/img/icon_marker.png")
@@ -41,6 +41,6 @@ ons-navigator(var="Navigator")
             //ui-gmap-polyline(ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", editable="true", draggable="true" , geodesic="true")
 
       ons-button(ng-click="okZone()", ng-show="isInZone") Aceptar
-      ons-button(ng-click="okZone()", ng-hide="isInZone") Mi fiesta es en otro lugar.
+      //ons-button(ng-click="okZone()", ng-hide="isInZone") Mi fiesta es en otro lugar.
       
           

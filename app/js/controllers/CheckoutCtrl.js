@@ -16,7 +16,7 @@ moduleapp.controller('CheckoutCtrl', function (CategoriesSvc, $scope, ShoppingCa
 
     $scope.order = {
   		code: UtilsSvc.createRandomCode(),
-  		date_time: UtilsSvc.formatDate(new Date(), "YYYY-MM-DDTHH:MM:SS"),
+  		date_time: new Date().toJSON().slice(0,10),
   		customer_name: $rootScope.userApp.name,
   		customer_email_address: $rootScope.userApp.email,
       address_coord_lat: "",
@@ -55,43 +55,49 @@ moduleapp.controller('CheckoutCtrl', function (CategoriesSvc, $scope, ShoppingCa
 
 
     var posOptions = {timeout: 10000, enableHighAccuracy: true, maximumAge: 0};
+    var nupaths = { path:[ ] };
+    for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
+    var area = new google.maps.Polygon( {paths: nupaths.path });
+    var geocoder = new google.maps.Geocoder();
     $cordovaGeolocation.getCurrentPosition(posOptions).then(function (data) {
-      var geocoder = new google.maps.Geocoder();
-      uiGmapGoogleMapApi.then(function(maps) {
-      setTimeout(function(){ $('.Cart .gm-style').append('<div class="centerPin"><img src="app/img/icon_marker.png"></div>'); }, 1000);
-        $scope.coords = { lat:data.coords.latitude, lng: data.coords.longitude };
-          $scope.map = {
-              center: { latitude: $scope.coords.lat, longitude: $scope.coords.lng },
-            zoom: 11,
-            options: {
-              mapTypeId: google.maps.MapTypeId.ROADMAP,
-              mapTypeControl: false,
-              streetViewControl: false,
-              styles: gmapStyle
-            },
-            events:{
-              dragend: function(e){
-                var point = e.center;
-                $scope.isInZone = area.containsLatLng(point);
-                if($scope.isInZone){ trackLocation($scope.map.center.latitude, $scope.map.center.longitude); }
-              }
-            }
-          }
-          $scope.polygons = zonaJagergin;
-
-          // ¿INSIDE JAGERGIN ZONE?
-          var nupaths = { path:[ ] };
-          for(var i=0;i<zonaJagergin.todo.path.length; i++){  nupaths.path.push( {lat:zonaJagergin.todo.path[i].latitude, lng:zonaJagergin.todo.path[i].longitude } );  }
-          var area = new google.maps.Polygon( {paths: nupaths.path });
-          var point = new google.maps.LatLng($scope.coords.lat, $scope.coords.lng);
-          $scope.isInZone = area.containsLatLng(point);
-          if($scope.isInZone){ trackLocation($scope.coords.lat, $scope.coords.lng); }
-      }, function(err){
-        alert('Debes tener la ubicación activa en tu dispositivo. Ingresa a los ajustes de tu dispositivo.');
-        console.log(err);
-      }); //ends uiGmapGoogleMapApi
+      $scope.coords = { lat:data.coords.latitude, lng: data.coords.longitude };
+      $scope.map.control.refresh( {latitude: $scope.coords.lat, longitude: $scope.coords.lng} );
+      $scope.isInZone = area.containsLatLng(new google.maps.LatLng($scope.coords.lat, $scope.coords.lng));
+      if($scope.isInZone){ trackLocation($scope.coords.lat, $scope.coords.lng); }
 
     }); //ends geolocation
+
+    uiGmapGoogleMapApi.then(function(maps) {
+    setTimeout(function(){ $('.Cart .gm-style').append('<div class="centerPin"><img src="app/img/icon_marker.png"></div>'); }, 1000);
+      $scope.coords = { lat:19.3981294, lng: -99.1203205 };
+        $scope.map = {
+          control : {},
+          center: { latitude: $scope.coords.lat, longitude: $scope.coords.lng },
+          zoom: 11,
+          options: {
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false,
+            streetViewControl: false,
+            styles: gmapStyle
+          },
+          events:{
+            dragend: function(e){
+              var point = e.center;
+              $scope.isInZone = area.containsLatLng(point);
+              if($scope.isInZone){  trackLocation(e.center.lat(), e.center.lng()); }
+              $scope.map.center.latitude = e.center.lat();
+              $scope.map.center.longitude = e.center.lng();
+            }
+          }
+        }
+        $scope.polygons = zonaJagergin;
+
+
+    }, function(err){
+      alert('Debes tener la ubicación activa en tu dispositivo. Ingresa a los ajustes de tu dispositivo.');
+      console.log(err);
+    }); //ends uiGmapGoogleMapApi
+
 
 
 
@@ -134,10 +140,11 @@ moduleapp.controller('CheckoutCtrl', function (CategoriesSvc, $scope, ShoppingCa
 
               var orderItem = {
                 order_id: result.data,
+                product_id: $scope.cartItems[i].id,
                 product_refId: $scope.cartItems[i].refId,
                 product_price: $scope.cartItems[i].new_price,
                 product_quantity: parseInt($scope.cartItems[i].quantity),
-                product_name: $scope.cartItems[i].name,
+                product_name: clean( $scope.cartItems[i].name ),
                 product_category: $scope.cartItems[i].category_name
               }
               console.log(orderItem);
@@ -173,6 +180,12 @@ moduleapp.controller('CheckoutCtrl', function (CategoriesSvc, $scope, ShoppingCa
 
         if(typeof PayPalMobile != 'undefined'){ PaypalSvc.initPaymentUI(); }
 
+
+
+        function clean(str){
+          str = str.replace( /\[(.+?)\]/g , '' );
+          return str;
+        }
 
 
 

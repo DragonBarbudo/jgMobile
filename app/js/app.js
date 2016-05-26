@@ -12,14 +12,15 @@ var moduleapp = angular.module('JagerginMobileApp',
     'ngScrollable',
     'cfp.loadingBar',
     'ngCordova',
-    'satellizer'
+    'ngCordovaOauth',
+    'LocalStorageModule'
   ]);
 
 
 
 
 
-moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $authProvider) {
+moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
 
 
@@ -46,12 +47,7 @@ moduleapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $a
 });
 
 
-moduleapp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-    console.log(cfpLoadingBarProvider);
-  }])
-
-
-moduleapp.run(function($rootScope){
+moduleapp.run(function($rootScope, localStorageService){
 
   //Esconder / Mostar Mapa
   $rootScope.zona = false;
@@ -64,9 +60,12 @@ moduleapp.run(function($rootScope){
   $rootScope.userApp.name;
   $rootScope.userApp.picture;
 
-  hello.init({ facebook : '613671772113193', google: '473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com' }, { redirect_uri:'http://jagergin.com/auth/redirect.html' });
+  //hello.init({ facebook : '613671772113193', google: '473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com' }, { redirect_uri:'http://jagergin.com/auth/redirect.html' });
   //hello.init({ facebook : '613690458777991', google: '473012819-cv5rgbmt6tjf8h4b8h2go7a4f89q9g6r.apps.googleusercontent.com' }, { redirect_uri:'redirect.html' });
-
+  if(localStorageService.get('user')){
+    $rootScope.userApp = localStorageService.get('user');
+    $rootScope.loggedin = true;
+  }
 
 });
 

@@ -25,7 +25,7 @@ ons-page(ng-controller="ProductosCtrl")
           ons-row
             ons-col(width="70px"): .thumb: img(ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
             ons-col
-              .name {{ prod.name =  prod.name.replace(categoryName, '') }}
+              .name {{ clean( prod.name ) }}
               .description {{prod.description}}
               .price
                 span.qtyTxt {{prod.quantity}}x  
@@ -47,7 +47,7 @@ ons-page(ng-controller="ProductosCtrl")
     ons-col(ng-repeat="prod in products | orderBy:'name'", width="46%").product
           ons-row
             .bigthumb: img(ng-src="http://jagergin.com/cms/api/imageFiles/{{prod.refId}}.jpg", alt="")
-            .name {{prod.name}}
+            .name {{ clean( prod.name ) }}
             ons-row
               ons-col: .description {{prod.description}}
               ons-col.tar

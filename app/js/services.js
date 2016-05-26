@@ -23,8 +23,8 @@ moduleapp.factory("StoreLocalSvc", function(){
 
 			"viewsUrl" : "app/app-pages",
 
-			"payPalSandbox" : "AaNAb3q2ipAiLfJBiMcSTZ-cQWA_PvxhkmxhBqoZQ2z5Mys6qj9tB_euGd20tSRco2QfOkLkLVwO61Je",
-			"payPalProduction" : "AYqK95EuSPivywD5MmpASfTf-2nTMW9ExnunOde9jqQJWQo2UJH2WFOPcdb1tvz5lF_3-Z1Gq041adiB"
+			"payPalSandbox" : "AUxqVMZowyo0RVcziMQU5vTAT4otucvliQH0ur0RIqB0mNkx8n_KDCDdTxxnj1SIeu9_VuHc7Yphr9W_",
+			"payPalProduction" : "ATyaG-oUZ2v3W8Oopdlp5TOIQZWlSeaOxcnmZxfXr3qIzwiX9ByylQMSIHWVuZroSuXDHo4Wrtyo1KcU"
 		}
 		return setting;
 	}
@@ -139,6 +139,22 @@ moduleapp.factory("ProductsSvc", function($q, $http, SettingSvc){
 	        });
 			return deferred.promise;
 		}
+
+
+		function remoteImage(imageUrl, id){
+			var deferred = $q.defer();
+			$http({
+							method: "POST",
+							url: SettingSvc.getRootUrl() + "/v1/user_remote_image/"+id,
+							data: imageUrl,
+							headers: {'Content-Type': undefined}
+					}).then(function (result) {
+							deferred.resolve(result);
+					});
+			return deferred.promise;
+		}
+
+
 		function uploadImage(fd){
 			var deferred = $q.defer();
 			$http({
@@ -151,17 +167,11 @@ moduleapp.factory("ProductsSvc", function($q, $http, SettingSvc){
 	        });
 			return deferred.promise;
 		}
-		function removeImage(url){
-			var deferred = $q.defer();
-			$http({
-	            method: "GET",
-	            url: SettingSvc.getRootUrl() + "/v1/product_remove_image/" + url,
-	            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
-        	}).then(function (result) {
-	            deferred.resolve(result);
-	        });
-			return deferred.promise;
-		}
+
+
+
+
+
 		return {
 		    create : create,
 		    findById : findById,
@@ -172,8 +182,8 @@ moduleapp.factory("ProductsSvc", function($q, $http, SettingSvc){
 		    update : update,
 		    count : count,
 		    uploadImage : uploadImage,
-		    removeImage : removeImage
-		};
+				remoteImage : remoteImage
+		}
 	});
 
 
@@ -317,7 +327,12 @@ moduleapp.factory("ShoppingCartSvc", function($window, $cookieStore){
 			if(cartItems == null)
 				return 0;
 			else
-				return cartItems.length;
+				var cant = 0;
+				for(var i = 0; i<cartItems.length; i++){
+					cant += cartItems[i].quantity*1;
+				}
+				//return cartItems.length;
+				return cant;
 		}
 		function clear(){
 			cartItems = [];
@@ -357,7 +372,7 @@ moduleapp.factory("ShoppingCartSvc", function($window, $cookieStore){
 	     return config;
 	   }
 	   function onPayPalMobileInit() {
-	     PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", configuration());
+	     PayPalMobile.prepareToRender("PayPalEnvironmentProduction", configuration());
 	   }
 	   function onUserCanceled(result) {
 	     console.log(result);
@@ -454,13 +469,27 @@ moduleapp.factory("UsersSvc", function($q, $http, SettingSvc){
 			return deferred.promise;
 	}
 
+	function uploadImage(fd){
+			var deferred = $q.defer();
+			$http({
+	            method: "POST",
+	            url: SettingSvc.getRootUrl() + "/v1/user_upload_image",
+	            data:fd,
+	            headers: {'Content-Type': undefined}
+        	}).then(function (result) {
+	            deferred.resolve(result);
+	        });
+			return deferred.promise;
+		}
+
 	return{
 		listUsers: listUsers,
 		createUser: createUser,
 		searchUser: searchUser,
 		loginUser: loginUser,
 		updateUser: updateUser,
-		searchClientId: searchClientId
+		searchClientId: searchClientId,
+		uploadImage	: uploadImage
 	}
 
 });
